@@ -4728,3 +4728,66 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   fuente: f01-35
   ancla: https://git-scm.com/docs/git-reset
   consultada: 2026-11-12
+
+- id: h01-904
+  hecho: La sintaxis <refname>@{<n>} designa el n-ésimo valor anterior de esa referencia.
+  evidencia: "<refname>@{<n>}, e.g. master@{1} A ref followed by the suffix @ with an ordinal specification enclosed in a brace pair (e.g. {1}, {15}) specifies the n-th prior value of that ref."
+  fuente: f01-29
+  ancla: https://git-scm.com/docs/gitrevisions
+  consultada: 2026-11-12
+
+- id: h01-905
+  hecho: master@{1} es el valor inmediatamente anterior de master.
+  evidencia: "For example master@{1} is the immediate prior value of master while master@{5} is the 5th prior value of master."
+  fuente: f01-29
+  ancla: https://git-scm.com/docs/gitrevisions
+  consultada: 2026-11-12
+
+- id: h01-906
+  hecho: Con la parte de la referencia vacía, la construcción @{<n>} permite llegar a una entrada del reflog de la rama actual.
+  evidencia: "@{<n>}, e.g. @{1} You can use the @ construct with an empty ref part to get at a reflog entry of the current branch."
+  fuente: f01-29
+  ancla: https://git-scm.com/docs/gitrevisions
+  consultada: 2026-11-12
+
+- id: h01-907
+  hecho: Si estás en la rama blabla, @{1} significa lo mismo que blabla@{1}.
+  evidencia: "For example, if you are on branch blabla then @{1} means the same as blabla@{1}."
+  fuente: f01-29
+  ancla: https://git-scm.com/docs/gitrevisions
+  consultada: 2026-11-12
+
+- id: h01-908
+  hecho: El backend merge de git rebase se conocía antes como el backend interactive.
+  evidencia: "Also, the merge backend used to be known as the interactive backend, but it is now used for non-interactive cases as well."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-909
+  hecho: El backend merge de git rebase, que antes se llamaba interactive, se usa ahora también en casos no interactivos.
+  evidencia: "Also, the merge backend used to be known as the interactive backend, but it is now used for non-interactive cases as well."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-910
+  hecho: Para descartar todos los cambios sin confirmar del directorio de trabajo, la página de git revert remite a git reset, en particular a la opción --hard.
+  evidencia: "If you want to throw away all uncommitted changes in your working directory, you should see git-reset[1], particularly the --hard option."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
+  consultada: 2026-11-12
+
+- id: h01-911
+  hecho: Para extraer archivos concretos tal como estaban en otro commit, la página de git revert remite a git restore, en concreto a la opción --source.
+  evidencia: "If you want to extract specific files as they were in another commit, you should see git-restore[1], specifically the --source option."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
+  consultada: 2026-11-12
+
+- id: h01-912
+  hecho: La página de git revert advierte de que git reset --hard y git restore --source, las dos alternativas que menciona, descartan los cambios sin confirmar del directorio de trabajo.
+  evidencia: "If you want to throw away all uncommitted changes in your working directory, you should see git-reset[1], particularly the --hard option. If you want to extract specific files as they were in another commit, you should see git-restore[1], specifically the --source option. Take care with these alternatives as both will discard uncommitted changes in your working directory."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
+  consultada: 2026-11-12
