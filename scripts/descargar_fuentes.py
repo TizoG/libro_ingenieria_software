@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import hashlib
+import re
 import sys
 
 import requests
@@ -31,15 +32,31 @@ import comun
 
 AGENTE = "libro-devoc-verificador/1.0"
 DESCARTAR = ("script", "style", "noscript", "nav", "header", "footer", "aside", "form", "svg")
+# Contenedores conocidos que no son contenido (índices laterales, navegación anterior/siguiente).
+DESCARTAR_SELECTORES = ("#book-chapters", "#nav", ".sidebar")
+# Contenedor principal, del más específico al más general (div#main es el de git-scm.com).
+CONTENEDORES = ("div#main", "main", "article", "body")
+BLOQUES = ("p", "div", "li", "ul", "ol", "dl", "dt", "dd", "h1", "h2", "h3", "h4", "h5", "h6",
+           "pre", "blockquote", "table", "tr", "td", "th", "section", "figure", "figcaption", "br", "hr")
 
 
 def extraer_texto(html: str) -> str:
-    """Texto visible de la página, con un salto de línea por bloque."""
+    """Texto visible del contenido principal, con un salto de línea por bloque.
+
+    Las etiquetas en línea (<em>, <code>, <a>) no parten el texto, para que una
+    frase con énfasis se pueda localizar literalmente.
+    """
     sopa = BeautifulSoup(html, "html.parser")
     for etiqueta in sopa(DESCARTAR):
         etiqueta.decompose()
-    raiz = sopa.find("main") or sopa.find("article") or sopa.body or sopa
-    lineas = (l.strip() for l in raiz.get_text("\n").splitlines())
+    for selector in DESCARTAR_SELECTORES:
+        for etiqueta in sopa.select(selector):
+            etiqueta.decompose()
+    raiz = next((r for c in CONTENEDORES if (r := sopa.select_one(c))), sopa)
+    for bloque in raiz.find_all(BLOQUES):
+        bloque.insert_before("\n")
+        bloque.append("\n")
+    lineas = (re.sub(r"[ \t\r\f\v]+", " ", l).strip() for l in raiz.get_text().splitlines())
     return "\n".join(l for l in lineas if l) + "\n"
 
 

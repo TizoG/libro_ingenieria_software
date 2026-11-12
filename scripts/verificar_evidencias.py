@@ -4,6 +4,7 @@
 Uso:
     python scripts/verificar_evidencias.py 1        # capítulo 1
     python scripts/verificar_evidencias.py --todos
+    python scripts/verificar_evidencias.py 1 --archivo investigacion/cap-01/secciones/1.4.md
 
 Comprueba también que cada hecho tiene todos sus campos, que los ids son únicos
 y siguen el formato hNN-NNN del capítulo, que la fuente está declarada en
@@ -36,9 +37,12 @@ class Resultado:
 
 def verificar(numero: int, investigacion: Path = comun.INVESTIGACION,
               cache: Path = comun.FUENTES_CACHE,
-              indice: Path = comun.INDICE_FUENTES) -> Resultado:
+              indice: Path = comun.INDICE_FUENTES, archivo: Path | None = None) -> Resultado:
     res = Resultado()
-    hechos = comun.leer_hechos(numero, investigacion)
+    if archivo is not None:
+        hechos = comun.leer_bloques(archivo.read_text(encoding="utf-8"), "id")
+    else:
+        hechos = comun.leer_hechos(numero, investigacion)
     fuentes = comun.leer_fuentes_capitulo(numero, investigacion)
     autorizadas = comun.urls_autorizadas(indice)
     textos: dict[str, str | None] = {}
@@ -95,6 +99,7 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("capitulo", nargs="?", type=int)
     p.add_argument("--todos", action="store_true", help="todos los capítulos con hechos.md")
+    p.add_argument("--archivo", type=Path, help="verifica este archivo de hechos en lugar de hechos.md")
     args = p.parse_args(argv)
     if args.todos:
         numeros = sorted(int(d.name[4:]) for d in comun.INVESTIGACION.glob("cap-[0-9][0-9]")
@@ -106,7 +111,7 @@ def main(argv: list[str] | None = None) -> int:
 
     fallo = False
     for n in numeros:
-        res = verificar(n)
+        res = verificar(n, archivo=args.archivo)
         print(f"Capítulo {n}: {len(res.validos)} hechos válidos, {len(res.errores)} rechazados")
         for e in res.errores:
             print(f"  RECHAZADO {e}")

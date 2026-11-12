@@ -80,3 +80,11 @@ def test_url_no_autorizada(proyecto):
     proyecto["indice"].write_text("nada\n", encoding="utf-8")
     res = verificar(proyecto)
     assert any("03-indice-con-fuentes" in e for e in res.errores)
+
+
+def test_archivo_alternativo(proyecto, tmp_path):
+    otro = tmp_path / "1.2.md"
+    otro.write_text(hecho(hid="h01-201", evidencia="inventada"), encoding="utf-8")
+    res = verificar_evidencias.verificar(1, proyecto["investigacion"], proyecto["cache"],
+                                         proyecto["indice"], archivo=otro)
+    assert res.validos == [] and len(res.errores) == 1

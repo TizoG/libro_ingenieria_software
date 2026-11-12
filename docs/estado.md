@@ -7,7 +7,7 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 | Hito | Qué | Estado |
 | --- | --- | --- |
 | 0 | Cimientos: estructura, scripts con tests, subagentes y este tablero | hecho (2026-11-12) |
-| 1 | Capítulo piloto: 1, «Git por dentro» | pendiente |
+| 1 | Capítulo piloto: 1, «Git por dentro» | en curso |
 | 2 | Parte I completa | pendiente |
 | 3 | Parte II completa | pendiente |
 | 4 a 10 | Partes III a IX | pendiente |
@@ -23,7 +23,7 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 
 | Cap. | Título | id | Fase | PENDIENTES | Notas |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Git por dentro | `base/git-modelo` | pendiente | | |
+| 1 | Git por dentro | `base/git-modelo` | 2-investigación | | Fase 1 hecha: 16 fuentes en fuentes.yaml, descargadas el 2026-11-12 |
 | 2 | Flujo de contribución | `base/git-colab` | pendiente | | |
 | 3 | Terminal y procesos | `base/terminal` | pendiente | | |
 | 4 | HTTP de verdad | `base/http` | pendiente | | |
