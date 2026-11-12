@@ -2,6 +2,8 @@
 
 Se extraen en `secciones/9-adicionales.md` (ids desde h01-809) y después el redactor resuelve los PENDIENTES.
 
+**2026-11-12:** extraídos h01-809 a h01-830 (los cinco puntos de la tabla). `init.defaultBranch` sigue respaldado solo por f01-17 (h01-279).
+
 | Detectado en | Qué falta | Fuente |
 | --- | --- | --- |
 | 1.1 | Que la herramienta creada en 2005 es Git | f01-02 («Desde su nacimiento en el 2005, Git…») |
