@@ -14,7 +14,8 @@ Métricas bloqueantes (deben ser 0 para pasar a «revisado»):
 
 Informativas: PENDIENTES abiertos, párrafos sin ningún id (pista para el revisor) y palabras.
 
-El informe de revisión es investigacion/cap-XX/revision.md, con bloques:
+El informe de revisión es investigacion/cap-XX/revision.md (o varios archivos en
+investigacion/cap-XX/revision/, uno por tramo), con bloques:
 
     - frase: "Una rama es un puntero móvil a un commit."
       hechos: h01-020
@@ -134,10 +135,14 @@ def generar(numero: int, ejecutar: bool = True) -> Informe:
         else:
             inf.ejemplos_sin_ejecutar = inf.ejemplos > 0
 
-    revision = comun.INVESTIGACION / comun.carpeta_capitulo(numero) / "revision.md"
-    if revision.exists():
+    carpeta = comun.INVESTIGACION / comun.carpeta_capitulo(numero)
+    # El informe puede estar en revision.md o repartido en revision/*.md (un archivo por tramo).
+    informes = [carpeta / "revision.md"] + sorted((carpeta / "revision").glob("*.md"))
+    informes = [r for r in informes if r.exists()]
+    if informes:
         inf.revision_existe = True
-        for b in comun.leer_bloques(revision.read_text(encoding="utf-8"), "frase"):
+        texto = "\n".join(r.read_text(encoding="utf-8") for r in informes)
+        for b in comun.leer_bloques(texto, "frase"):
             veredicto = b.get("veredicto").upper()
             resuelto = b.get("resuelto").lower() in ("sí", "si", "yes")
             if resuelto or veredicto == "SOPORTADA":
