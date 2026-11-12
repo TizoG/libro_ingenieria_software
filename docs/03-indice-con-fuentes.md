@@ -65,6 +65,8 @@ Fuentes añadidas el 2026-11-12 para cubrir lo que la edición en español de Pr
 | 1.2, 1.3, 1.6 | [Documentación de Git: gitrevisions](https://git-scm.com/docs/gitrevisions) (`~`, `^`, `^{tree}`, `@{n}`) | ✔ |
 | 1.2, 1.3 | [Documentación de Git: git-log](https://git-scm.com/docs/git-log) (`--oneline`) | ✔ |
 | Apertura | [Pro Git 1.6, Configurando Git por primera vez](https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez) | ✔ |
+| 1.3, 1.4 | [Documentación de Git: git-commit](https://git-scm.com/docs/git-commit) (`--no-edit`, mensaje tras un conflicto) | ✔ |
+| 1.5 | [Documentación de Git: git-diff](https://git-scm.com/docs/git-diff) (comparar dos commits o ramas) | ✔ |
 
 ### Capítulo 2: Flujo de contribución
 

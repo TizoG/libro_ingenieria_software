@@ -127,3 +127,11 @@ f01-31:
   titulo: "Pro Git 1.6, Configurando Git por primera vez"
   url: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez
   secciones: ["apertura"]
+f01-32:
+  titulo: "Documentación de Git, git-commit"
+  url: https://git-scm.com/docs/git-commit
+  secciones: ["1.3", "1.4"]
+f01-33:
+  titulo: "Documentación de Git, git-diff"
+  url: https://git-scm.com/docs/git-diff
+  secciones: ["1.5"]
