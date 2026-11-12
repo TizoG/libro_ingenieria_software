@@ -4322,3 +4322,409 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
+
+- id: h01-846
+  hecho: Con --amend, git commit sustituye la punta de la rama actual creando un commit nuevo.
+  evidencia: "--amend Replace the tip of the current branch by creating a new commit"
+  fuente: f01-32
+  ancla: https://git-scm.com/docs/git-commit
+  consultada: 2026-11-12
+
+- id: h01-847
+  hecho: Con --amend, el commit nuevo tiene los mismos padres que el commit actual.
+  evidencia: "--amend Replace the tip of the current branch by creating a new commit. The recorded tree is prepared as usual (including the effect of the -i and -o options and explicit pathspec), and the message from the original commit is used as the starting point, instead of an empty message, when no other message is specified from the command line via options such as -m, -F, -c, etc. The new commit has the same parents and author as the current one"
+  fuente: f01-32
+  ancla: https://git-scm.com/docs/git-commit
+  consultada: 2026-11-12
+
+- id: h01-848
+  hecho: Con --amend, el commit nuevo tiene el mismo autor que el commit actual.
+  evidencia: "--amend Replace the tip of the current branch by creating a new commit. The recorded tree is prepared as usual (including the effect of the -i and -o options and explicit pathspec), and the message from the original commit is used as the starting point, instead of an empty message, when no other message is specified from the command line via options such as -m, -F, -c, etc. The new commit has the same parents and author as the current one"
+  fuente: f01-32
+  ancla: https://git-scm.com/docs/git-commit
+  consultada: 2026-11-12
+
+- id: h01-849
+  hecho: En git restore, indicar --staged restaura solo el índice.
+  evidencia: "Specify the restore location. If neither option is specified, by default the working tree is restored. Specifying --staged will only restore the index."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-850
+  hecho: En git restore, si no se indica ni --staged ni --worktree, se restaura por defecto el directorio de trabajo.
+  evidencia: "If neither option is specified, by default the working tree is restored."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-851
+  hecho: git restore puede restaurar a la vez el directorio de trabajo y el índice combinando --staged --worktree.
+  evidencia: "The command can also be used to restore the content in the index with --staged, or restore both the working tree and the index with --staged --worktree."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-852
+  hecho: Sin indicar tree-ish, git checkout -- <pathspec> sustituye los archivos o directorios indicados por la versión del índice.
+  evidencia: "git checkout [-f|--ours|--theirs|-m|--conflict=<style>] [--] <pathspec>... git checkout [-f|--ours|--theirs|-m|--conflict=<style>] --pathspec-from-file=<file> [--pathspec-file-nul] Replace the specified files and/or directories with the version from the index."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-853
+  hecho: Con un tree-ish, git checkout <tree-ish> -- <pathspec> sustituye los archivos o directorios indicados por la versión de ese commit o árbol y los añade al índice.
+  evidencia: "git checkout <tree-ish> [--] <pathspec>... git checkout <tree-ish> --pathspec-from-file=<file> [--pathspec-file-nul] Replace the specified files and/or directories with the version from the given commit or tree and add them to the index"
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-854
+  hecho: git checkout <archivo> descarta los cambios sin preparar de ese archivo, por ejemplo tras decidir que fueron un error.
+  evidencia: "if you check out a commit, edit file.txt, and then decide those changes were a mistake, git checkout file.txt will discard any unstaged changes to file.txt."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-855
+  hecho: En una fusión, los cambios que no se solapan (un lado cambió una zona y el otro la dejó intacta) se incorporan tal cual al resultado final.
+  evidencia: "Among the changes made to the common ancestor’s version, non-overlapping ones (that is, you changed an area of the file while the other side left that area intact, or vice versa) are incorporated in the final result verbatim."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-856
+  hecho: En una fusión, las líneas que ambos lados cambiaron de la misma manera se resuelven limpiamente, sin conflicto.
+  evidencia: "Here are lines that are either unchanged from the common ancestor, or cleanly resolved because only one side changed, or cleanly resolved because both sides changed the same way."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-857
+  hecho: El formato por defecto de los marcadores de conflicto no muestra qué decía el original en la zona en conflicto.
+  evidencia: "The default format does not show what the original said in the conflicting area."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-858
+  hecho: El estilo de conflicto diff3 añade un marcador ||||||| y el texto original antes del marcador =======.
+  evidencia: 'An alternate style, "diff3", adds a ||||||| marker and the original text before the ======= marker.'
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-859
+  hecho: La descripción simplificada de git rebase <upstream> tiene cuatro pasos, que son listar los commits de la rama que no tienen equivalente en upstream, hacer checkout de upstream en modo detached, reaplicar los commits uno a uno y actualizar la rama con checkout -B.
+  evidencia: "Here is a simplified description of what git rebase <upstream> does: Make a list of all commits on your current branch since it branched off from <upstream> that do not have an equivalent commit in <upstream>. Check out <upstream> with the equivalent of git checkout --detach <upstream>. Replay the commits, one by one, in order. This is similar to running git cherry-pick <commit> for each commit. See REBASING MERGES for how merges are handled. Update your branch to point to the final commit with the equivalent of git checkout -B <branch>."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-860
+  hecho: Con --no-ff (también --force-rebase o -f), rebase reaplica uno por uno todos los commits rebasados en lugar de avanzar sobre los que no cambian.
+  evidencia: "--no-ff --force-rebase -f Individually replay all rebased commits instead of fast-forwarding over the unchanged ones."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-861
+  hecho: Con --no-ff, la historia completa de la rama rebasada queda compuesta por commits nuevos.
+  evidencia: "--no-ff --force-rebase -f Individually replay all rebased commits instead of fast-forwarding over the unchanged ones. This ensures that the entire history of the rebased branch is composed of new commits."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-862
+  hecho: git rebase tiene dos backends principales, apply y merge.
+  evidencia: "git rebase has two primary backends: apply and merge."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-863
+  hecho: La opción --merge de git rebase usa estrategias de fusión para rebasar, y la página la marca como opción por defecto.
+  evidencia: "-m --merge Using merging strategies to rebase (default)."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-864
+  hecho: La opción --apply de git rebase usa estrategias de aplicación de parches, llamando internamente a git am.
+  evidencia: "--apply Use applying strategies to rebase (calling git-am internally)."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-865
+  hecho: La variable de configuración rebase.backend fija el backend por defecto de rebase, con las opciones apply o merge.
+  evidencia: "rebase.backend Default backend to use for rebasing. Possible choices are apply or merge."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-866
+  hecho: Por defecto, rebase descarta los commits de fusión de la lista de tareas y deja los commits rebasados en una sola rama lineal.
+  evidencia: "-r --rebase-merges[=(rebase-cousins|no-rebase-cousins)] --no-rebase-merges By default, a rebase will simply drop merge commits from the todo list, and put the rebased commits into a single, linear branch."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-867
+  hecho: Con --rebase-merges, rebase intenta conservar la estructura de ramas de los commits a rebasar recreando los commits de fusión.
+  evidencia: "With --rebase-merges, the rebase will instead try to preserve the branching structure within the commits that are to be rebased, by recreating the merge commits."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-868
+  hecho: El subcomando expire de git reflog elimina las entradas antiguas del reflog, según el tiempo de expiración y el de expiración de las inalcanzables.
+  evidencia: 'The "expire" subcommand prunes older reflog entries. Entries older than expire time, or entries older than expire-unreachable time and not reachable from the current tip, are removed from the reflog.'
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-869
+  hecho: La opción --expire de git reflog poda las entradas más antiguas que el tiempo indicado.
+  evidencia: "--expire=<time> Prune entries older than the specified time."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-870
+  hecho: Sin --expire, git reflog toma el tiempo de expiración de gc.reflogExpire, que por defecto es de 90 días.
+  evidencia: "--expire=<time> Prune entries older than the specified time. If this option is not specified, the expiration time is taken from the configuration setting gc.reflogExpire, which in turn defaults to 90 days."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-871
+  hecho: La opción --expire-unreachable de git reflog poda las entradas más antiguas que el tiempo indicado que no son alcanzables desde la punta actual de la rama.
+  evidencia: "--expire-unreachable=<time> Prune entries older than <time> that are not reachable from the current tip of the branch."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-872
+  hecho: Sin --expire-unreachable, git reflog toma el tiempo de gc.reflogExpireUnreachable, que por defecto es de 30 días.
+  evidencia: "--expire-unreachable=<time> Prune entries older than <time> that are not reachable from the current tip of the branch. If this option is not specified, the expiration time is taken from the configuration setting gc.reflogExpireUnreachable, which in turn defaults to 30 days."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-873
+  hecho: La página de git reflog indica que el subcomando expire no suele usarse directamente por los usuarios y remite a git-gc.
+  evidencia: 'The "expire" subcommand prunes older reflog entries. Entries older than expire time, or entries older than expire-unreachable time and not reachable from the current tip, are removed from the reflog. This is typically not used directly by end users — instead, see git-gc[1].'
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-874
+  hecho: Pro Git indica que se pueden aplastar commits con reset y que existe otra forma de hacerlo, la que presenta bajo el título Aplastando, aunque en ese ejemplo reset es más simple.
+  evidencia: "Puedes usar reset para aplastarlos rápida y fácilmente en una sola confirmación que lo hace ver realmente inteligente. (Aplastando muestra otra forma de hacerlo, pero en este ejemplo es más simple usar reset.)"
+  fuente: f01-15
+  ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
+  consultada: 2026-11-12
+
+- id: h01-875
+  hecho: La salida de git cat-file -p sobre una etiqueta anotada incluye una línea tagger con el nombre, el correo y la fecha de quien la creó.
+  evidencia: "(la opción -a indica que la etiqueta es anotativa) $ git tag -a v1.1 1a410efbd13591db07496601ebc7a059dd55cfe9 -m 'test tag' Este es el objeto SHA-1 creado: $ cat .git/refs/tags/v1.1 9585191f37f7b0fb9444f35a9bf50de191beadc2 Ahora, lanzando el comando cat-file para ese valor SHA-1: $ git cat-file -p 9585191f37f7b0fb9444f35a9bf50de191beadc2 object 1a410efbd13591db07496601ebc7a059dd55cfe9 type commit tag v1.1 tagger Scott Chacon <schacon@gmail.com> Sat May 23 16:48:58 2009 -0700"
+  fuente: f01-13
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
+  consultada: 2026-11-12
+
+- id: h01-876
+  hecho: Por defecto, git log no genera ninguna salida de diff.
+  evidencia: "By default, git log does not generate any diff output."
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-877
+  hecho: En git log, los commits de fusión no muestran diff aunque se elija un formato como --patch, salvo que se indique una variante de --diff-merges (incluidas -m, -c, --cc y --dd).
+  evidencia: "Note that unless one of --diff-merges variants (including short -m, -c, --cc, and --dd options) is explicitly given, merge commits will not show a diff, even if a diff format like --patch is selected, nor will they match search options like -S."
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-878
+  hecho: En git log, los commits de fusión tampoco coinciden con opciones de búsqueda como -S salvo que se indique una variante de --diff-merges.
+  evidencia: "Note that unless one of --diff-merges variants (including short -m, -c, --cc, and --dd options) is explicitly given, merge commits will not show a diff, even if a diff format like --patch is selected, nor will they match search options like -S."
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-879
+  hecho: Con --first-parent, el formato de diff por defecto de los commits de fusión en git log es first-parent.
+  evidencia: "Note that unless one of --diff-merges variants (including short -m, -c, --cc, and --dd options) is explicitly given, merge commits will not show a diff, even if a diff format like --patch is selected, nor will they match search options like -S. The exception is when --first-parent is in use, in which case first-parent is the default format for merge commits."
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-880
+  hecho: git pull --ff-only solo hace actualizaciones de avance rápido y falla si la rama local ha divergido de la remota.
+  evidencia: 'git pull --ff-only will only do "fast-forward" updates: it fails if your local branch has diverged from the remote branch.'
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-881
+  hecho: La opción --ff-only de git pull solo actualiza si no hay historia local divergente, y es el comportamiento por defecto cuando no se indica ningún método para reconciliar historias divergentes.
+  evidencia: "--ff-only Only update to the new history if there is no divergent local history. This is the default when no method for reconciling divergent histories is provided (via the --rebase flags)."
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-882
+  hecho: git pull --rebase ejecuta git rebase.
+  evidencia: "git pull --rebase runs git rebase"
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-883
+  hecho: git pull --no-rebase ejecuta git merge.
+  evidencia: "git pull --no-rebase runs git merge."
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-884
+  hecho: Con --rebase (valor true), git pull rebasa la rama actual sobre la rama upstream después de hacer fetch.
+  evidencia: "--rebase[=(true|merges|false|interactive)] true rebase the current branch on top of the upstream branch after fetching."
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-885
+  hecho: Se pueden fijar pull.rebase, pull.squash o pull.ff para elegir el comportamiento preferido de git pull.
+  evidencia: "You can also set the configuration options pull.rebase, pull.squash, or pull.ff with your preferred behaviour."
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-886
+  hecho: pull.rebase, branch.<name>.rebase y branch.autoSetupRebase sirven para hacer que git pull use siempre --rebase en lugar de fusionar.
+  evidencia: "See pull.rebase, branch.<name>.rebase and branch.autoSetupRebase in git-config[1] if you want to make git pull always use --rebase instead of merging."
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-887
+  hecho: La página de git pull advierte de que --rebase es un modo potencialmente peligroso porque reescribe la historia.
+  evidencia: "Note This is a potentially dangerous mode of operation. It rewrites history, which does not bode well when you published that history already."
+  fuente: f01-34
+  ancla: https://git-scm.com/docs/git-pull
+  consultada: 2026-11-12
+
+- id: h01-888
+  hecho: Si no se indica modo, git reset usa --mixed por defecto.
+  evidencia: "The <mode> must be one of the following (default --mixed):"
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-889
+  hecho: El modo --mixed de git reset deja sin cambios el directorio de trabajo.
+  evidencia: "The <mode> must be one of the following (default --mixed): --mixed Leave your working directory unchanged."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-890
+  hecho: El modo --mixed de git reset actualiza el índice para que coincida con el nuevo HEAD, de modo que no queda nada preparado.
+  evidencia: "--mixed Leave your working directory unchanged. Update the index to match the new HEAD, so nothing will be staged."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-891
+  hecho: El modo --soft de git reset deja sin cambios los archivos del árbol de trabajo y el índice.
+  evidencia: "--soft Leave your working tree files and the index unchanged."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-892
+  hecho: Sin cambios preparados, git reset --soft HEAD~5 seguido de git commit combina los últimos 5 commits en uno.
+  evidencia: "--soft Leave your working tree files and the index unchanged. For example, if you have no staged changes, you can use git reset --soft HEAD~5; git commit to combine the last 5 commits into 1 commit."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-893
+  hecho: El modo --hard de git reset sobrescribe todos los archivos y directorios con la versión de <commit>.
+  evidencia: "--hard Overwrite all files and directories with the version from <commit>,"
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-894
+  hecho: El modo --hard de git reset puede sobrescribir archivos sin seguimiento.
+  evidencia: "--hard Overwrite all files and directories with the version from <commit>, and may overwrite untracked files."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-895
+  hecho: Con --hard, los archivos con seguimiento que no están en <commit> se eliminan para que el árbol de trabajo coincida con <commit>.
+  evidencia: "--hard Overwrite all files and directories with the version from <commit>, and may overwrite untracked files. Tracked files not in <commit> are removed so that the working tree matches <commit>."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-896
+  hecho: Con --hard, git reset actualiza el índice para que coincida con el nuevo HEAD, de modo que no queda nada preparado.
+  evidencia: "--hard Overwrite all files and directories with the version from <commit>, and may overwrite untracked files. Tracked files not in <commit> are removed so that the working tree matches <commit>. Update the index to match the new HEAD, so nothing will be staged."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-897
+  hecho: git reset <modo> <commit> cambia el commit al que apunta HEAD.
+  evidencia: "git reset [<mode>] <commit> changes which commit HEAD points to."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-898
+  hecho: Cambiar el commit al que apunta HEAD con git reset permite deshacer operaciones de Git como commit, merge, rebase y pull.
+  evidencia: "git reset [<mode>] <commit> changes which commit HEAD points to. This makes it possible to undo various Git operations, for example commit, merge, rebase, and pull."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-899
+  hecho: Con rutas, git reset fija la versión preparada de los archivos o directorios indicados a la del commit o árbol dado, que por defecto es HEAD.
+  evidencia: "git reset [-q] [<tree-ish>] [--] <pathspec>... git reset [-q] [--pathspec-from-file=<file> [--pathspec-file-nul]] [<tree-ish>] For all specified files or directories, set the staged version to the version from the given commit or tree (which defaults to HEAD)."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-900
+  hecho: git reset <pathspec> es lo opuesto de git add <pathspec>, pues deshace la preparación de los cambios de esos archivos o directorios.
+  evidencia: "This means that git reset <pathspec> is the opposite of git add <pathspec>: it unstages all changes to the specified file(s) or directories."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-901
+  hecho: git reset <pathspec> equivale a git restore --staged <pathspec>.
+  evidencia: "This means that git reset <pathspec> is the opposite of git add <pathspec>: it unstages all changes to the specified file(s) or directories. This is equivalent to git restore --staged <pathspec>"
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-902
+  hecho: Con rutas, git reset actualiza solo el índice, sin tocar HEAD ni los archivos del árbol de trabajo.
+  evidencia: "In this mode, git reset updates only the index (without updating the HEAD or working tree files)."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
+
+- id: h01-903
+  hecho: Para actualizar los archivos además de las entradas del índice, la página de git reset remite a git restore.
+  evidencia: "In this mode, git reset updates only the index (without updating the HEAD or working tree files). If you want to update the files as well as the index entries, use git-restore[1]."
+  fuente: f01-35
+  ancla: https://git-scm.com/docs/git-reset
+  consultada: 2026-11-12
