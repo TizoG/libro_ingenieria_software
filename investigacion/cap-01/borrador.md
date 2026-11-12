@@ -241,3 +241,159 @@ Vuelve al `MM`. ¿Qué pasa si confirmas sin otro `git add`? `factura.py` está 
 > **Ojo con la versión.** Pro Git en español da `master` como rama por defecto [h01-410]. La documentación actual de `git init` dice que hoy la rama inicial se sigue llamando así si no indicas otro nombre, y que pasará a llamarse `main` con Git 3.0 [h01-276, h01-278]. Los ejemplos usan `main` porque su entorno lo fija con `init.defaultBranch` [h01-279]; para un solo repositorio está `git init -b` [h01-277]. `master` no tiene nada de especial: está en casi todos los repositorios solo porque `git init` la crea por defecto y casi nadie la renombra [h01-412, h01-413].
 >
 > Con el hash, algo parecido. `git init` usa SHA-1 salvo que pidas `--object-format=sha256`, si está habilitado, y por ahora los repositorios SHA-256 y SHA-1 no interoperan [h01-280, h01-283]. Que un objeto pueda nombrarse con 40 dígitos hexadecimales (SHA-1) o con 64 (SHA-256) es lo que prevé el diseño de la transición, no lo que hace `git init` por defecto [h01-293, h01-280]. La sección 1.6 cuenta por qué se eligió SHA-256 como sucesor [h01-292].
+
+## 1.3 Leer y deshacer el historial
+
+`git log` funciona como una consulta: puedes quedarte con los commits que añadieron o quitaron un texto, con los que tocaron un archivo o con los de un autor, y resumir cada uno en una línea [h01-301, h01-324, h01-325, h01-321, h01-310]. Deshacer casi nunca borra un commit, porque `git commit --amend` crea un commit que sustituye al último y `git restore` copia contenido de un sitio a otro; lo que sí puedes perder es lo que nunca confirmaste [h01-215, h01-334, h01-764, h01-346, h01-352, h01-345, h01-347].
+
+Cada commit guarda el hash de sus padres: uno si es normal, varios si registra una fusión [h01-570, h01-404]. El historial es una cadena que se recorre hacia atrás, y `git log` la enseña con lo más reciente arriba [h01-302]. Tu punto de partida será casi siempre `HEAD`, que señala la última instantánea confirmada, la que será padre del próximo commit [h01-703]; la sección 1.4 cuenta qué es exactamente.
+
+Desde ahí retrocedes con `~<n>`, que sube n generaciones por el primer padre: `HEAD~1` es el padre; `HEAD~2`, el abuelo [h01-826, h01-828]. `HEAD^` también es el primer padre, así que equivale a `HEAD~` [h01-822, h01-825]. Con un número detrás se separan: `HEAD^2` es el segundo padre, que solo tiene un commit de fusión, y `HEAD~3` equivale a `HEAD^^^` [h01-828, h01-823, h01-824, h01-827].
+
+```mermaid
+flowchart RL
+    C5(("938b805 (HEAD)")) -- padre --> C4(("795693a (HEAD~1)"))
+    C4 -- padre --> C3(("c87074a (HEAD~2)"))
+    C3 -- padre --> C2(("c2466c3 (HEAD~3)"))
+    C2 -- padre --> C1(("ce4f8a1 (HEAD~4)"))
+```
+
+Así se leen el `HEAD~4` de «El problema», cuatro generaciones atrás, y su `HEAD~2`, el abuelo; y también el `HEAD~1^{tree}` de la sección 1.2, el árbol del padre [h01-826, h01-828, h01-829].
+
+`facturas` tiene ya los cinco commits del dibujo; los tests los escribió tu compañera Marta Ruiz. El commit del IVA no se llama `d382532`, como en la sección 1.2, porque ahora tiene otro padre y otro árbol: antes de él hay un commit que añade al README un ejemplo de uso [h01-570, h01-638, h01-214]. El ejemplo le hace cinco consultas.
+
+<!-- ejemplo: ejemplos/cap-01/04-leer-historial.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git log --oneline
+938b805 Documenta el IVA en el README
+795693a Añade tests de total
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git log --stat -1
+commit 938b8051e8da371c0d510280521d4cff1343fa6f
+Author: devOC <devoc@ejemplo.dev>
+Date:   Thu Jan 1 12:00:00 2026 +0100
+
+    Documenta el IVA en el README
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+$ git log -S "0.21" --oneline
+c87074a Cambia el tipo de IVA al 21 %
+$ git log --oneline -- README.md
+938b805 Documenta el IVA en el README
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git log --format=fuller -1 HEAD~1
+commit 795693a3558a7d3086daa5692c61635643e96470
+Author:     Marta Ruiz <marta@ejemplo.dev>
+AuthorDate: Thu Jan 1 12:00:00 2026 +0100
+Commit:     devOC <devoc@ejemplo.dev>
+CommitDate: Thu Jan 1 12:00:00 2026 +0100
+
+    Añade tests de total
+```
+<!-- /ejemplo -->
+
+`--oneline` abrevia `--pretty=oneline --abbrev-commit` [h01-820]: una línea por commit y, en vez del hash de 40 caracteres, un prefijo que lo identifica sin ambigüedad [h01-310, h01-815, h01-821]. Por defecto son siete caracteres, más si hace falta para que siga siendo único [h01-818]; por eso `ce4f8a1` tiene siete. Tú también puedes escribir un prefijo en tus comandos: Git lo acepta si tiene al menos cuatro caracteres y ningún otro objeto del repositorio empieza igual [h01-816, h01-817].
+
+`-1` muestra solo el último commit, como `-<n>` los n últimos [h01-306], y sin `--oneline` sale la entrada entera: hash, autor con su correo, fecha y mensaje [h01-303]. `--stat` añade los archivos tocados y cuántas líneas se añadieron y quitaron en cada uno [h01-308, h01-309].
+
+`-S "0.21"` deja los commits que añadieron o quitaron esa cadena en el código [h01-324]: solo `c87074a`, el del IVA, y lo has encontrado sin abrir un archivo. Para buscar en los mensajes está `--grep` [h01-322]. Una ruta, al final y por lo general detrás de `--`, limita la salida a los commits que cambiaron ese archivo [h01-325, h01-326]: tres de los cinco tocaron `README.md`.
+
+La última consulta mira `HEAD~1` con el estilo `fuller`, que da más información [h01-311], y separa dos papeles: el autor, quien escribió el trabajo, y el confirmador, quien lo aplicó [h01-316, h01-317]. Si envías un parche a un proyecto y alguien del equipo lo aplica, el reconocimiento es para los dos [h01-318]. Con `--author` filtras por el primero [h01-321]. Y si la salida va a leerla otro programa, fija tú el formato con `format`: así sabes que no cambiará en futuras versiones de Git [h01-312, h01-313].
+
+Hasta aquí solo has mirado. Deshacer es otra cosa: es una de las pocas áreas en las que Git puede perder parte de tu trabajo si te equivocas [h01-327, h01-328].
+
+Uno de los casos más comunes es confirmar antes de tiempo, con un archivo olvidado o un mensaje equivocado [h01-329]. Lo rehaces con `git commit --amend`, que confirma lo que haya en el área de preparación [h01-330, h01-331]. En el ejemplo redondeas el total, escribes su test y solo preparas `factura.py`.
+
+<!-- ejemplo: ejemplos/cap-01/05-amend.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git add factura.py
+$ git commit -m "Redondea el total y lo prueba"
+[main 552d7cd] Redondea el total y lo prueba
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git status -s
+?? tests/
+$ git log --oneline -1
+552d7cd Redondea el total y lo prueba
+$ git add tests/test_factura.py
+$ git commit --amend --no-edit
+[main 3ddacd5] Redondea el total y lo prueba
+ Date: Thu Jan 1 12:00:00 2026 +0100
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+ create mode 100644 tests/test_factura.py
+$ git log --oneline
+3ddacd5 Redondea el total y lo prueba
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git reflog
+3ddacd5 HEAD@{0}: commit (amend): Redondea el total y lo prueba
+552d7cd HEAD@{1}: commit: Redondea el total y lo prueba
+c87074a HEAD@{2}: commit: Cambia el tipo de IVA al 21 %
+c2466c3 HEAD@{3}: commit: Añade un ejemplo de uso al README
+ce4f8a1 HEAD@{4}: commit (initial): Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+`git status -s` delata el olvido: `tests/` sigue sin rastrear [h01-249]. Tras prepararlo y repetir con `--amend`, `git log` muestra un solo commit con ese mensaje: el segundo ha reemplazado al primero [h01-334]. Pero ya no se llama `552d7cd`, sino `3ddacd5`.
+
+`--amend` no edita nada: los commits son inmutables, y «editar» el historial es crear commits nuevos y mover las referencias hacia ellos [h01-763, h01-764]. `3ddacd5` es otro commit, con otra instantánea y el mismo padre, `c87074a`, y `main` apunta ahora a él [h01-331, h01-764]. Su nombre cambia porque sale de su contenido [h01-214, h01-638]; Pro Git pide cuidado con `--amend` justo porque puede cambiar el SHA-1 del commit [h01-539]. Por qué importa si ya lo habías compartido lo verás en la sección 1.5.
+
+```mermaid
+flowchart RL
+    C2(("c2466c3")) -- padre --> C1(("ce4f8a1"))
+    C3(("c87074a")) -- padre --> C2
+    V(("552d7cd")) -. padre .-> C3
+    N(("3ddacd5")) -- padre --> C3
+    M["main"] --> N
+    classDef sustituido stroke-dasharray: 5 5
+    class V sustituido
+```
+
+El commit de borde discontinuo es el sustituido: ninguna rama apunta ya a él [h01-764]. Si no has preparado nada, `--amend` deja la instantánea igual y solo cambia el mensaje [h01-332]. Normalmente abre el editor con el mensaje anterior [h01-333]; el ejemplo añade `--no-edit` y el mensaje se queda igual.
+
+> PENDIENTE: falta hecho sobre `git commit --no-edit` (reutiliza el mensaje del commit sin abrir el editor). Está en la página de `git commit`, que no está en el mapa de fuentes; f01-24 solo documenta el `--no-edit` de `git revert`.
+
+Las otras dos formas habituales de deshacer tocan archivos, no commits: sacar un cambio del área de preparación y descartarlo del directorio de trabajo. El propio `git status` te recuerda cómo [h01-335, h01-350]. El ejemplo prepara una línea nueva en `factura.py` y deshace los dos pasos.
+
+<!-- ejemplo: ejemplos/cap-01/06-restore.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ echo "IVA_REDUCIDO = 0.10" >> factura.py
+$ git add factura.py
+$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   factura.py
+$ git restore --staged factura.py
+$ git status -s
+ M factura.py
+$ git restore factura.py
+$ git status -s
+```
+<!-- /ejemplo -->
+
+Bajo «Changes to be committed», Git 2.43 te sugiere `git restore --staged`. `git restore` restaura rutas con contenido que copia de una fuente [h01-352]. Con `--staged`, el destino es el índice y la fuente, por defecto, `HEAD` [h01-354, h01-356]: `factura.py` pasa de `M ` a ` M` y tu línea sigue en disco, porque tocar también el directorio de trabajo exige añadir `--worktree` [h01-250, h01-355]. Sin opciones, el destino es el directorio de trabajo y la fuente, el índice [h01-357, h01-360]: `git restore factura.py` borra tu línea y el estado queda limpio.
+
+```mermaid
+flowchart LR
+    H["HEAD"] -- "git restore --staged" --> I["Índice"]
+    I -- "git restore" --> W["Directorio de trabajo"]
+    O(("Otro commit")) -. "git restore --source" .-> W
+```
+
+Es el camino de `git add` y `git commit` recorrido al revés [h01-710, h01-711, h01-356, h01-357]. Con `--source` copias desde otro commit, que puedes nombrar por su hash, por una rama o por una etiqueta [h01-358, h01-359].
+
+Los dos pasos no pesan igual. `git restore --staged` no toca tu directorio de trabajo [h01-354, h01-355]; por la misma razón, Pro Git considera relativamente seguro su `git reset HEAD <archivo>` [h01-336, h01-339]. `git restore <archivo>`, en cambio, descarta cambios [h01-772]: es el error típico de esta sección.
+
+Vuelve al ejemplo 05. ¿Dónde está `552d7cd`? `git log` ya no lo enseña, pero `git reflog` lo lista en su segunda línea. Esa orden lee unos registros locales que anotan cuándo se movieron las puntas de las ramas y de otras referencias [h01-774]. Sin argumentos muestra el de `HEAD` [h01-777], y esos registros se actualizan con cada commit [h01-786]. Pro Git lo confirma: hasta los commits sustituidos con `--amend` se pueden recuperar [h01-346]. Cómo traerlo de vuelta lo verás en la sección 1.7.
+
+> **Error típico.** Usar `git restore <archivo>`, o el antiguo `git checkout -- <archivo>`, para «limpiar» y descubrir después que querías ese cambio. El archivo se sobrescribe con otra versión y lo que le hubieras hecho desaparece [h01-342, h01-352]. Pro Git llama peligroso a `git checkout -- <archivo>` y pide no usarlo salvo que estés completamente seguro de que ya no quieres el archivo [h01-341, h01-343]. Si dudas, confirma antes: lo confirmado se recupera, y lo que nunca confirmaste puede que no [h01-345, h01-347].
+
+> **Ojo con la versión.** Pro Git en español saca un archivo del área de preparación con `git reset HEAD <archivo>`, que es lo que sugiere su `git status` [h01-336], y descarta cambios con `git checkout -- <archivo>` [h01-340, h01-341]. El `git status` de Git 2.43 del ejemplo 06 sugiere ya `git restore --staged`. La documentación actual de `git restore` dice que devolver un archivo del índice a la versión de `HEAD` equivale a usar `git reset`, y que restaurar a la vez el índice y el directorio de trabajo equivale a usar `git checkout` [h01-361, h01-362]. El libro usa la forma que te sugiere tu propio Git.

@@ -11,3 +11,5 @@ Se extraen en `secciones/9-adicionales.md` (ids desde h01-809) y después el red
 | 1.2 | Hash abreviado: Git muestra solo los primeros caracteres; `--oneline` lo usa | f01-05 (`--abbrev-commit`), f01-28, f01-30 |
 | 1.2 | `HEAD~N`, `HEAD^`: padre, abuelo... | f01-28, f01-29 |
 | 1.2 | `<rev>^{tree}` en general | f01-29 |
+| 1.3 | `git commit --no-edit` (usa el mensaje sin abrir el editor) | Documentación de `git commit` (no está en el mapa) |
+| 1.3 | `--format=<estilo>` equivale a `--pretty=<estilo>` y admite `fuller` | f01-30 (git-log), hacia la línea 762 |
