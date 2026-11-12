@@ -213,6 +213,7 @@ El borrador vive en `investigacion/cap-XX/borrador.md`, no en `contenido/`. `scr
 | Script | Cortafuegos o fase | Qué hace |
 | --- | --- | --- |
 | `descargar_fuentes.py N` | 1 | Descarga las fuentes de `fuentes.yaml` a `fuentes-cache/` con fecha y huella; `--comprobar` avisa si una página cambió |
+| `juntar_hechos.py N` | 2 | Junta `secciones/*.md` en `hechos.md` y detecta ids repetidos |
 | `verificar_evidencias.py N` | 2 | Rechaza los hechos cuya evidencia no está literalmente en la copia local, o cuya fuente no está autorizada |
 | `insertar_ejemplos.py borrador` | 3 | Ejecuta los ejemplos e inserta código y salida real; `--comprobar` falla si algo cambió |
 | `comprobar_ids.py N` | Redacción cerrada | Cada id citado existe y pasa el cortafuegos 2 |
