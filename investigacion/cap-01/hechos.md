@@ -1,7 +1,6 @@
 # Hechos del capítulo 1: Git por dentro
 
-Hechos atómicos con evidencia literal (cortafuegos 2). Se generan juntando `secciones/1.X.md`; edita la sección y vuelve a juntar.
-Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
+Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/juntar_hechos.py` a partir de `secciones/`; edita la sección y vuelve a juntar.
 
 ## 1.1 Qué es el control de versiones
 
@@ -14,21 +13,21 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-102
   hecho: El registro de cambios permite recuperar versiones concretas más adelante.
-  evidencia: "de modo que puedas recuperar versiones específicas más adelante"
+  evidencia: "registra los cambios realizados en un archivo o conjunto de archivos a lo largo del tiempo, de modo que puedas recuperar versiones específicas más adelante"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-103
-  hecho: Un VCS permite volver a una versión anterior del proyecto completo, no solo de un archivo.
-  evidencia: "regresar a una versión anterior del proyecto completo"
+  hecho: Un VCS permite regresar a versiones anteriores de los archivos y también a una versión anterior del proyecto completo.
+  evidencia: "un sistema de control de versiones (VCS por sus siglas en inglés) es una decisión muy acertada. Dicho sistema te permite regresar a versiones anteriores de tus archivos, regresar a una versión anterior del proyecto completo"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-104
   hecho: Con un VCS suele ser posible recuperar fácilmente archivos que se han estropeado o perdido.
-  evidencia: "si arruinas o pierdes archivos, será posible recuperarlos fácilmente"
+  evidencia: "Usar un VCS también significa generalmente que si arruinas o pierdes archivos, será posible recuperarlos fácilmente"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
@@ -41,14 +40,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-106
-  hecho: Copiar archivos a mano como control de versiones es muy propenso a errores.
-  evidencia: "pero también es tremendamente propenso a errores"
+  hecho: Copiar los archivos a otro directorio como método de control de versiones es tremendamente propenso a errores.
+  evidencia: "es copiar los archivos a otro directorio (quizás indicando la fecha y hora en que lo hicieron, si son ingeniosos). Este método es muy común porque es muy sencillo, pero también es tremendamente propenso a errores"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-107
-  hecho: Un error típico de la copia manual es guardar en el archivo equivocado o sobrescribir archivos sin querer.
+  hecho: Es fácil olvidar en qué directorio te encuentras y guardar accidentalmente en el archivo equivocado o sobrescribir archivos que no querías.
   evidencia: "Es fácil olvidar en qué directorio te encuentras y guardar accidentalmente en el archivo equivocado o sobrescribir archivos que no querías."
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
@@ -62,49 +61,49 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-109
-  hecho: RCS, un VCS local muy popular, guarda las diferencias entre archivos (parches) en un formato especial en disco.
-  evidencia: "Esta herramienta funciona guardando conjuntos de parches (es decir, las diferencias entre archivos) en un formato especial en disco"
+  hecho: RCS guarda conjuntos de parches (es decir, las diferencias entre archivos) en un formato especial en disco.
+  evidencia: "RCS, que todavía podemos encontrar en muchas de las computadoras actuales. Incluso el famoso sistema operativo Mac OS X incluye el comando rcs cuando instalas las herramientas de desarrollo. Esta herramienta funciona guardando conjuntos de parches (es decir, las diferencias entre archivos) en un formato especial en disco"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-110
-  hecho: Los sistemas centralizados nacieron para colaborar con desarrolladores en otros sistemas.
-  evidencia: "Los sistemas de Control de Versiones Centralizados (CVCS por sus siglas en inglés) fueron desarrollados para solucionar este problema."
+  hecho: Los sistemas de control de versiones centralizados (CVCS) se desarrollaron para resolver el problema de colaborar con desarrolladores en otros sistemas.
+  evidencia: "El siguiente gran problema con el que se encuentran las personas es que necesitan colaborar con desarrolladores en otros sistemas. Los sistemas de Control de Versiones Centralizados (CVCS por sus siglas en inglés) fueron desarrollados para solucionar este problema."
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-111
   hecho: CVS, Subversion y Perforce son ejemplos de sistemas de control de versiones centralizados.
-  evidencia: "Estos sistemas, como CVS, Subversion y Perforce, tienen un único servidor"
+  evidencia: "Los sistemas de Control de Versiones Centralizados (CVCS por sus siglas en inglés) fueron desarrollados para solucionar este problema. Estos sistemas, como CVS, Subversion y Perforce, tienen un único servidor"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-112
   hecho: Un sistema centralizado tiene un único servidor con todos los archivos versionados y varios clientes que los descargan de ahí.
-  evidencia: "tienen un único servidor que contiene todos los archivos versionados y varios clientes que descargan los archivos desde ese lugar central"
+  evidencia: "Los sistemas de Control de Versiones Centralizados (CVCS por sus siglas en inglés) fueron desarrollados para solucionar este problema. Estos sistemas, como CVS, Subversion y Perforce, tienen un único servidor que contiene todos los archivos versionados y varios clientes que descargan los archivos desde ese lugar central"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-113
   hecho: En un sistema centralizado, todas las personas saben hasta cierto punto en qué trabajan las demás.
-  evidencia: "todas las personas saben hasta cierto punto en qué están trabajando los otros colaboradores del proyecto"
+  evidencia: "Figura 2. Control de versiones centralizado. Esta configuración ofrece muchas ventajas, especialmente frente a VCS locales. Por ejemplo, todas las personas saben hasta cierto punto en qué están trabajando los otros colaboradores del proyecto"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-114
   hecho: En un sistema centralizado, los administradores controlan al detalle qué puede hacer cada usuario.
-  evidencia: "Los administradores tienen control detallado sobre qué puede hacer cada usuario"
+  evidencia: "Figura 2. Control de versiones centralizado. Esta configuración ofrece muchas ventajas, especialmente frente a VCS locales. Por ejemplo, todas las personas saben hasta cierto punto en qué están trabajando los otros colaboradores del proyecto. Los administradores tienen control detallado sobre qué puede hacer cada usuario"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-115
-  hecho: Administrar un sistema centralizado es más fácil que gestionar bases de datos locales en cada cliente.
+  hecho: Es mucho más fácil administrar un CVCS que tener que lidiar con bases de datos locales en cada cliente.
   evidencia: "es mucho más fácil administrar un CVCS que tener que lidiar con bases de datos locales en cada cliente"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
@@ -112,70 +111,70 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-116
   hecho: La desventaja más obvia de un sistema centralizado es que el servidor es un punto único de fallo.
-  evidencia: "La más obvia es el punto único de fallo que representa el servidor centralizado."
+  evidencia: "Sin embargo, esta configuración también tiene serias desventajas. La más obvia es el punto único de fallo que representa el servidor centralizado."
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-117
-  hecho: Si el servidor centralizado se cae, nadie puede colaborar ni guardar cambios mientras dure la caída.
-  evidencia: "Si ese servidor se cae durante una hora, entonces durante esa hora nadie podrá colaborar o guardar cambios en archivos en los que hayan estado trabajando."
+  hecho: Si el servidor centralizado se cae durante una hora, durante esa hora nadie puede colaborar ni guardar cambios en los archivos en los que había estado trabajando.
+  evidencia: "La más obvia es el punto único de fallo que representa el servidor centralizado. Si ese servidor se cae durante una hora, entonces durante esa hora nadie podrá colaborar o guardar cambios en archivos en los que hayan estado trabajando."
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-118
-  hecho: Si se corrompe el disco del servidor central y no hay copias de seguridad, se pierde la información del proyecto salvo las copias instantáneas que haya en máquinas locales.
-  evidencia: "se perderá toda la información del proyecto, con excepción de las copias instantáneas que las personas tengan en sus máquinas locales"
+  hecho: Si se corrompe el disco duro con la base de datos central y no se han hecho copias de seguridad adecuadas, se pierde toda la información del proyecto, salvo las copias instantáneas que las personas tengan en sus máquinas locales.
+  evidencia: "Si el disco duro en el que se encuentra la base de datos central se corrompe, y no se han realizado copias de seguridad adecuadamente, se perderá toda la información del proyecto, con excepción de las copias instantáneas que las personas tengan en sus máquinas locales"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-119
   hecho: Git, Mercurial, Bazaar y Darcs son ejemplos de sistemas de control de versiones distribuidos.
-  evidencia: "En un DVCS (como Git, Mercurial, Bazaar o Darcs)"
+  evidencia: "Los sistemas de Control de Versiones Distribuidos (DVCS por sus siglas en inglés) ofrecen soluciones para los problemas que han sido mencionados. En un DVCS (como Git, Mercurial, Bazaar o Darcs)"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-120
-  hecho: En un sistema distribuido, los clientes replican completamente el repositorio, no solo descargan la última copia instantánea.
-  evidencia: "los clientes no solo descargan la última copia instantánea de los archivos, sino que se replica completamente el repositorio"
+  hecho: En un DVCS, los clientes no solo descargan la última copia instantánea de los archivos, sino que replican completamente el repositorio.
+  evidencia: "En un DVCS (como Git, Mercurial, Bazaar o Darcs), los clientes no solo descargan la última copia instantánea de los archivos, sino que se replica completamente el repositorio"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-121
-  hecho: En un sistema distribuido, cada clon es una copia completa de todos los datos.
+  hecho: Cada clon es realmente una copia completa de todos los datos.
   evidencia: "Cada clon es realmente una copia completa de todos los datos."
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-122
-  hecho: Si el servidor de un sistema distribuido falla, cualquier repositorio de un cliente puede copiarse al servidor para restaurarlo.
-  evidencia: "cualquiera de los repositorios disponibles en los clientes puede ser copiado al servidor con el fin de restaurarlo"
+  hecho: Si un servidor deja de funcionar y los sistemas colaboraban a través de él, cualquiera de los repositorios disponibles en los clientes puede copiarse al servidor para restaurarlo.
+  evidencia: "De esta manera, si un servidor deja de funcionar y estos sistemas estaban colaborando a través de él, cualquiera de los repositorios disponibles en los clientes puede ser copiado al servidor con el fin de restaurarlo"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-123
-  hecho: Muchos sistemas distribuidos permiten trabajar con varios repositorios remotos a la vez.
-  evidencia: "muchos de estos sistemas se encargan de manejar numerosos repositorios remotos con los cuales pueden trabajar"
+  hecho: Muchos sistemas distribuidos manejan numerosos repositorios remotos, de modo que puedes colaborar simultáneamente con diferentes grupos de personas dentro del mismo proyecto.
+  evidencia: "Figura 3. Control de versiones distribuido. Además, muchos de estos sistemas se encargan de manejar numerosos repositorios remotos con los cuales pueden trabajar, de tal forma que puedes colaborar simultáneamente con diferentes grupos de personas en distintas maneras dentro del mismo proyecto"
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-124
-  hecho: Los sistemas distribuidos permiten flujos de trabajo imposibles en los centralizados, como los modelos jerárquicos.
+  hecho: Se pueden establecer varios flujos de trabajo que no son posibles en sistemas centralizados, como los modelos jerárquicos.
   evidencia: "Esto permite establecer varios flujos de trabajo que no son posibles en sistemas centralizados, como pueden ser los modelos jerárquicos."
   fuente: f01-01
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 - id: h01-125
-  hecho: Entre 1991 y 2002, el kernel de Linux gestionó sus cambios con parches y archivos.
-  evidencia: "los cambios en el software se realizaban a través de parches y archivos"
+  hecho: Durante la mayor parte del mantenimiento del kernel de Linux (1991-2002), los cambios en el software se realizaban a través de parches y archivos.
+  evidencia: "Durante la mayor parte del mantenimiento del kernel de Linux (1991-2002), los cambios en el software se realizaban a través de parches y archivos"
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
   consultada: 2026-11-12
@@ -188,59 +187,66 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-127
-  hecho: En 2005, BitKeeper dejó de ofrecerse gratis tras romperse la relación entre su compañía y la comunidad del kernel.
+  hecho: En 2005, la relación entre la comunidad del kernel de Linux y la compañía de BitKeeper se vino abajo y la herramienta dejó de ofrecerse gratis.
   evidencia: "En el 2005, la relación entre la comunidad que desarrollaba el kernel de Linux y la compañía que desarrollaba BitKeeper se vino abajo y la herramienta dejó de ser ofrecida de manera gratuita."
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
   consultada: 2026-11-12
 
 - id: h01-128
-  hecho: Ese cambio impulsó a la comunidad de Linux, en particular a Linus Torvalds, a desarrollar su propia herramienta.
-  evidencia: "Esto impulsó a la comunidad de desarrollo de Linux (y en particular a Linus Torvalds, el creador de Linux) a desarrollar su propia herramienta"
+  hecho: Que la herramienta dejara de ofrecerse gratis impulsó a la comunidad de desarrollo de Linux, y en particular a Linus Torvalds, a desarrollar su propia herramienta.
+  evidencia: "la herramienta dejó de ser ofrecida de manera gratuita. Esto impulsó a la comunidad de desarrollo de Linux (y en particular a Linus Torvalds, el creador de Linux) a desarrollar su propia herramienta"
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
   consultada: 2026-11-12
 
 - id: h01-129
-  hecho: Uno de los objetivos del nuevo sistema (Git) fue la velocidad.
+  hecho: Velocidad fue uno de los objetivos del nuevo sistema.
   evidencia: "Algunos de los objetivos del nuevo sistema fueron los siguientes: Velocidad"
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
   consultada: 2026-11-12
 
 - id: h01-130
-  hecho: Uno de los objetivos de Git era un gran soporte para el desarrollo no lineal, con miles de ramas paralelas.
-  evidencia: "Gran soporte para desarrollo no lineal (miles de ramas paralelas)"
+  hecho: Un gran soporte para el desarrollo no lineal (miles de ramas paralelas) fue uno de los objetivos del nuevo sistema.
+  evidencia: "Algunos de los objetivos del nuevo sistema fueron los siguientes: Velocidad Diseño sencillo Gran soporte para desarrollo no lineal (miles de ramas paralelas)"
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
   consultada: 2026-11-12
 
 - id: h01-131
-  hecho: Uno de los objetivos de Git era ser completamente distribuido.
-  evidencia: "Completamente distribuido"
+  hecho: Ser completamente distribuido fue uno de los objetivos del nuevo sistema.
+  evidencia: "Algunos de los objetivos del nuevo sistema fueron los siguientes: Velocidad Diseño sencillo Gran soporte para desarrollo no lineal (miles de ramas paralelas) Completamente distribuido"
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
   consultada: 2026-11-12
 
 - id: h01-132
-  hecho: Uno de los objetivos de Git era manejar grandes proyectos, como el kernel de Linux, con eficiencia en velocidad y tamaño de datos.
-  evidencia: "Capaz de manejar grandes proyectos (como el kernel de Linux) eficientemente (velocidad y tamaño de los datos)"
+  hecho: Ser capaz de manejar grandes proyectos, como el kernel de Linux, con eficiencia en velocidad y tamaño de los datos fue uno de los objetivos del nuevo sistema.
+  evidencia: "Algunos de los objetivos del nuevo sistema fueron los siguientes: Velocidad Diseño sencillo Gran soporte para desarrollo no lineal (miles de ramas paralelas) Completamente distribuido Capaz de manejar grandes proyectos (como el kernel de Linux) eficientemente (velocidad y tamaño de los datos)"
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
   consultada: 2026-11-12
 
 - id: h01-133
-  hecho: Otro de los objetivos de Git, en la misma lista, fue un diseño sencillo.
-  evidencia: "Diseño sencillo"
+  hecho: Un diseño sencillo fue otro de los objetivos del nuevo sistema.
+  evidencia: "Algunos de los objetivos del nuevo sistema fueron los siguientes: Velocidad Diseño sencillo"
   fuente: f01-02
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Una-breve-historia-de-Git
+  consultada: 2026-11-12
+
+- id: h01-134
+  hecho: RCS fue una de las herramientas de control de versiones más populares.
+  evidencia: "Una de las herramientas de control de versiones más popular fue un sistema llamado RCS"
+  fuente: f01-01
+  ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones
   consultada: 2026-11-12
 
 ## 1.2 Fotos, no diferencias; los tres estados
 
 - id: h01-201
-  hecho: La mayoría de los otros sistemas de control de versiones almacenan la información como una lista de cambios en los archivos.
-  evidencia: "la mayoría de los otros sistemas almacenan la información como una lista de cambios en los archivos"
+  hecho: Conceptualmente, la mayoría de los otros sistemas de control de versiones almacenan la información como una lista de cambios en los archivos.
+  evidencia: "La principal diferencia entre Git y cualquier otro VCS (incluyendo Subversion y sus amigos) es la forma en la que manejan sus datos. Conceptualmente, la mayoría de los otros sistemas almacenan la información como una lista de cambios en los archivos"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -253,8 +259,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-203
-  hecho: Cada vez que confirmas, Git toma una foto del aspecto de todos los archivos en ese momento.
-  evidencia: "toma una foto del aspecto de todos tus archivos en ese momento y guarda una referencia a esa copia instantánea"
+  hecho: Cada vez que confirmas un cambio, Git toma una foto del aspecto de todos los archivos en ese momento y guarda una referencia a esa copia instantánea.
+  evidencia: "Cada vez que confirmas un cambio, o guardas el estado de tu proyecto en Git, él básicamente toma una foto del aspecto de todos tus archivos en ese momento y guarda una referencia a esa copia instantánea"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -281,15 +287,15 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-207
-  hecho: Con Git tienes toda la historia del proyecto en tu disco local.
-  evidencia: "tienes toda la historia del proyecto ahí mismo, en tu disco local"
+  hecho: Debido a que tienes toda la historia del proyecto en tu disco local, la mayoría de las operaciones parecen prácticamente inmediatas.
+  evidencia: "Debido a que tienes toda la historia del proyecto ahí mismo, en tu disco local, la mayoría de las operaciones parecen prácticamente inmediatas"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
 
 - id: h01-208
-  hecho: Con Git puedes confirmar tus cambios sin conexión de red y subirlos más tarde.
-  evidencia: "puedes confirmar tus cambios felizmente hasta que consigas una conexión de red para subirlos"
+  hecho: Si estás en un avión o en un tren y quieres trabajar un poco, puedes confirmar tus cambios hasta que consigas una conexión de red para subirlos.
+  evidencia: "Si te subes a un avión o a un tren y quieres trabajar un poco, puedes confirmar tus cambios felizmente hasta que consigas una conexión de red para subirlos"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -317,14 +323,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-212
   hecho: Un hash SHA-1 es una cadena de 40 caracteres hexadecimales.
-  evidencia: "Se trata de una cadena de 40 caracteres hexadecimales (0-9 y a-f)"
+  evidencia: "se conoce como hash SHA-1. Se trata de una cadena de 40 caracteres hexadecimales (0-9 y a-f)"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
 
 - id: h01-213
-  hecho: El hash SHA-1 se calcula a partir de los contenidos del archivo o de la estructura del directorio.
-  evidencia: "se calcula con base en los contenidos del archivo o estructura del directorio en Git"
+  hecho: El hash SHA-1 se calcula con base en los contenidos del archivo o la estructura del directorio en Git.
+  evidencia: "se conoce como hash SHA-1. Se trata de una cadena de 40 caracteres hexadecimales (0-9 y a-f), y se calcula con base en los contenidos del archivo o estructura del directorio en Git"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -338,7 +344,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-215
   hecho: Casi todas las acciones de Git solo añaden información a la base de datos de Git.
-  evidencia: "casi todas ellas sólo añaden información a la base de datos de Git"
+  evidencia: "Cuando realizas acciones en Git, casi todas ellas sólo añaden información a la base de datos de Git"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -358,7 +364,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-218
-  hecho: Un archivo confirmado tiene sus datos almacenados de forma segura en la base de datos local.
+  hecho: El estado confirmado significa que los datos están almacenados de manera segura en la base de datos local.
   evidencia: "Confirmado: significa que los datos están almacenados de manera segura en tu base de datos local."
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
@@ -394,7 +400,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-223
   hecho: El directorio de Git es lo que se copia al clonar un repositorio desde otra computadora.
-  evidencia: "es lo que se copia cuando clonas un repositorio desde otra computadora"
+  evidencia: "El directorio de Git es donde se almacenan los metadatos y la base de datos de objetos para tu proyecto. Es la parte más importante de Git, y es lo que se copia cuando clonas un repositorio desde otra computadora"
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -408,7 +414,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-225
   hecho: Los archivos del directorio de trabajo se sacan de la base de datos comprimida del directorio de Git y se colocan en disco para usarlos o modificarlos.
-  evidencia: "Estos archivos se sacan de la base de datos comprimida en el directorio de Git, y se colocan en disco para que los puedas usar o modificar."
+  evidencia: "El directorio de trabajo es una copia de una versión del proyecto. Estos archivos se sacan de la base de datos comprimida en el directorio de Git, y se colocan en disco para que los puedas usar o modificar."
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -421,22 +427,22 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-227
-  hecho: El primer paso del flujo de trabajo básico es modificar archivos en el directorio de trabajo.
-  evidencia: "Modificas una serie de archivos en tu directorio de trabajo."
+  hecho: El flujo de trabajo básico en Git empieza modificando una serie de archivos en el directorio de trabajo.
+  evidencia: "El flujo de trabajo básico en Git es algo así: Modificas una serie de archivos en tu directorio de trabajo."
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
 
 - id: h01-228
-  hecho: El segundo paso del flujo de trabajo básico es preparar los archivos añadiéndolos al área de preparación.
-  evidencia: "Preparas los archivos, añadiéndolos a tu área de preparación."
+  hecho: En el flujo de trabajo básico de Git, después de modificar archivos en el directorio de trabajo, los preparas añadiéndolos al área de preparación.
+  evidencia: "El flujo de trabajo básico en Git es algo así: Modificas una serie de archivos en tu directorio de trabajo. Preparas los archivos, añadiéndolos a tu área de preparación."
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
 
 - id: h01-229
-  hecho: El tercer paso del flujo de trabajo básico es confirmar: toma los archivos tal como están en el área de preparación y guarda esa copia instantánea de forma permanente en el directorio de Git.
-  evidencia: "Confirmas los cambios, lo que toma los archivos tal y como están en el área de preparación y almacena esa copia instantánea de manera permanente en tu directorio de Git."
+  hecho: Después de preparar los archivos, confirmas los cambios: se toman los archivos tal como están en el área de preparación y se almacena esa copia instantánea de forma permanente en el directorio de Git.
+  evidencia: "Preparas los archivos, añadiéndolos a tu área de preparación. Confirmas los cambios, lo que toma los archivos tal y como están en el área de preparación y almacena esa copia instantánea de manera permanente en tu directorio de Git."
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -449,15 +455,15 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-231
-  hecho: Un archivo que ha cambiado desde que se obtuvo del repositorio y ha sido añadido al área de preparación está preparado.
-  evidencia: "Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área de preparación, está preparada (staged)."
+  hecho: Una versión de un archivo que ha sufrido cambios desde que se obtuvo del repositorio y ha sido añadida al área de preparación está preparada.
+  evidencia: "Si una versión concreta de un archivo está en el directorio de Git, se considera confirmada (committed). Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área de preparación, está preparada (staged)."
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
 
 - id: h01-232
-  hecho: Un archivo que ha cambiado desde que se obtuvo del repositorio y no se ha preparado está modificado.
-  evidencia: "Y si ha sufrido cambios desde que se obtuvo del repositorio, pero no se ha preparado, está modificada (modified)."
+  hecho: Una versión de un archivo que ha sufrido cambios desde que se obtuvo del repositorio y no se ha preparado está modificada.
+  evidencia: "Si una versión concreta de un archivo está en el directorio de Git, se considera confirmada (committed). Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área de preparación, está preparada (staged). Y si ha sufrido cambios desde que se obtuvo del repositorio, pero no se ha preparado, está modificada (modified)."
   fuente: f01-03
   ancla: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Fundamentos-de-Git
   consultada: 2026-11-12
@@ -471,14 +477,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-234
   hecho: Un archivo rastreado puede estar sin modificar, modificado o preparado.
-  evidencia: "pueden ser archivos sin modificar, modificados o preparados"
+  evidencia: "Los archivos rastreados (tracked files en inglés) son todos aquellos archivos que estaban en la última instantánea del proyecto; pueden ser archivos sin modificar, modificados o preparados"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-235
   hecho: Los archivos sin rastrear son los del directorio de trabajo que no estaban en la última instantánea ni están en el área de preparación.
-  evidencia: "cualquier otro archivo en tu directorio de trabajo que no estaba en tu última instantánea y que no está en el área de preparación (staging area)"
+  evidencia: "Los archivos sin rastrear son todos los demás - cualquier otro archivo en tu directorio de trabajo que no estaba en tu última instantánea y que no está en el área de preparación (staging area)"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
@@ -520,7 +526,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-241
   hecho: Git no incluye un archivo sin rastrear en el próximo commit a menos que se lo indiques explícitamente.
-  evidencia: "Git no los incluirá en tu próximo commit a menos que se lo indiques explícitamente."
+  evidencia: "Sin rastrear significa que Git ve archivos que no tenías en el commit anterior. Git no los incluirá en tu próximo commit a menos que se lo indiques explícitamente."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
@@ -533,21 +539,21 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-243
-  hecho: Tras git add, un archivo nuevo queda rastreado y preparado para ser confirmado.
-  evidencia: "verás que el archivo README está siendo rastreado y está preparado para ser confirmado"
+  hecho: Tras ejecutar git add README para comenzar a rastrear el archivo README, este aparece rastreado y preparado para ser confirmado.
+  evidencia: "Para comenzar a rastrear el archivo README, puedes ejecutar lo siguiente: $ git add README Ahora si vuelves a ver el estado del proyecto, verás que el archivo README está siendo rastreado y está preparado para ser confirmado"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-244
   hecho: git add sirve para empezar a rastrear archivos nuevos, preparar archivos y marcar como resueltos los archivos en conflicto por combinación.
-  evidencia: "lo usas para empezar a rastrear archivos nuevos, preparar archivos, y hacer otras cosas como marcar archivos en conflicto por combinación como resueltos"
+  evidencia: "git add es un comando que cumple varios propósitos - lo usas para empezar a rastrear archivos nuevos, preparar archivos, y hacer otras cosas como marcar archivos en conflicto por combinación como resueltos"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-245
-  hecho: Un archivo puede aparecer a la vez como preparado y como no preparado si lo modificas después de git add.
+  hecho: En el ejemplo de la fuente, CONTRIBUTING.md aparece a la vez como preparado y como no preparado.
   evidencia: "Ahora CONTRIBUTING.md aparece como preparado y como no preparado."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
@@ -568,29 +574,29 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-248
-  hecho: git status -s y git status --short muestran un estado abreviado.
+  hecho: git status -s y git status --short muestran una salida mucho más simplificada.
   evidencia: "Si ejecutas git status -s o git status --short, obtendrás una salida mucho más simplificada."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-249
-  hecho: En el estado abreviado, los archivos nuevos sin rastrear llevan ??, los preparados una A y los modificados una M.
-  evidencia: "Los archivos nuevos que no están rastreados tienen un ?? a su lado, los archivos que están preparados tienen una A y los modificados una M."
+  hecho: En la salida de git status -s, los archivos nuevos sin rastrear llevan ??, los preparados una A y los modificados una M.
+  evidencia: "$ git status -s M README MM Rakefile A lib/git.rb M lib/simplegit.rb ?? LICENSE.txt Los archivos nuevos que no están rastreados tienen un ?? a su lado, los archivos que están preparados tienen una A y los modificados una M."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-250
-  hecho: En el estado abreviado hay dos columnas: la izquierda indica el estado preparado y la derecha el estado sin preparar.
+  hecho: El estado aparece en dos columnas: la columna de la izquierda indica el estado preparado y la de la derecha el estado sin preparar.
   evidencia: "El estado aparece en dos columnas - la columna de la izquierda indica el estado preparado y la columna de la derecha indica el estado sin preparar."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-251
-  hecho: Un archivo .gitignore lista patrones de archivos que Git debe ignorar.
-  evidencia: "puedes crear un archivo llamado .gitignore que liste patrones a considerar"
+  hecho: Para archivos generados automáticamente, como trazas o archivos creados por el sistema de compilación, puedes crear un archivo llamado .gitignore que liste patrones a considerar.
+  evidencia: "Este suele ser el caso de archivos generados automáticamente como trazas o archivos creados por tu sistema de compilación. En estos casos, puedes crear un archivo llamado .gitignore que liste patrones a considerar."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
@@ -604,13 +610,13 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-253
   hecho: En .gitignore se usan patrones glob estándar que se aplican recursivamente a todo el directorio del repositorio local.
-  evidencia: "Emplear patrones glob estándar que se aplicarán recursivamente a todo el directorio del repositorio local."
+  evidencia: "Las reglas sobre los patrones que puedes incluir en el archivo .gitignore son las siguientes: Ignorar las líneas en blanco y aquellas que comiencen con #. Emplear patrones glob estándar que se aplicarán recursivamente a todo el directorio del repositorio local."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-254
-  hecho: Un patrón de .gitignore se niega añadiendo un signo de exclamación (!) al principio.
+  hecho: Los patrones pueden negarse si se añade al principio el signo de exclamación (!).
   evidencia: "Los patrones pueden negarse si se añade al principio el signo de exclamación (!)."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
@@ -624,8 +630,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-256
-  hecho: git diff sin parámetros compara el directorio de trabajo con el área de preparación.
-  evidencia: "Este comando compara lo que tienes en tu directorio de trabajo con lo que está en el área de preparación."
+  hecho: Comparar lo que hay en el directorio de trabajo con lo que está en el área de preparación indica los cambios hechos que aún no se han preparado.
+  evidencia: "Este comando compara lo que tienes en tu directorio de trabajo con lo que está en el área de preparación. El resultado te indica los cambios que has hecho pero que aun no has preparado."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
@@ -639,7 +645,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-258
   hecho: git diff --staged compara los cambios preparados con la última instantánea confirmada.
-  evidencia: "Este comando compara tus cambios preparados con la última instantánea confirmada."
+  evidencia: "Si quieres ver lo que has preparado y será incluido en la próxima confirmación, puedes usar git diff --staged. Este comando compara tus cambios preparados con la última instantánea confirmada."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
@@ -653,7 +659,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-260
   hecho: Las opciones --staged y --cached de git diff son sinónimos.
-  evidencia: "--staged y --cached son sinónimos"
+  evidencia: "y git diff --cached para ver que has preparado hasta ahora (--staged y --cached son sinónimos)"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
@@ -695,20 +701,20 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-266
   hecho: Para eliminar un archivo de Git hay que quitarlo de los archivos rastreados, es decir, del área de preparación, y luego confirmar.
-  evidencia: "debes eliminarlos de tus archivos rastreados (o mejor dicho, eliminarlos del área de preparación) y luego confirmar"
+  evidencia: "Para eliminar archivos de Git, debes eliminarlos de tus archivos rastreados (o mejor dicho, eliminarlos del área de preparación) y luego confirmar"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-267
   hecho: git rm, además de quitar el archivo del seguimiento, lo elimina del directorio de trabajo.
-  evidencia: "Para ello existe el comando git rm, que además elimina el archivo de tu directorio de trabajo"
+  evidencia: "Para eliminar archivos de Git, debes eliminarlos de tus archivos rastreados (o mejor dicho, eliminarlos del área de preparación) y luego confirmar. Para ello existe el comando git rm, que además elimina el archivo de tu directorio de trabajo"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-268
-  hecho: Si modificaste un archivo y ya lo habías añadido al índice, git rm exige forzar la eliminación con la opción -f.
+  hecho: Si modificaste un archivo y ya lo habías añadido al índice, tendrás que forzar su eliminación con la opción -f.
   evidencia: "Si modificaste el archivo y ya lo habías añadido al índice, tendrás que forzar su eliminación con la opción -f."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
@@ -723,14 +729,35 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-270
   hecho: Si renombras un archivo en Git, no se guarda ningún metadato que indique el cambio de nombre.
-  evidencia: "no se guardará ningún metadato que indique que renombraste el archivo"
+  evidencia: "Si renombras un archivo en Git, no se guardará ningún metadato que indique que renombraste el archivo"
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
 - id: h01-271
-  hecho: La única diferencia real entre git mv y hacer mv, git rm y git add es que git mv es un solo comando en vez de tres.
+  hecho: La única diferencia real del comando mv es que es un solo comando en vez de tres, y existe por conveniencia.
   evidencia: "La única diferencia real es que mv es un solo comando en vez de tres - existe por conveniencia."
+  fuente: f01-04
+  ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
+  consultada: 2026-11-12
+
+- id: h01-272
+  hecho: Puede haber archivos que no quieres que Git añada automáticamente o que ni siquiera aparezcan como no rastreados.
+  evidencia: "A veces, tendrás algún tipo de archivo que no quieres que Git añada automáticamente o más aun, que ni siquiera quieras que aparezca como no rastreado."
+  fuente: f01-04
+  ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
+  consultada: 2026-11-12
+
+- id: h01-273
+  hecho: Para ver qué has cambiado pero aún no has preparado, se escribe git diff sin más parámetros.
+  evidencia: "Para ver qué has cambiado pero aun no has preparado, escribe git diff sin más parámetros"
+  fuente: f01-04
+  ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
+  consultada: 2026-11-12
+
+- id: h01-274
+  hecho: Da igual renombrar un archivo con mv, git rm y git add o con el comando mv: Git se da cuenta de que es un renombramiento implícito.
+  evidencia: "$ mv README.md README $ git rm README.md $ git add README Git se da cuenta que es un renombramiento implícito, así que no importa si renombras el archivo de esa manera o a través del comando mv."
   fuente: f01-04
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
@@ -738,7 +765,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 ## 1.3 Leer y deshacer el historial
 
 - id: h01-301
-  hecho: git log es la herramienta más básica y potente para mirar atrás y ver qué modificaciones se han hecho en un repositorio.
+  hecho: git log es la herramienta más básica y potente para mirar atrás y ver qué modificaciones se han hecho.
   evidencia: "probablemente quieras mirar atrás para ver qué modificaciones se han llevado a cabo. La herramienta más básica y potente para hacer esto es el comando git log."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
@@ -753,84 +780,84 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-303
   hecho: Cada entrada de git log muestra la suma de comprobación SHA-1, el autor con su correo, la fecha y el mensaje de la confirmación.
-  evidencia: "este comando lista cada confirmación con su suma de comprobación SHA-1, el nombre y dirección de correo del autor, la fecha y el mensaje de confirmación."
+  evidencia: "git log lista las confirmaciones hechas sobre ese repositorio en orden cronológico inverso. Es decir, las confirmaciones más recientes se muestran al principio. Como puedes ver, este comando lista cada confirmación con su suma de comprobación SHA-1, el nombre y dirección de correo del autor, la fecha y el mensaje de confirmación."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-304
   hecho: La opción -p de git log muestra las diferencias introducidas en cada confirmación.
-  evidencia: "Una de las opciones más útiles es -p, que muestra las diferencias introducidas en cada confirmación."
+  evidencia: "El comando git log proporciona gran cantidad de opciones para mostrarte exactamente lo que buscas. Aquí veremos algunas de las más usadas. Una de las opciones más útiles es -p, que muestra las diferencias introducidas en cada confirmación."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-305
-  hecho: Ver las diferencias de cada confirmación con git log -p resulta útil para revisiones de código.
-  evidencia: "Esto resulta muy útil para revisiones de código, o para visualizar rápidamente lo que ha pasado en las confirmaciones enviadas por un colaborador."
+  hecho: Mostrar tras cada entrada las diferencias que le corresponden resulta muy útil para revisiones de código.
+  evidencia: "añadiendo tras cada entrada las diferencias que le corresponden. Esto resulta muy útil para revisiones de código"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-306
-  hecho: Con -<n>, siendo n un entero, git log muestra solo las últimas n confirmaciones.
-  evidencia: "De hecho, puedes hacer -<n>, siendo n cualquier entero, para mostrar las últimas n confirmaciones."
+  hecho: git log acepta la opción -<n>, siendo n cualquier entero, para mostrar las últimas n confirmaciones.
+  evidencia: "git log acepta una serie de opciones para limitar su salida —es decir, opciones que te permiten mostrar únicamente parte de las confirmaciones—. Ya has visto una de ellas, la opción -2, que muestra sólo las dos últimas confirmaciones. De hecho, puedes hacer -<n>, siendo n cualquier entero, para mostrar las últimas n confirmaciones."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-307
-  hecho: Git pagina por defecto la salida de git log.
+  hecho: Git pagina por defecto su salida, para que se vea cada página del historial por separado.
   evidencia: "ya que Git por defecto pagina su salida para que veas cada página del historial por separado."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-308
-  hecho: La opción --stat de git log imprime tras cada confirmación una lista de los archivos modificados.
+  hecho: La opción --stat imprime tras cada confirmación una lista de archivos modificados.
   evidencia: "la opción --stat imprime tras cada confirmación una lista de archivos modificados"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-309
-  hecho: Con --stat se indica, para cada archivo modificado, cuántas líneas se han añadido y eliminadas.
-  evidencia: "cuántas líneas han sido añadidas y eliminadas para cada uno de ellos"
+  hecho: Con --stat se indica, para cada archivo modificado, cuántas líneas han sido añadidas y eliminadas.
+  evidencia: "la opción --stat imprime tras cada confirmación una lista de archivos modificados, indicando cuántos han sido modificados y cuántas líneas han sido añadidas y eliminadas para cada uno de ellos"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-310
-  hecho: La opción --pretty=oneline de git log imprime cada confirmación en una única línea.
-  evidencia: "La opción oneline imprime cada confirmación en una única línea"
+  hecho: Entre los estilos de la opción --pretty, oneline imprime cada confirmación en una única línea.
+  evidencia: "Otra opción realmente útil es --pretty, que modifica el formato de la salida. Tienes unos cuantos estilos disponibles. La opción oneline imprime cada confirmación en una única línea"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-311
-  hecho: Los estilos short, full y fuller de --pretty muestran un formato parecido al estándar, con menos o más información respectivamente.
+  hecho: Las opciones short, full y fuller muestran la salida en un formato parecido, pero añadiendo menos o más información, respectivamente.
   evidencia: "Otras opciones son short, full y fuller, que muestran la salida en un formato parecido, pero añadiendo menos o más información, respectivamente"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-312
-  hecho: La opción --pretty=format permite especificar un formato de salida propio.
+  hecho: La opción format permite especificar un formato propio.
   evidencia: "La opción más interesante es format, que te permite especificar tu propio formato."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-313
-  hecho: Un formato especificado explícitamente con --pretty=format no cambiará en futuras actualizaciones de Git, lo que lo hace adecuado para que otro programa analice la salida.
-  evidencia: "como especificas el formato explícitamente, sabes que no cambiará en futuras actualizaciones de Git"
+  hecho: Si se especifica el formato explícitamente, no cambiará en futuras actualizaciones de Git, lo que resulta especialmente útil al generar una salida para que la analice otro programa.
+  evidencia: "Esto resulta especialmente útil si estás generando una salida para que sea analizada por otro programa —como especificas el formato explícitamente, sabes que no cambiará en futuras actualizaciones de Git"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-314
-  hecho: La opción --graph de git log añade un pequeño gráfico ASCII con el historial de ramificaciones y uniones.
-  evidencia: "Ésta añade un pequeño gráfico ASCII mostrando tu historial de ramificaciones y uniones"
+  hecho: La opción --graph añade un pequeño gráfico ASCII que muestra el historial de ramificaciones y uniones.
+  evidencia: "Las opciones oneline y format son especialmente útiles combinadas con otra opción llamada --graph. Ésta añade un pequeño gráfico ASCII mostrando tu historial de ramificaciones y uniones"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
@@ -851,20 +878,20 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-317
   hecho: El confirmador es quien aplicó el trabajo.
-  evidencia: "mientras que el confirmador es quien lo aplicó."
+  evidencia: "El autor es la persona que escribió originalmente el trabajo, mientras que el confirmador es quien lo aplicó."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-318
-  hecho: Si envías un parche a un proyecto y un miembro lo aplica, tú figuras como autor y el miembro como confirmador.
-  evidencia: "tú como autor, y el miembro del proyecto como confirmador"
+  hecho: Si mandas un parche a un proyecto y uno de sus miembros lo aplica, ambos recibís reconocimiento: tú como autor y el miembro del proyecto como confirmador.
+  evidencia: "si mandas un parche a un proyecto, y uno de sus miembros lo aplica, ambos recibiréis reconocimiento —tú como autor, y el miembro del proyecto como confirmador"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-319
-  hecho: Las opciones --since y --until de git log limitan la salida por fecha.
+  hecho: Las opciones temporales como --since (desde) y --until (hasta) resultan muy útiles.
   evidencia: "las opciones temporales como --since (desde) y --until (hasta) sí que resultan muy útiles."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
@@ -872,34 +899,34 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-320
   hecho: git log --since=2.weeks lista las confirmaciones hechas durante las dos últimas semanas.
-  evidencia: "Por ejemplo, este comando lista todas las confirmaciones hechas durante las dos últimas semanas:"
+  evidencia: "Por ejemplo, este comando lista todas las confirmaciones hechas durante las dos últimas semanas: $ git log --since=2.weeks"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-321
-  hecho: La opción --author de git log filtra las confirmaciones por autor.
+  hecho: La opción --author permite filtrar por autor.
   evidencia: "La opción --author te permite filtrar por autor"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-322
-  hecho: La opción --grep de git log busca palabras clave entre los mensajes de confirmación.
+  hecho: La opción --grep permite buscar palabras clave entre los mensajes de confirmación.
   evidencia: "--grep te permite buscar palabras clave entre los mensajes de confirmación."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-323
-  hecho: Para aplicar a la vez --author y --grep hay que añadir --all-match; sin ella se muestran las confirmaciones que cumplan cualquiera de los dos criterios.
-  evidencia: "tienes que añadir --all-match, o el comando mostrará las confirmaciones que cumplan cualquiera de las dos"
+  hecho: Para aplicar a la vez --author y --grep hay que añadir --all-match; sin ella se muestran las confirmaciones que cumplan cualquiera de las dos.
+  evidencia: "La opción --author te permite filtrar por autor, y --grep te permite buscar palabras clave entre los mensajes de confirmación. (Ten en cuenta que si quieres aplicar ambas opciones simultáneamente, tienes que añadir --all-match, o el comando mostrará las confirmaciones que cumplan cualquiera de las dos"
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-324
-  hecho: La opción -S de git log recibe una cadena y muestra solo las confirmaciones que cambiaron el código añadiendo o eliminando esa cadena.
+  hecho: La opción -S recibe una cadena y muestra solo las confirmaciones que cambiaron el código añadiendo o eliminando esa cadena.
   evidencia: "Otra opción útil es -S, la cual recibe una cadena y solo muestra las confirmaciones que cambiaron el código añadiendo o eliminando la cadena."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
@@ -907,14 +934,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-325
   hecho: Indicar la ruta de un directorio o archivo limita la salida de git log a las confirmaciones que introdujeron un cambio en esos archivos.
-  evidencia: "Si especificas la ruta de un directorio o archivo, puedes limitar la salida a aquellas confirmaciones que introdujeron un cambio en dichos archivos."
+  evidencia: "La última opción verdaderamente útil para filtrar la salida de git log es especificar una ruta. Si especificas la ruta de un directorio o archivo, puedes limitar la salida a aquellas confirmaciones que introdujeron un cambio en dichos archivos."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
 
 - id: h01-326
-  hecho: En git log la ruta debe ser siempre la última opción y suele ir precedida de dos guiones (--) que la separan del resto de opciones.
-  evidencia: "Ésta debe ser siempre la última opción, y suele ir precedida de dos guiones (--) para separar la ruta del resto de opciones."
+  hecho: La ruta debe ser siempre la última opción y suele ir precedida de dos guiones (--) que la separan del resto de opciones.
+  evidencia: "Si especificas la ruta de un directorio o archivo, puedes limitar la salida a aquellas confirmaciones que introdujeron un cambio en dichos archivos. Ésta debe ser siempre la última opción, y suele ir precedida de dos guiones (--) para separar la ruta del resto de opciones."
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
@@ -927,8 +954,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-328
-  hecho: Deshacer es una de las pocas áreas en las que Git puede perder parte de tu trabajo si cometes un error.
-  evidencia: "Esta es una de las pocas áreas en las que Git puede perder parte de tu trabajo si cometes un error."
+  hecho: Deshacer cosas es una de las pocas áreas en las que Git puede perder parte de tu trabajo si cometes un error.
+  evidencia: "Ten cuidado, a veces no es posible recuperar algo luego que lo has deshecho. Esta es una de las pocas áreas en las que Git puede perder parte de tu trabajo si cometes un error."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
@@ -942,27 +969,27 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-330
   hecho: Para rehacer una confirmación se puede reconfirmar con git commit --amend.
-  evidencia: "Si quieres rehacer la confirmación, puedes reconfirmar con la opción --amend:"
+  evidencia: "Si quieres rehacer la confirmación, puedes reconfirmar con la opción --amend: $ git commit --amend"
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-331
   hecho: git commit --amend utiliza el área de preparación para la confirmación.
-  evidencia: "Este comando utiliza tu área de preparación para la confirmación."
+  evidencia: "git commit --amend Este comando utiliza tu área de preparación para la confirmación."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-332
   hecho: Si no hay cambios desde la última confirmación, git commit --amend solo cambia el mensaje de confirmación.
-  evidencia: "entonces la instantánea lucirá exactamente igual y lo único que cambiarás será el mensaje de confirmación."
+  evidencia: "git commit --amend Este comando utiliza tu área de preparación para la confirmación. Si no has hecho cambios desde tu última confirmación (por ejemplo, ejecutas este comando justo después de tu confirmación anterior), entonces la instantánea lucirá exactamente igual y lo único que cambiarás será el mensaje de confirmación."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-333
-  hecho: git commit --amend lanza el editor de confirmación con el mensaje de la confirmación anterior ya incluido.
+  hecho: Se lanza el mismo editor de confirmación, que ya incluye el mensaje de la confirmación anterior.
   evidencia: "Se lanzará el mismo editor de confirmación, pero verás que ya incluye el mensaje de tu confirmación anterior."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
@@ -970,27 +997,27 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-334
   hecho: Tras confirmar, preparar un archivo olvidado y ejecutar git commit --amend, queda una sola confirmación: la segunda reemplaza el resultado de la primera.
-  evidencia: "Al final terminarás con una sola confirmación - la segunda confirmación reemplaza el resultado de la primera."
+  evidencia: "git commit -m 'initial commit' $ git add forgotten_file $ git commit --amend Al final terminarás con una sola confirmación - la segunda confirmación reemplaza el resultado de la primera."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-335
-  hecho: git status indica cómo deshacer los cambios del área de preparación y del directorio de trabajo.
-  evidencia: "el comando que usas para determinar el estado de esas dos áreas también te recuerda cómo deshacer los cambios en ellas."
+  hecho: El comando que se usa para determinar el estado del área de preparación y del directorio de trabajo también recuerda cómo deshacer los cambios en ellas.
+  evidencia: "Las siguientes dos secciones demuestran cómo lidiar con los cambios de tu área de preparación y tú directorio de trabajo. Afortunadamente, el comando que usas para determinar el estado de esas dos áreas también te recuerda cómo deshacer los cambios en ellas."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-336
-  hecho: Bajo Changes to be committed, git status sugiere git reset HEAD <file>... para sacar un archivo del área de preparación.
-  evidencia: "verás que dice que uses git reset HEAD <file>... para deshacer la preparación."
+  hecho: Justo debajo del texto Changes to be committed se indica que se use git reset HEAD <file>... para deshacer la preparación.
+  evidencia: "Justo debajo del texto "Changes to be committed" ("Cambios a ser confirmados", en inglés), verás que dice que uses git reset HEAD <file>... para deshacer la preparación."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-337
-  hecho: Tras git reset HEAD CONTRIBUTING.md, el archivo queda modificado y no preparado.
+  hecho: El archivo CONTRIBUTING.md queda modificado y, nuevamente, no preparado.
   evidencia: "El archivo CONTRIBUTING.md esta modificado y, nuevamente, no preparado."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
@@ -1004,15 +1031,15 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-339
-  hecho: Al sacar un archivo del área de preparación con git reset HEAD, el archivo del directorio de trabajo no se toca, por lo que es relativamente seguro.
-  evidencia: "el archivo que está en tu directorio de trabajo no se toca, por lo que es relativamente seguro."
+  hecho: Aunque git reset puede ser peligroso, en el escenario descrito anteriormente el archivo del directorio de trabajo no se toca, por lo que es relativamente seguro.
+  evidencia: "git reset puede ser un comando peligroso, especialmente si lo llamas con la opción --hard. Sin embargo, en el escenario descrito anteriormente, el archivo que está en tu directorio de trabajo no se toca, por lo que es relativamente seguro."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-340
-  hecho: Tras descartar los cambios no preparados de un archivo, estos aparecen revertidos.
-  evidencia: "Ahora puedes ver que los cambios se han revertido."
+  hecho: Tras git checkout -- CONTRIBUTING.md, se puede ver que los cambios se han revertido.
+  evidencia: "git checkout -- CONTRIBUTING.md $ git status On branch master Changes to be committed: (use "git reset HEAD <file>..." to unstage) renamed: README.md -> README Ahora puedes ver que los cambios se han revertido."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
@@ -1026,14 +1053,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-342
   hecho: Con git checkout -- [archivo] desaparece cualquier cambio hecho al archivo, porque se sobrescribe con otro archivo.
-  evidencia: "Cualquier cambio que le hayas hecho a ese archivo desaparecerá - acabas de sobreescribirlo con otro archivo."
+  evidencia: "Es importante entender que git checkout -- [archivo] es un comando peligroso. Cualquier cambio que le hayas hecho a ese archivo desaparecerá - acabas de sobreescribirlo con otro archivo."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
 - id: h01-343
   hecho: Pro Git recomienda no usar git checkout -- [archivo] salvo que estés absolutamente seguro de que ya no quieres el archivo.
-  evidencia: "Nunca utilices este comando a menos que estés absolutamente seguro de que ya no quieres el archivo."
+  evidencia: "Es importante entender que git checkout -- [archivo] es un comando peligroso. Cualquier cambio que le hayas hecho a ese archivo desaparecerá - acabas de sobreescribirlo con otro archivo. Nunca utilices este comando a menos que estés absolutamente seguro de que ya no quieres el archivo."
   fuente: f01-06
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
@@ -1066,11 +1093,39 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
   consultada: 2026-11-12
 
+- id: h01-348
+  hecho: Las opciones --since y --after muestran aquellas confirmaciones hechas después de la fecha especificada.
+  evidencia: "--since, --after Muestra aquellas confirmaciones hechas después de la fecha especificada."
+  fuente: f01-05
+  ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
+  consultada: 2026-11-12
+
+- id: h01-349
+  hecho: Las opciones --until y --before muestran aquellas confirmaciones hechas antes de la fecha especificada.
+  evidencia: "--until, --before Muestra aquellas confirmaciones hechas antes de la fecha especificada."
+  fuente: f01-05
+  ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
+  consultada: 2026-11-12
+
+- id: h01-350
+  hecho: El comando git status te recuerda cómo sacar del área de preparación un archivo.
+  evidencia: "¿Cómo puedes sacar del área de preparación uno de ellos? El comando git status te recuerda cómo:"
+  fuente: f01-06
+  ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
+  consultada: 2026-11-12
+
+- id: h01-351
+  hecho: La opción -(n) muestra solamente las últimas n confirmaciones.
+  evidencia: "-(n) Muestra solamente las últimas n confirmaciones"
+  fuente: f01-05
+  ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
+  consultada: 2026-11-12
+
 ## 1.4 Las ramas son punteros
 
 - id: h01-401
-  hecho: Git guarda los datos como una serie de instantáneas, que son copias puntuales de los archivos completos.
-  evidencia: "instantáneas (copias puntuales de los archivos completos, tal y como se encuentran en ese momento)"
+  hecho: Git no almacena sus datos de forma incremental (guardando solo diferencias), sino como una serie de instantáneas, que son copias puntuales de los archivos completos.
+  evidencia: "la forma en que almacena sus datos. Recordando lo citado en [ch01-introduction], Git no los almacena de forma incremental (guardando solo diferencias), sino que los almacena como una serie de instantáneas (copias puntuales de los archivos completos, tal y como se encuentran en ese momento)"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1083,8 +1138,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-403
-  hecho: La confirmación lleva metadatos con el autor y el mensaje explicativo.
-  evidencia: "Dicha instantánea contiene además unos metadatos con el autor y el mensaje explicativo"
+  hecho: La instantánea de cada confirmación contiene además metadatos con el autor y el mensaje explicativo.
+  evidencia: "En cada confirmación de cambios (commit), Git almacena una instantánea de tu trabajo preparado. Dicha instantánea contiene además unos metadatos con el autor y el mensaje explicativo"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1098,14 +1153,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-405
   hecho: Al preparar los archivos, Git guarda una copia de cada uno en el repositorio, y esas copias se llaman blobs.
-  evidencia: "almacena una copia de cada uno en el repositorio (estas copias se denominan "blobs")"
+  evidencia: "Al preparar los archivos, Git realiza una suma de control de cada uno de ellos (un resumen SHA-1, tal y como se mencionaba en [ch01-introduction]), almacena una copia de cada uno en el repositorio (estas copias se denominan "blobs")"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-406
-  hecho: Al confirmar, Git calcula sumas de control de cada subdirectorio y las guarda como objetos árbol.
-  evidencia: "Git realiza sumas de control de cada subdirectorio (en el ejemplo, solamente tenemos el directorio principal del proyecto), y las guarda como objetos árbol en el repositorio Git."
+  hecho: Al confirmar con git commit, Git calcula sumas de control de cada subdirectorio y las guarda como objetos árbol en el repositorio.
+  evidencia: "Cuando creas una confirmación con el comando git commit, Git realiza sumas de control de cada subdirectorio (en el ejemplo, solamente tenemos el directorio principal del proyecto), y las guarda como objetos árbol en el repositorio Git."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1118,8 +1173,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-408
-  hecho: Tras confirmar tres archivos por primera vez, el repositorio contiene cinco objetos.
-  evidencia: "En este momento, el repositorio de Git contendrá cinco objetos"
+  hecho: En ese momento del ejemplo, el repositorio de Git contendrá cinco objetos: un blob para cada uno de los tres archivos, un árbol con la lista de contenidos del directorio y una confirmación que apunta a la raíz de ese árbol.
+  evidencia: "En este momento, el repositorio de Git contendrá cinco objetos: un "blob" para cada uno de los tres archivos, un árbol con la lista de contenidos del directorio (más sus respectivas relaciones con los "blobs"), y una confirmación de cambios (commit) apuntando a la raíz de ese árbol"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1139,43 +1194,43 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-411
-  hecho: En cada confirmación, la rama actual avanza automáticamente.
-  evidencia: "En cada confirmación de cambios que realicemos, la rama irá avanzando automáticamente."
+  hecho: La rama principal master se crea apuntando a la primera confirmación, y en cada confirmación de cambios que se realice la rama avanza automáticamente.
+  evidencia: "Con la primera confirmación de cambios que realicemos, se creará esta rama principal master apuntando a dicha confirmación. En cada confirmación de cambios que realicemos, la rama irá avanzando automáticamente."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-412
-  hecho: La rama master no es una rama especial.
-  evidencia: "no es una rama especial"
+  hecho: La rama master no es una rama especial; es como cualquier otra rama.
+  evidencia: "La rama "master" en Git, no es una rama especial. Es como cualquier otra rama."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-413
-  hecho: Master aparece en casi todos los repositorios porque es la que crea por defecto git init y casi nadie cambia el nombre.
-  evidencia: "es la que crea por defecto el comando git init y la gente no se molesta en cambiarle el nombre"
+  hecho: La única razón por la que master aparece en casi todos los repositorios es que git init la crea por defecto y la gente no se molesta en cambiarle el nombre.
+  evidencia: "La rama "master" en Git, no es una rama especial. Es como cualquier otra rama. La única razón por la cual aparece en casi todos los repositorios es porque es la que crea por defecto el comando git init y la gente no se molesta en cambiarle el nombre."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-414
   hecho: Crear una rama nueva solo crea un apuntador nuevo que se puede mover libremente.
-  evidencia: "simplemente se crea un nuevo apuntador para que lo puedas mover libremente."
+  evidencia: "¿Qué sucede cuando creas una nueva rama? Bueno…​, simplemente se crea un nuevo apuntador para que lo puedas mover libremente."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-415
   hecho: git branch testing crea un apuntador nuevo a la misma confirmación en la que estás.
-  evidencia: "Esto creará un nuevo apuntador apuntando a la misma confirmación donde estés actualmente."
+  evidencia: "Para ello, usarás el comando git branch: $ git branch testing Esto creará un nuevo apuntador apuntando a la misma confirmación donde estés actualmente."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-416
-  hecho: En Git, HEAD es el apuntador a la rama local en la que estás.
-  evidencia: "En Git, es simplemente el apuntador a la rama local en la que tú estés en ese momento"
+  hecho: En Git, HEAD es el apuntador a la rama local en la que estás en ese momento.
+  evidencia: "este HEAD es totalmente distinto al concepto de HEAD en otros sistemas de control de cambios como Subversion o CVS. En Git, es simplemente el apuntador a la rama local en la que tú estés en ese momento"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1196,28 +1251,28 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-419
   hecho: git checkout testing mueve HEAD a la rama testing.
-  evidencia: "Esto mueve el apuntador HEAD a la rama testing."
+  evidencia: "git checkout testing Esto mueve el apuntador HEAD a la rama testing."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-420
-  hecho: Si confirmas estando en testing, esa rama avanza y master se queda donde estaba.
-  evidencia: "la rama testing avanza, mientras que la rama master permanece en la confirmación donde estaba"
+  hecho: Tras confirmar con git commit -a -m 'made a change', la rama testing avanza, mientras que master permanece en la confirmación donde estaba.
+  evidencia: "git commit -a -m 'made a change' Figura 15. La rama apuntada por HEAD avanza con cada confirmación de cambios Observamos algo interesante: la rama testing avanza, mientras que la rama master permanece en la confirmación donde estaba"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-421
   hecho: Volver a master con git checkout mueve HEAD de nuevo a master.
-  evidencia: "Mueve el apuntador HEAD de nuevo a la rama master"
+  evidencia: "git checkout master Figura 16. HEAD apunta a otra rama cuando hacemos un salto Este comando realiza dos acciones: Mueve el apuntador HEAD de nuevo a la rama master"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
 
 - id: h01-422
-  hecho: Ese mismo cambio de rama revierte los archivos del directorio de trabajo a la última instantánea confirmada en master.
-  evidencia: "revierte los archivos de tu directorio de trabajo; dejándolos tal y como estaban en la última instantánea confirmada en dicha rama master"
+  hecho: Además de mover HEAD de nuevo a master, ese comando revierte los archivos del directorio de trabajo, dejándolos como estaban en la última instantánea confirmada en master.
+  evidencia: "Este comando realiza dos acciones: Mueve el apuntador HEAD de nuevo a la rama master, y revierte los archivos de tu directorio de trabajo; dejándolos tal y como estaban en la última instantánea confirmada en dicha rama master."
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1231,7 +1286,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-424
   hecho: Una rama de Git es un archivo con los 40 caracteres de la suma de control SHA-1 de la confirmación a la que apunta.
-  evidencia: "una rama Git es realmente un simple archivo que contiene los 40 caracteres de una suma de control SHA-1"
+  evidencia: "una rama Git es realmente un simple archivo que contiene los 40 caracteres de una suma de control SHA-1, (representando la confirmación de cambios a la que apunta)"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1244,8 +1299,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-426
-  hecho: En Git crear una rama es siempre instantáneo.
-  evidencia: "mientras que en Git el proceso es siempre instantáneo"
+  hecho: En otros sistemas de control de versiones, crear una rama supone copiar todos los archivos del proyecto a un directorio nuevo y puede llevar segundos o minutos, mientras que en Git el proceso es siempre instantáneo.
+  evidencia: "otros sistemas de control de versiones, en los que crear una rama nueva supone el copiar todos los archivos del proyecto a un directorio adicional nuevo. Esto puede llevar segundos o incluso minutos, dependiendo del tamaño del proyecto; mientras que en Git el proceso es siempre instantáneo"
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
@@ -1266,7 +1321,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-429
   hecho: git checkout -b iss53 es un atajo de git branch iss53 seguido de git checkout iss53.
-  evidencia: "Esto es un atajo para: $ git branch iss53 $ git checkout iss53"
+  evidencia: "git checkout -b iss53 Switched to a new branch "iss53" Esto es un atajo para: $ git branch iss53 $ git checkout iss53"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
@@ -1286,7 +1341,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-432
-  hecho: Al activar una rama, Git añade, quita y modifica archivos para que la copia de trabajo sea como en la última confirmación de esa rama.
+  hecho: Git añade, quita y modifica archivos automáticamente para asegurar que la copia de trabajo luce exactamente como lucía la rama en la última confirmación de cambios realizada sobre ella.
   evidencia: "Git añade, quita y modifica archivos automáticamente para asegurar que tu copia de trabajo luce exactamente como lucía la rama en la última confirmación de cambios realizada sobre ella."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
@@ -1300,43 +1355,43 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-434
-  hecho: En un avance rápido Git mueve el apuntador hacia adelante porque la confirmación a fusionar está directamente por delante de la actual.
-  evidencia: "Git ha movido el apuntador hacia adelante, ya que la confirmación apuntada en la rama donde has fusionado estaba directamente arriba respecto a la confirmación actual."
+  hecho: En un avance rápido (Fast forward), Git mueve el apuntador hacia adelante porque la confirmación apuntada en la rama donde se fusiona estaba directamente arriba respecto a la confirmación actual.
+  evidencia: "Notarás la frase "Fast forward" ("Avance rápido", en inglés) que aparece en la salida del comando. Git ha movido el apuntador hacia adelante, ya que la confirmación apuntada en la rama donde has fusionado estaba directamente arriba respecto a la confirmación actual."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-435
-  hecho: En el avance rápido no hay trabajo divergente que fusionar.
-  evidencia: "ya que no hay ningún otro trabajo divergente a fusionar"
+  hecho: En lo que se denomina avance rápido, Git simplifica las cosas avanzando el puntero, ya que no hay ningún otro trabajo divergente a fusionar.
+  evidencia: "Git simplifica las cosas avanzando el puntero, ya que no hay ningún otro trabajo divergente a fusionar. Esto es lo que se denomina "avance rápido" ("fast forward")."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-436
-  hecho: El avance rápido ocurre cuando se fusiona una confirmación con otra accesible siguiendo el historial de la primera.
-  evidencia: "cuando intentas fusionar una confirmación con otra confirmación accesible siguiendo directamente el historial de la primera; Git simplifica las cosas avanzando el puntero"
+  hecho: El avance rápido ocurre cuando se fusiona una confirmación con otra accesible siguiendo directamente el historial de la primera.
+  evidencia: "Dicho de otro modo: cuando intentas fusionar una confirmación con otra confirmación accesible siguiendo directamente el historial de la primera; Git simplifica las cosas avanzando el puntero, ya que no hay ningún otro trabajo divergente a fusionar. Esto es lo que se denomina "avance rápido" ("fast forward")."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-437
-  hecho: Una rama ya fusionada puede borrarse con la opción -d de git branch.
-  evidencia: "Esto lo puedes hacer con la opción -d del comando git branch"
+  hecho: Una rama que ya no se necesita porque apunta al mismo sitio que master puede borrarse con la opción -d del comando git branch.
+  evidencia: "es importante borrar la rama hotfix, ya que no la vamos a necesitar más, puesto que apunta exactamente al mismo sitio que la rama master. Esto lo puedes hacer con la opción -d del comando git branch"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-438
-  hecho: Lo hecho en una rama hotfix no aparece en otra rama iss53 hasta que se fusionan.
+  hecho: Todo el trabajo realizado en la rama hotfix no está en los archivos de la rama iss53.
   evidencia: "todo el trabajo realizado en la rama hotfix no está en los archivos de la rama iss53"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-439
-  hecho: Se puede fusionar master sobre iss53 con git merge master para traer ese trabajo.
-  evidencia: "puedes fusionar (merge) la rama master sobre la rama iss53 utilizando el comando git merge master"
+  hecho: Si fuera necesario agregar a iss53 el trabajo de hotfix, se puede fusionar la rama master sobre iss53 con git merge master.
+  evidencia: "todo el trabajo realizado en la rama hotfix no está en los archivos de la rama iss53. Si fuera necesario agregarlos, puedes fusionar (merge) la rama master sobre la rama iss53 utilizando el comando git merge master"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
@@ -1350,14 +1405,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-441
   hecho: En ese caso Git hace una fusión a tres bandas.
-  evidencia: "Git realizará una fusión a tres bandas"
+  evidencia: "Debido a que la confirmación en la rama actual no es ancestro directo de la rama que pretendes fusionar, Git tiene cierto trabajo extra que hacer. Git realizará una fusión a tres bandas"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-442
   hecho: La fusión a tres bandas usa las instantáneas de los extremos de ambas ramas y el ancestro común.
-  evidencia: "utilizando las dos instantáneas apuntadas por el extremo de cada una de las ramas y por el ancestro común a ambas"
+  evidencia: "Git realizará una fusión a tres bandas, utilizando las dos instantáneas apuntadas por el extremo de cada una de las ramas y por el ancestro común a ambas"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
@@ -1371,14 +1426,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-444
   hecho: Git crea automáticamente una nueva confirmación que apunta a esa instantánea.
-  evidencia: "crea automáticamente una nueva confirmación de cambios (commit) que apunta a ella"
+  evidencia: "Git crea una nueva instantánea (snapshot) resultante de la fusión a tres bandas; y crea automáticamente una nueva confirmación de cambios (commit) que apunta a ella"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-445
-  hecho: La fusión confirmada se caracteriza por tener más de un padre.
-  evidencia: "su particularidad es que tiene más de un padre."
+  hecho: Git crea una nueva instantánea y una confirmación que apunta a ella; a este proceso se le llama fusión confirmada y su particularidad es que tiene más de un padre.
+  evidencia: "Git crea una nueva instantánea (snapshot) resultante de la fusión a tres bandas; y crea automáticamente una nueva confirmación de cambios (commit) que apunta a ella. Nos referimos a este proceso como "fusión confirmada" y su particularidad es que tiene más de un padre."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
@@ -1398,21 +1453,21 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-448
-  hecho: Hay conflicto cuando las dos ramas modifican de forma distinta una misma porción de un mismo archivo.
+  hecho: Si hay modificaciones dispares en una misma porción de un mismo archivo en las dos ramas que se pretende fusionar, Git no es capaz de fusionarlas directamente.
   evidencia: "Si hay modificaciones dispares en una misma porción de un mismo archivo en las dos ramas distintas que pretendes fusionar, Git no será capaz de fusionarlas directamente."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-449
-  hecho: Ante un conflicto, git merge informa de que la fusión automática ha fallado.
-  evidencia: "Automatic merge failed; fix conflicts and then commit the result."
+  hecho: Ante un conflicto, git merge muestra CONFLICT (content) e informa de que la fusión automática ha fallado (Automatic merge failed).
+  evidencia: "git merge iss53 Auto-merging index.html CONFLICT (content): Merge conflict in index.html Automatic merge failed; fix conflicts and then commit the result."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-450
-  hecho: Ante un conflicto, Git no crea la confirmación de fusión y hace una pausa esperando a que se resuelva.
+  hecho: Ante un conflicto, Git no crea automáticamente la confirmación de fusión, sino que hace una pausa en el proceso esperando a que se resuelva el conflicto.
   evidencia: "Git no crea automáticamente una nueva fusión confirmada (merge commit), sino que hace una pausa en el proceso, esperando a que tú resuelvas el conflicto."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
@@ -1426,8 +1481,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-452
-  hecho: En el ejemplo, git status indica durante el conflicto que hay rutas sin fusionar.
-  evidencia: "You have unmerged paths."
+  hecho: En un momento conflictivo de una fusión, la salida de git status incluye el mensaje You have unmerged paths.
+  evidencia: "Para ver qué archivos permanecen sin fusionar en un determinado momento conflictivo de una fusión, puedes usar el comando git status: $ git status On branch master You have unmerged paths."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
@@ -1475,8 +1530,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-459
-  hecho: Cuando todos los conflictos están resueltos pero la fusión no ha concluido, git status lo indica.
-  evidencia: "All conflicts fixed but you are still merging."
+  hecho: git status sirve para ver si ya se han resuelto todos los conflictos, y en el ejemplo muestra All conflicts fixed but you are still merging.
+  evidencia: "En cualquier momento, puedes lanzar el comando git status para ver si ya has resuelto todos los conflictos: $ git status On branch master All conflicts fixed but you are still merging."
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
@@ -1489,22 +1544,22 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-461
-  hecho: El mensaje por defecto de la confirmación de fusión empieza por Merge branch seguido del nombre de la rama.
-  evidencia: "El mensaje de confirmación por defecto será algo parecido a: Merge branch 'iss53'"
+  hecho: Al terminar la fusión con git commit, el mensaje de confirmación por defecto será algo parecido a Merge branch 'iss53'.
+  evidencia: "puedes lanzar el comando git commit para terminar de confirmar la fusión. El mensaje de confirmación por defecto será algo parecido a: Merge branch 'iss53'"
   fuente: f01-08
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%c3%a1sicos-para-Ramificar-y-Fusionar
   consultada: 2026-11-12
 
 - id: h01-462
   hecho: git branch sin parámetros lista las ramas del proyecto.
-  evidencia: "Si lo lanzas sin parámetros, obtienes una lista de las ramas presentes en tu proyecto"
+  evidencia: "El comando git branch tiene más funciones que las de crear y borrar ramas. Si lo lanzas sin parámetros, obtienes una lista de las ramas presentes en tu proyecto"
   fuente: f01-09
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Gesti%c3%b3n-de-Ramas
   consultada: 2026-11-12
 
 - id: h01-463
   hecho: En esa lista, el asterisco marca la rama activa, a la que apunta HEAD.
-  evidencia: "nos indica la rama activa en este momento (la rama a la que apunta HEAD)"
+  evidencia: "Fijate en el carácter * delante de la rama master: nos indica la rama activa en este momento (la rama a la que apunta HEAD)"
   fuente: f01-09
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Gesti%c3%b3n-de-Ramas
   consultada: 2026-11-12
@@ -1524,7 +1579,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-466
-  hecho: Las ramas ya fusionadas que no llevan asterisco se pueden eliminar sin problemas.
+  hecho: Las ramas que no llevan por delante el asterisco pueden eliminarse sin problemas, porque todo su contenido ya ha sido incorporado a otras ramas.
   evidencia: "Las ramas que no llevan por delante el carácter * pueden ser eliminadas sin problemas, porque todo su contenido ya ha sido incorporado a otras ramas."
   fuente: f01-09
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Gesti%c3%b3n-de-Ramas
@@ -1551,6 +1606,13 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Gesti%c3%b3n-de-Ramas
   consultada: 2026-11-12
 
+- id: h01-470
+  hecho: Git sabe en qué rama estás mediante un apuntador especial denominado HEAD.
+  evidencia: "¿cómo sabe Git en qué rama estás en este momento? Pues…​, mediante un apuntador especial denominado HEAD."
+  fuente: f01-07
+  ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
+  consultada: 2026-11-12
+
 ## 1.5 Rebase y reescribir historia
 
 - id: h01-501
@@ -1562,7 +1624,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-502
   hecho: git merge hace una fusión a tres bandas entre las dos últimas instantáneas de cada rama y su ancestro común.
-  evidencia: "Realiza una fusión a tres bandas entre las dos últimas instantáneas de cada rama (C3 y C4) y el ancestro común a ambas (C2)"
+  evidencia: "es el comando git merge. Realiza una fusión a tres bandas entre las dos últimas instantáneas de cada rama (C3 y C4) y el ancestro común a ambas (C2)"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
@@ -1575,14 +1637,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-504
-  hecho: Lo primero que hace rebase es ir al ancestro común de la rama actual y la rama sobre la que se reorganiza.
+  hecho: Git va al ancestro común de ambas ramas: la rama actual y aquella sobre la que se quiere reorganizar.
   evidencia: "Haciendo que Git vaya al ancestro común de ambas ramas (donde estás actualmente y de donde quieres reorganizar)"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
 
 - id: h01-505
-  hecho: Después saca las diferencias que introduce cada confirmación de la rama actual.
+  hecho: Saca las diferencias que introduce cada confirmación de la rama actual.
   evidencia: "saque las diferencias introducidas por cada confirmación en la rama donde estás"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
@@ -1610,15 +1672,15 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-509
-  hecho: Tras el rebase, se puede volver a la rama principal y hacer una fusión con avance rápido (fast-forward).
-  evidencia: "En este momento, puedes volver a la rama master y hacer una fusión con avance rápido (fast-forward merge)."
+  hecho: Tras reorganizar los cambios de C4 sobre C3, se puede volver a la rama master y hacer una fusión con avance rápido (fast-forward merge).
+  evidencia: "Reorganizando sobre C3 los cambios introducidos en C4 En este momento, puedes volver a la rama master y hacer una fusión con avance rápido (fast-forward merge)."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
 
 - id: h01-510
   hecho: La instantánea final es la misma tanto si se llega por rebase como por merge; solo cambia el historial.
-  evidencia: "es exactamente la misma instantánea; lo único diferente es el historial"
+  evidencia: "la instantánea (snapshot) apuntada por la confirmación (commit) final, tanto si es producto de una reorganización (rebase) como si lo es de una fusión (merge), es exactamente la misma instantánea; lo único diferente es el historial"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
@@ -1631,15 +1693,15 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-512
-  hecho: Rebase se usa para asegurarse de que las confirmaciones propias se aplican limpiamente sobre una rama remota.
-  evidencia: "Habitualmente, optarás por esta vía cuando quieras estar seguro de que tus confirmaciones de cambio (commits) se pueden aplicar limpiamente sobre una rama remota"
+  hecho: Habitualmente se opta por reorganizar cuando se quiere estar seguro de que las confirmaciones propias se pueden aplicar limpiamente sobre una rama remota.
+  evidencia: "Si examinas el historial de una rama reorganizada, este aparece siempre como un historial lineal: como si todo el trabajo se hubiera realizado en series, aunque realmente se haya hecho en paralelo. Habitualmente, optarás por esta vía cuando quieras estar seguro de que tus confirmaciones de cambio (commits) se pueden aplicar limpiamente sobre una rama remota"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
 
 - id: h01-513
-  hecho: Con el trabajo reorganizado, quien mantiene el proyecto no necesita integrarlo: le basta un avance rápido o una incorporación limpia.
-  evidencia: "la persona que mantiene el proyecto no necesitará hacer ninguna integración con tu trabajo; le bastará con un avance rápido o una incorporación limpia."
+  hecho: Si se reorganiza el trabajo sobre origin/master antes de enviarlo al proyecto principal, quien mantiene el proyecto no necesita integrarlo: le basta un avance rápido o una incorporación limpia.
+  evidencia: "reorganizar lo realizado en la rama origin/master cuando lo tengas todo listo para enviarlo al proyecto principal. De esta forma, la persona que mantiene el proyecto no necesitará hacer ninguna integración con tu trabajo; le bastará con un avance rápido o una incorporación limpia."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
@@ -1659,7 +1721,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-516
-  hecho: La opción --onto de git rebase permite reaplicar sobre la rama principal los cambios de una rama que no están en otra rama puntual.
+  hecho: Con la opción --onto de git rebase se pueden coger los cambios del cliente que no están en server y reaplicarlos sobre la rama principal.
   evidencia: "Puedes coger los cambios del cliente que no están en server (C8 y C9) y reaplicarlos sobre tu rama principal usando la opción --onto del comando git rebase"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
@@ -1667,7 +1729,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-517
   hecho: git rebase --onto master server client toma los cambios desde el ancestro común entre client y server y los aplica en master.
-  evidencia: "Activa la rama client, averigua los cambios desde el ancestro común entre las ramas client y server, y aplicalos en la rama master"
+  evidencia: "git rebase --onto master server client Esto viene a decir: “Activa la rama client, averigua los cambios desde el ancestro común entre las ramas client y server, y aplicalos en la rama master”"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
@@ -1695,35 +1757,35 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-521
   hecho: Si otros ya habían recogido las confirmaciones reescritas, deberán volver a fusionar su trabajo y recoger el suyo se complica mucho.
-  evidencia: "tus colaboradores tendrán que refusionar (re-merge) su trabajo y todo se volverá tremendamente complicado cuando intentes recoger (pull) su trabajo de vuelta sobre el tuyo."
+  evidencia: "Si envías (push) confirmaciones (commits) a alguna parte, y otros las recogen (pull) de allí; y después vas tú y las reescribes con git rebase y las vuelves a enviar (push); tus colaboradores tendrán que refusionar (re-merge) su trabajo y todo se volverá tremendamente complicado cuando intentes recoger (pull) su trabajo de vuelta sobre el tuyo."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
 
 - id: h01-522
-  hecho: En el ejemplo de Pro Git, quien reorganiza sobrescribe el historial del servidor con git push --force.
-  evidencia: "haciendo un git push --force para sobrescribir el registro en el servidor"
+  hecho: La persona que había llevado cambios al servidor central decide retroceder y reorganizar su trabajo, y sobrescribe el registro del servidor con git push --force.
+  evidencia: "la persona que había llevado cambios al servidor central decide retroceder y reorganizar su trabajo; haciendo un git push --force para sobrescribir el registro en el servidor"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
 
 - id: h01-523
-  hecho: Si el otro colaborador sobrescribió el historial y tú haces git pull, se crea una fusión confirmada que incluye ambas líneas del historial.
-  evidencia: "Si haces git pull crearás una fusión confirmada, la cual incluirá ambas líneas del historial"
+  hecho: Si alguien envió confirmaciones reorganizadas que abandonan aquellas en las que basabas tu trabajo y haces git pull, se crea una fusión confirmada que incluye ambas líneas del historial.
+  evidencia: "Alguien envió (push) confirmaciones (commits) reorganizadas, abandonando las confirmaciones en las que tu habías basado tu trabajo Ahora los dos están en un aprieto. Si haces git pull crearás una fusión confirmada, la cual incluirá ambas líneas del historial"
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
 
 - id: h01-524
-  hecho: En ese historial git log muestra dos confirmaciones con el mismo autor, fecha y mensaje, lo que confunde.
-  evidencia: "verás dos confirmaciones hechas por el mismo autor y con la misma fecha y mensaje, lo cual será confuso."
+  hecho: Cuando se vuelve a fusionar el mismo trabajo en una nueva fusión confirmada, git log muestra dos confirmaciones con el mismo autor, fecha y mensaje, lo que resulta confuso.
+  evidencia: "Vuelves a fusionar el mismo trabajo en una nueva fusión confirmada Si ejecutas git log sobre un historial así, verás dos confirmaciones hechas por el mismo autor y con la misma fecha y mensaje, lo cual será confuso."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
 
 - id: h01-525
-  hecho: Git calcula una suma de control basada en el parche que introduce cada confirmación, llamada patch-id.
-  evidencia: "Git calcula una suma de control basada en el parche que introduce una confirmación"
+  hecho: Además del SHA-1, Git calcula una suma de control basada en el parche que introduce una confirmación, conocida como patch-id.
+  evidencia: "Además de la suma de control SHA-1, Git calcula una suma de control basada en el parche que introduce una confirmación. A esta se le conoce como “patch-id”."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
@@ -1743,7 +1805,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-528
-  hecho: git pull --rebase sustituye al git pull tradicional para reorganizar en vez de fusionar.
+  hecho: Se puede ejecutar git pull --rebase en vez del git pull tradicional para simplificar el proceso.
   evidencia: "También puedes simplificar el proceso si ejecutas git pull --rebase en vez del tradicional git pull."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
@@ -1757,8 +1819,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-530
-  hecho: Si reorganizar un historial público es inevitable, Pro Git recomienda que todos sepan que deben ejecutar git pull --rebase.
-  evidencia: "asegúrense que todos sepan que deben ejecutar git pull --rebase para intentar aliviar en lo posible la frustración."
+  hecho: Si aun así se ve necesario reorganizar, Pro Git aconseja asegurarse de que todos sepan que deben ejecutar git pull --rebase para aliviar la frustración.
+  evidencia: "Si tu compañero o tú ven que aun así es necesario hacerlo en algún momento, asegúrense que todos sepan que deben ejecutar git pull --rebase para intentar aliviar en lo posible la frustración."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
@@ -1771,8 +1833,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-532
-  hecho: Desde esa visión, cambiar el historial equivale a mentir sobre lo que ocurrió.
-  evidencia: "Desde este punto de vista, cambiar el historial de confirmaciones es casi como blasfemar; estarías mintiendo sobre lo que en verdad ocurrió."
+  hecho: Para quien ve el historial como un documento histórico que no debería alterarse, cambiarlo es casi como blasfemar: estaría mintiendo sobre lo que en verdad ocurrió.
+  evidencia: "Un documento histórico, valioso por sí mismo y que no debería ser alterado. Desde este punto de vista, cambiar el historial de confirmaciones es casi como blasfemar; estarías mintiendo sobre lo que en verdad ocurrió."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
   consultada: 2026-11-12
@@ -1785,7 +1847,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-534
-  hecho: Desde la segunda visión, rebase y filter-branch sirven para contar la historia de la mejor manera a los futuros lectores.
+  hecho: Herramientas como rebase y filter-branch se utilizan para contar la historia de la mejor manera para los futuros lectores.
   evidencia: "Esta es el área que utiliza herramientas como rebase y filter-branch para contar la historia de la mejor manera para los futuros lectores."
   fuente: f01-10
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado
@@ -1807,28 +1869,28 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-537
   hecho: git commit --amend abre el editor con el mensaje de la última confirmación para modificarlo.
-  evidencia: "Esto te envía al editor de texto, el cual tiene tu confirmación final, listo para modificarse en el mensaje."
+  evidencia: "git commit --amend Esto te envía al editor de texto, el cual tiene tu confirmación final, listo para modificarse en el mensaje."
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-538
-  hecho: Para cambiar la instantánea de la última confirmación, se editan los archivos, se usa git add o git rm y se ejecuta git commit --amend.
-  evidencia: "el subsecuente git commit --amend toma tu área de trabajo actual y la vuelve una instantánea para la nueva confirmación"
+  hecho: Se manejan los cambios editando el archivo y usando git add o git rm, y el git commit --amend siguiente toma el área de trabajo actual y la convierte en la instantánea de la nueva confirmación.
+  evidencia: "Tu manejas los cambios que quieras editando el archivo y oprimiendo git add en éste o git rm a un archivo adjunto, y el subsecuente git commit --amend toma tu área de trabajo actual y la vuelve una instantánea para la nueva confirmación"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-539
-  hecho: git commit --amend puede modificar el SHA-1 de la confirmación.
-  evidencia: "puedes modificar los cambios del SHA-1 de la confirmación"
+  hecho: Pro Git advierte de ser cuidadoso con la técnica de git commit --amend porque puede modificar el SHA-1 de la confirmación.
+  evidencia: "y el subsecuente git commit --amend toma tu área de trabajo actual y la vuelve una instantánea para la nueva confirmación. Debes ser cuidadoso con esta técnica porque puedes modificar los cambios del SHA-1 de la confirmación"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-540
-  hecho: Para modificar confirmaciones más antiguas se usa rebase, porque Git no tiene una herramienta propia para modificar la historia.
-  evidencia: "Git no tiene una herramienta para modificar la historia, pero puedes usar la herramienta de rebase"
+  hecho: Git no tiene una herramienta para modificar la historia, pero se puede usar la herramienta de rebase para modificar una confirmación que está más atrás en la historia.
+  evidencia: "Para modificar una confirmación que está más atrás en tu historia, deberás aplicar herramientas más complejas Git no tiene una herramienta para modificar la historia, pero puedes usar la herramienta de rebase"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
@@ -1849,27 +1911,27 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-543
   hecho: Con git rebase -i HEAD~3 se reescribe cualquier confirmación del rango HEAD~3..HEAD, cambie o no su mensaje.
-  evidencia: "cualquier confirmación incluida en el rango de HEAD~3..HEAD será reescrita, aún si cambias el mensaje o no."
+  evidencia: "git rebase -i HEAD~3 Recuerda de Nuevo que este es un comando de rebase – cualquier confirmación incluida en el rango de HEAD~3..HEAD será reescrita, aún si cambias el mensaje o no."
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-544
-  hecho: Pro Git advierte de no incluir en el rebase interactivo confirmaciones ya enviadas al servidor central.
-  evidencia: "No incluyas cualquier confirmación que ya hayas enviado al servidor central"
+  hecho: En un comando de rebase, Pro Git advierte de no incluir cualquier confirmación que ya se haya enviado al servidor central.
+  evidencia: "este es un comando de rebase – cualquier confirmación incluida en el rango de HEAD~3..HEAD será reescrita, aún si cambias el mensaje o no. No incluyas cualquier confirmación que ya hayas enviado al servidor central"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-545
-  hecho: Hacerlo confunde a otros desarrolladores porque les da una versión alternativa del mismo cambio.
-  evidencia: "esto confundirá a los demás desarrolladores proporcionando una versión alternativa del mismo cambio"
+  hecho: Incluir confirmaciones ya enviadas al servidor central confundirá a los demás desarrolladores, al proporcionar una versión alternativa del mismo cambio.
+  evidencia: "No incluyas cualquier confirmación que ya hayas enviado al servidor central – si lo haces esto confundirá a los demás desarrolladores proporcionando una versión alternativa del mismo cambio"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-546
-  hecho: La lista del rebase interactivo muestra las confirmaciones en orden contrario al de git log.
+  hecho: Pro Git señala que las confirmaciones aparecen en el orden contrario al que normalmente se vería usando el comando log.
   evidencia: "Es importante el notar que estas confirmaciones son escuchadas en el orden contrario del que tú normalmente las verías usando el comando de log."
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
@@ -1877,13 +1939,13 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-547
   hecho: El script del rebase interactivo reproduce los cambios de cada confirmación de arriba a abajo.
-  evidencia: "reproducirá los cambios introducidos en cada una de estas confirmaciones de arriba a abajo"
+  evidencia: "El rebase interactivo te da un script que va a utilizarse. Este empezará en la confirmación que especificas en la línea de comandos (HEAD~3) y reproducirá los cambios introducidos en cada una de estas confirmaciones de arriba a abajo"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-548
-  hecho: Acción pick: usar la confirmación tal cual.
+  hecho: Acción pick: usar la confirmación.
   evidencia: "p, pick = use commit"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
@@ -1911,8 +1973,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-552
-  hecho: Acción fixup: descarta el mensaje de la confirmación.
-  evidencia: "but discard this commit's log message"
+  hecho: Acción fixup: como squash, pero descarta el mensaje de log de la confirmación.
+  evidencia: "f, fixup = like "squash", but discard this commit's log message"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
@@ -1947,14 +2009,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-557
   hecho: Con edit, Git se para en cada confirmación marcada para que se modifique y se continúe al terminar.
-  evidencia: "Git se parará, permitiéndote modificar la confirmación y continuar cuando hayas terminado"
+  evidencia: "Si decides cambiar y elegir editar en más líneas, puedes repetir estos pasos para cada confirmación que cambies en cada edición. Cada vez, Git se parará, permitiéndote modificar la confirmación y continuar cuando hayas terminado"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-558
-  hecho: Git indica git rebase --continue como orden para seguir tras modificar la confirmación.
-  evidencia: "git rebase --continue"
+  hecho: Cuando se esté satisfecho con los cambios, Git indica ejecutar git rebase --continue.
+  evidencia: "Once you’re satisfied with your changes, run git rebase --continue"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
@@ -1981,15 +2043,15 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-562
-  hecho: Para dividir una confirmación, la línea de esa confirmación en el script de rebase -i lleva la acción edit.
-  evidencia: "edit 310154e updated README formatting and added blame"
+  hecho: En el script de rebase -i se cambia a edit la instrucción de la confirmación que se quiere dividir.
+  evidencia: "Puedes hacer eso en el script rebase -i cambiando la instrucción en la confirmación que quieres dividir a “edit”"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-563
-  hecho: Al pararse en ella, se hace un reseteo mixto con git reset HEAD^.
-  evidencia: "puedes hacer un reseteo mixto de esa confirmación con el git reset HEAD^"
+  hecho: Una vez Git envía a la consola, se puede hacer un reseteo mixto de esa confirmación con git reset HEAD^.
+  evidencia: "y te enviará directamente a la consola. Ahí, puedes hacer un reseteo mixto de esa confirmación con el git reset HEAD^"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
@@ -2002,14 +2064,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-565
-  hecho: Dividir una confirmación cambia el SHA-1 de todas las confirmaciones de la lista.
-  evidencia: "esto cambia el SHA-1s de todas tus confirmaciones en tu lista"
+  hecho: Pro Git avisa de que este procedimiento cambia el SHA-1 de todas las confirmaciones de la lista, así que ninguna debería estar ya en un repositorio compartido.
+  evidencia: "esto cambia el SHA-1s de todas tus confirmaciones en tu lista, así que asegúrate de que ninguna confirmación esté en esa lista que ya has puesto en un repositorio compartido."
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-566
-  hecho: filter-branch sirve para reescribir muchas confirmaciones de forma programable.
+  hecho: Existe otra opción para reescribir la historia, útil cuando se necesita reescribir un gran número de confirmaciones de una manera que se pueda scriptear.
   evidencia: "Existe otra opción en la parte de volver a escribir la historia que puedes usar si necesitas reescribir un gran número de confirmaciones de una manera que se puedan scriptear"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
@@ -2017,21 +2079,21 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-567
   hecho: Advertencia sobre filter-branch: probablemente no usarlo salvo que el proyecto no sea público y nadie se haya basado en las confirmaciones.
-  evidencia: "probablemente no lo deberías usar a menos que tu proyecto aún no sea público y otra persona no se haya basado en las confirmaciones que estás a punto de reescribir"
+  evidencia: "El comando es filter-branch, y este puede reescribir una gran cantidad de franjas de tu historia, así que probablemente no lo deberías usar a menos que tu proyecto aún no sea público y otra persona no se haya basado en las confirmaciones que estás a punto de reescribir."
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-568
-  hecho: Con --tree-filter, filter-branch ejecuta un comando tras cada revisión del proyecto y vuelve a confirmar el resultado.
+  hecho: El --tree-filter inicia el comando específico después de cada revisión del proyecto y entonces vuelve a confirmar los resultados.
   evidencia: "El --tree-filter inicia el comando específico después de cada revisión del proyecto y éste entonces vuelve a confirmar los resultados."
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-569
-  hecho: Pro Git propone filter-branch con --tree-filter para quitar un archivo llamado passwords.txt de todo el historial.
-  evidencia: "git filter-branch --tree-filter 'rm -f passwords.txt' HEAD"
+  hecho: Para remover un archivo nombrado passwords.txt de toda la historia, Pro Git aplica --tree-filter a filter-branch con git filter-branch --tree-filter 'rm -f passwords.txt' HEAD.
+  evidencia: "Para remover un archivo nombrado passwords.txt de tu historia complete puedes aplicar el comando --tree-filter a filter-branch: $ git filter-branch --tree-filter 'rm -f passwords.txt' HEAD"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
@@ -2044,15 +2106,22 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-571
-  hecho: Un cambio de e-mail con filter-branch cambia el SHA-1 de todas las confirmaciones de la historia, no solo las que coinciden.
-  evidencia: "este comando cambia cada confirmación del SHA-1 en tu historia, no solamente aquellos en los cuales el e-mail es el mismo o encaja"
+  hecho: Al reescribir cada confirmación para tener la nueva dirección de e-mail, el comando cambia el SHA-1 de cada confirmación de la historia, no solo de aquellas cuyo e-mail coincide, porque cada confirmación contiene el SHA-1 de sus padres.
+  evidencia: "Esto va a través de la re-escripción de cada confirmación para tener tu nuva dirección. Porque cada confirmación contiene el SHA-1 de sus padres, este comando cambia cada confirmación del SHA-1 en tu historia, no solamente aquellos en los cuales el e-mail es el mismo o encaja"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
 
 - id: h01-572
-  hecho: Pro Git aconseja probar filter-branch en una rama de prueba y hacer hard-reset de la rama principal solo si el resultado es el deseado.
+  hecho: Pro Git considera generalmente una buena idea hacer esto en una parte de prueba de la rama y hacer un hard-reset de la rama principal después de haber determinado que el resultado es el deseado.
   evidencia: "Es generalmente una buena idea hacer esto en una parte de prueba de la rama y hacer un hard-reset de tu rama principal después de haber determinado que el resultado es lo que realmente deseas."
+  fuente: f01-11
+  ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
+  consultada: 2026-11-12
+
+- id: h01-573
+  hecho: El comando filter-branch puede reescribir una gran cantidad de franjas de la historia.
+  evidencia: "El comando es filter-branch, y este puede reescribir una gran cantidad de franjas de tu historia"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
   consultada: 2026-11-12
@@ -2074,7 +2143,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-603
-  hecho: Los comandos de bajo nivel se llaman comandos de fontanería y los más amigables, comandos de porcelana.
+  hecho: Existen unos comandos conocidos como «comandos de fontanería» y otros, más amigables, conocidos como «comandos de porcelana».
   evidencia: "Estos comandos son conocidos como los "comandos de fontanería", mientras que los comandos más amigables son conocidos como los "comandos de porcelana"."
   fuente: f01-14
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Fontaner%c3%ada-y-porcelana
@@ -2082,28 +2151,28 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-604
   hecho: Muchos comandos de fontanería no se piensan para uso manual, sino como bloques de construcción de herramientas y scripts propios.
-  evidencia: "Muchos de estos comando no están pensados para ser utilizados manualmente desde la línea de comandos; sino más bien para ser utilizados como bloques de construcción para nuevas herramientas y scripts de usuario personalizados."
+  evidencia: "comandos de fontanería; comandos que te darán acceso a los entresijos internos de Git y que te ayudarán a comprender cómo y por qué hace Git lo que hace como lo hace. Muchos de estos comando no están pensados para ser utilizados manualmente desde la línea de comandos; sino más bien para ser utilizados como bloques de construcción para nuevas herramientas y scripts de usuario personalizados."
   fuente: f01-14
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Fontaner%c3%ada-y-porcelana
   consultada: 2026-11-12
 
 - id: h01-605
   hecho: git init crea la carpeta .git, donde se ubica prácticamente todo lo que Git almacena y manipula.
-  evidencia: "Git crea la carpeta auxiliar .git; la carpeta donde se ubica prácticamente todo lo almacenado y manipulado por Git"
+  evidencia: "Cuando lanzas git init sobre una carpeta nueva o sobre una ya existente, Git crea la carpeta auxiliar .git; la carpeta donde se ubica prácticamente todo lo almacenado y manipulado por Git"
   fuente: f01-14
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Fontaner%c3%ada-y-porcelana
   consultada: 2026-11-12
 
 - id: h01-606
   hecho: Copiar la carpeta .git a otro lugar basta para tener una copia completa del repositorio.
-  evidencia: "con tan solo copiar esta carpeta a cualquier otro lugar ya tienes tu copia completa"
+  evidencia: ".git; la carpeta donde se ubica prácticamente todo lo almacenado y manipulado por Git. Si deseas hacer una copia de seguridad de tu repositorio, con tan solo copiar esta carpeta a cualquier otro lugar ya tienes tu copia completa."
   fuente: f01-14
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Fontaner%c3%ada-y-porcelana
   consultada: 2026-11-12
 
 - id: h01-607
   hecho: Un repositorio recién creado con git init contiene HEAD, config, description, hooks, info, objects y refs.
-  evidencia: "HEAD config* description hooks/ info/ objects/ refs/"
+  evidencia: "HEAD config* description hooks/ info/ objects/ refs/ Puede que veas algunos otros archivos en tu carpeta .git, pero este es el contenido de un repositorio recién creado tras ejecutar git init"
   fuente: f01-14
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Fontaner%c3%ada-y-porcelana
   consultada: 2026-11-12
@@ -2123,14 +2192,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-610
-  hecho: Las cuatro entradas importantes de .git son los archivos HEAD e index y las carpetas objects y refs.
+  hecho: Hay cuatro entradas importantes: los archivos HEAD e index y las carpetas objects y refs.
   evidencia: "Esto nos deja con cuatro entradas importantes: los archivos HEAD e index (todavía por ser creado), y las carpetas objects y refs."
   fuente: f01-14
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Fontaner%c3%ada-y-porcelana
   consultada: 2026-11-12
 
 - id: h01-611
-  hecho: La carpeta objects guarda el contenido de la base de datos de Git.
+  hecho: La carpeta objects guarda el contenido de la base de datos.
   evidencia: "La carpeta objects guarda el contenido de tu base de datos"
   fuente: f01-14
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Fontaner%c3%ada-y-porcelana
@@ -2166,14 +2235,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-616
   hecho: Al insertar cualquier contenido, Git devuelve una clave con la que se puede recuperar ese contenido cuando se quiera.
-  evidencia: "Cuando insertas cualquier tipo de contenido, él te devuelve una clave que puedes utilizar para recuperar de nuevo dicho contenido en cualquier momento."
+  evidencia: "Pues significa que el núcleo Git es un simple almacén de claves y valores. Cuando insertas cualquier tipo de contenido, él te devuelve una clave que puedes utilizar para recuperar de nuevo dicho contenido en cualquier momento."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-617
   hecho: hash-object es un comando de fontanería que guarda datos en .git y devuelve la clave con la que se han guardado.
-  evidencia: "Este comando coge ciertos datos, los guarda en la carpeta .git. y te devuelve la clave bajo la cual se han guardado."
+  evidencia: "Para verlo en acción, puedes utilizar el comando de fontanería hash-object. Este comando coge ciertos datos, los guarda en la carpeta .git. y te devuelve la clave bajo la cual se han guardado."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2187,7 +2256,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-619
   hecho: La clave que devuelve hash-object es una suma de comprobación de 40 caracteres.
-  evidencia: "La salida del comando es una suma de comprobación (checksum hash) de 40 caracteres."
+  evidencia: "si no lo indicas, hash-object espera una ruta de archivo al final. La salida del comando es una suma de comprobación (checksum hash) de 40 caracteres."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2201,13 +2270,13 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-621
   hecho: Git guarda cada pieza de contenido en un archivo propio, nombrado con el SHA-1 del contenido y su cabecera.
-  evidencia: "como un archivo por cada pieza de contenido, nombrado con la suma de comprobación SHA-1 del contenido y su cabecera"
+  evidencia: "En principio, esta es la forma en que guarda Git los contenidos; como un archivo por cada pieza de contenido, nombrado con la suma de comprobación SHA-1 del contenido y su cabecera"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-622
-  hecho: La subcarpeta de objects se nombra con los 2 primeros caracteres del SHA-1 y el archivo con los 38 restantes.
+  hecho: La subcarpeta se nombra con los 2 primeros caracteres del SHA-1 y el archivo con los 38 restantes.
   evidencia: "La subcarpeta se nombra con los primeros 2 caracteres del SHA-1, y el archivo con los restantes 38 caracteres."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
@@ -2215,7 +2284,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-623
   hecho: cat-file sirve para inspeccionar objetos Git.
-  evidencia: "Este comando es algo así como una "navaja suiza" para inspeccionar objetos Git."
+  evidencia: "Puedes volver a recuperar los contenidos usando el comando cat-file. Este comando es algo así como una "navaja suiza" para inspeccionar objetos Git."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2229,21 +2298,21 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-625
   hecho: Con cat-file -t se comprueba el tipo de cualquier objeto a partir de su clave SHA-1.
-  evidencia: "Con la orden cat-file -t puedes comprobar el tipo de cualquier objeto almacenado en Git"
+  evidencia: "Con la orden cat-file -t puedes comprobar el tipo de cualquier objeto almacenado en Git, sin mas que indicar su clave SHA-1"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-626
-  hecho: Un objeto guardado con hash-object no incluye el nombre del archivo, solo su contenido.
+  hecho: Al guardar contenido en la base de datos no se guarda el nombre del archivo en el sistema, solo su contenido.
   evidencia: "realmente no estás guardando el nombre de tu archivo en el sistema, --solo su contenido--."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-627
-  hecho: Ese tipo de objeto, que guarda solo contenido, se llama blob (binary large object).
-  evidencia: "Este tipo de objeto se denomina un blob (binary large object)."
+  hecho: El objeto que guarda solo el contenido de un archivo, sin su nombre, se denomina blob (binary large object).
+  evidencia: "realmente no estás guardando el nombre de tu archivo en el sistema, --solo su contenido--. Este tipo de objeto se denomina un blob (binary large object)."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2257,14 +2326,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-629
   hecho: Los árboles corresponden a las entradas de carpetas y los blobs, más o menos, al contenido de los archivos.
-  evidencia: "correspondiendo los árboles a las entradas de carpetas; y correspondiendo los binarios, mas o menos, a los contenidos de los archivos (inodes)"
+  evidencia: "Todo el contenido se guarda como objetos árbol (tree) u objetos binarios (blob), correspondiendo los árboles a las entradas de carpetas; y correspondiendo los binarios, mas o menos, a los contenidos de los archivos (inodes)"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-630
   hecho: Cada entrada de un árbol tiene un puntero SHA-1 a un blob o a un subárbol, más el modo, el tipo y el nombre de archivo.
-  evidencia: "cada una de las cuales consta de un puntero SHA-1 a un objeto binario (blob) o a un subárbol, más sus correspondientes datos de modo, tipo y nombre de archivo"
+  evidencia: "Un objeto tipo árbol tiene una o más entradas de tipo árbol, cada una de las cuales consta de un puntero SHA-1 a un objeto binario (blob) o a un subárbol, más sus correspondientes datos de modo, tipo y nombre de archivo"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2277,7 +2346,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-632
-  hecho: Una carpeta dentro de un árbol no es un blob, sino un puntero a otro árbol.
+  hecho: En el ejemplo, la carpeta lib no es un blob, sino un puntero a otro objeto árbol.
   evidencia: "Fíjate en que la carpeta lib no es un objeto binario, sino un apuntador a otro objeto tipo árbol."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
@@ -2291,14 +2360,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-634
-  hecho: El comando de fontanería write-tree escribe el área de preparación en un objeto árbol.
+  hecho: El comando write-tree escribe el área de preparación en un objeto árbol.
   evidencia: "Tras esto, puedes usar el comando write-tree para escribir el área de preparación a un objeto tipo árbol."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-635
-  hecho: El modo 100644 denota un archivo normal en una entrada de árbol.
+  hecho: El modo 100644 denota un archivo normal.
   evidencia: "En este caso, indicas un modo 100644, el modo que denota un archivo normal."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
@@ -2306,13 +2375,13 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-636
   hecho: El modo 100755 denota un archivo ejecutable y el 120000 un enlace simbólico.
-  evidencia: "Otras opciones son 100755, para un archivo ejecutable; o 120000, para un enlace simbólico."
+  evidencia: "indicas un modo 100644, el modo que denota un archivo normal. Otras opciones son 100755, para un archivo ejecutable; o 120000, para un enlace simbólico."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-637
-  hecho: El comando commit-tree crea una confirmación a partir de un árbol y de las confirmaciones que la preceden, si las hay.
+  hecho: El comando commit-tree se invoca indicando el SHA-1 de un árbol y los objetos de confirmación de cambios que lo preceden, si hay alguno.
   evidencia: "Para crearlos, tan solo has de llamar al comando commit-tree, indicando uno de los árboles SHA-1 y los objetos de confirmación de cambios que lo preceden (si es que lo precede alguno)"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
@@ -2320,28 +2389,28 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-638
   hecho: Un objeto de confirmación contiene el árbol que representa el estado del proyecto en ese momento.
-  evidencia: "el objeto tipo árbol para la situación del proyecto en ese momento puntual"
+  evidencia: "El formato para un objeto de confirmación de cambios (commit) es sencillo, contemplando: el objeto tipo árbol para la situación del proyecto en ese momento puntual"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-639
-  hecho: Un objeto de confirmación contiene la información del autor y del confirmador, que usa user.name, user.email y una marca de tiempo.
+  hecho: La información sobre el autor/confirmador usa las opciones de configuración user.name y user.email y una marca de tiempo.
   evidencia: "la información sobre el autor/confirmador (que usa tus opciones de configuración user.name y user.email y una marca de tiempo)"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-640
-  hecho: Un objeto de confirmación termina con una línea en blanco y el mensaje.
-  evidencia: "una línea en blanco; y el mensaje de la confirmación de cambios"
+  hecho: Tras la información sobre el autor/confirmador vienen una línea en blanco y el mensaje de la confirmación de cambios.
+  evidencia: "la información sobre el autor/confirmador (que usa tus opciones de configuración user.name y user.email y una marca de tiempo); una línea en blanco; y el mensaje de la confirmación de cambios"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-641
-  hecho: En el ejemplo, cada confirmación se relaciona con la inmediatamente anterior.
-  evidencia: "relacionando cada uno de ellos con su inmediato anterior"
+  hecho: En el ejemplo, los otros dos objetos de confirmación de cambios se escriben relacionando cada uno con su inmediato anterior.
+  evidencia: "Puedes seguir adelante, escribiendo los otros dos objetos de confirmación de cambios, y relacionando cada uno de ellos con su inmediato anterior"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2355,14 +2424,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-643
   hecho: Con git add y git commit Git guarda blobs de los archivos modificados, actualiza el índice, escribe árboles y escribe las confirmaciones que los referencian, enlazadas con la anterior.
-  evidencia: "guardar objetos binarios (blobs) para los archivos modificados, actualizar el índice, escribir árboles (trees), escribir objetos de confirmación de cambios (commits) que los referencian y relacionar cada uno de ellos con su inmediato precedente"
+  evidencia: "Esto es básicamente lo que hace Git cada vez que utilizas los comandos git add y git commit: guardar objetos binarios (blobs) para los archivos modificados, actualizar el índice, escribir árboles (trees), escribir objetos de confirmación de cambios (commits) que los referencian y relacionar cada uno de ellos con su inmediato precedente"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-644
   hecho: Blobs, árboles y confirmaciones se guardan como archivos separados en .git/objects.
-  evidencia: "se guardan como archivos separados en la carpeta .git/objects"
+  evidencia: "Estos tres objetos Git, -binario, árbol y confirmación de cambios--, se guardan como archivos separados en la carpeta .git/objects."
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2376,7 +2445,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-646
   hecho: Tras el tipo, la cabecera lleva un espacio, el tamaño del contenido y un byte nulo.
-  evidencia: "Después añade un espacio, seguido del tamaño del contenido y termina con un byte nulo"
+  evidencia: "Git construye la cabecera comenzando por el tipo de objeto, en este caso un objeto binario grande (blob). Después añade un espacio, seguido del tamaño del contenido y termina con un byte nulo"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2389,14 +2458,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-648
-  hecho: Git comprime el contenido con zlib antes de escribirlo.
+  hecho: Git comprime todo el contenido con zlib.
   evidencia: "Git comprime todo el contenido con zlib"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
 
 - id: h01-649
-  hecho: Los demás objetos se almacenan igual, pero su cabecera empieza por otro tipo.
+  hecho: Los demás objetos Git se almacenan de forma similar, pero sus cabeceras comienzan con un tipo diferente.
   evidencia: "Todos los demas objetos Git se almacenan de forma similar, pero con la diferencia de que sus cabeceras comienzan con un tipo diferente"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
@@ -2404,7 +2473,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-650
   hecho: Las cabeceras de los demás objetos empiezan por commit o por tree en lugar de blob.
-  evidencia: "en lugar de blob (objeto binario grande), comenzarán por commit (confirmación de cambios), o por tree (árbol)"
+  evidencia: "Todos los demas objetos Git se almacenan de forma similar, pero con la diferencia de que sus cabeceras comienzan con un tipo diferente — en lugar de blob (objeto binario grande), comenzarán por commit (confirmación de cambios), o por tree (árbol)"
   fuente: f01-12
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
   consultada: 2026-11-12
@@ -2418,34 +2487,34 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-652
   hecho: Las referencias (refs) son archivos de .git/refs que contienen valores SHA-1 y tienen un nombre.
-  evidencia: "en la carpeta .git/refs puedes encontrar esos archivos con valores SHA-1 y nombres"
+  evidencia: "En Git, esto es lo que se conoce como "referencias" o "refs"; en la carpeta .git/refs puedes encontrar esos archivos con valores SHA-1 y nombres"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-653
   hecho: Una referencia permite usar un nombre simple en lugar de la suma SHA-1.
-  evidencia: "sus respectivos nombres simples que puedas utilizar como enlaces en lugar de la propia suma de comprobación"
+  evidencia: "junto con sus respectivos nombres simples que puedas utilizar como enlaces en lugar de la propia suma de comprobación. En Git, esto es lo que se conoce como "referencias" o "refs""
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-654
   hecho: En el repositorio de ejemplo, .git/refs contiene las subcarpetas heads y tags.
-  evidencia: ".git/refs/heads .git/refs/tags"
+  evidencia: "pero sí contiene una estructura simple: $ find .git/refs .git/refs .git/refs/heads .git/refs/tags"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-655
   hecho: Técnicamente, una referencia se crea escribiendo un SHA-1 en un archivo de .git/refs/heads.
-  evidencia: "$ echo "1a410efbd13591db07496601ebc7a059dd55cfe9" > .git/refs/heads/master"
+  evidencia: "Para crear una nueva referencia que te sirva de ayuda para recordar cual es tu última confirmación de cambios, puedes realizar técnicamente algo tan simple como: $ echo "1a410efbd13591db07496601ebc7a059dd55cfe9" > .git/refs/heads/master"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-656
-  hecho: Una vez creada una referencia, se puede usar en lugar del SHA-1 en todos los comandos.
+  hecho: En el ejemplo, la referencia principal creada puede usarse en lugar del valor SHA-1 en todos los comandos.
   evidencia: "puedes utilizar esa referencia principal que acabas de crear, en lugar del valor SHA-1, en todos tus comandos"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
@@ -2459,8 +2528,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-658
-  hecho: El comando update-ref es la forma más segura de actualizar una referencia.
-  evidencia: "Si necesitas actualizar una referencia, puedes utilizar el comando update-ref"
+  hecho: El comando update-ref es un comando mucho más seguro que editar directamente los archivos de referencia para actualizar una referencia.
+  evidencia: "No es conveniente editar directamente los archivos de referencia. Git suministra un comando mucho más seguro para hacer esto. Si necesitas actualizar una referencia, puedes utilizar el comando update-ref"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2474,28 +2543,28 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-660
   hecho: En el ejemplo, git update-ref refs/heads/test cac0ca crea la rama test apuntando a la segunda confirmación.
-  evidencia: "$ git update-ref refs/heads/test cac0ca"
+  evidencia: "Para crear una rama hacia la segunda confirmación de cambios, puedes hacer: $ git update-ref refs/heads/test cac0ca"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-661
-  hecho: Esa rama contiene solo el trabajo desde la confirmación a la que apunta hacia atrás.
-  evidencia: "Y la rama contendrá únicamente trabajo desde esa confirmación de cambios hacia atrás."
+  hecho: En el ejemplo, la rama creada hacia la segunda confirmación contiene únicamente trabajo desde esa confirmación hacia atrás.
+  evidencia: "Para crear una rama hacia la segunda confirmación de cambios, puedes hacer: $ git update-ref refs/heads/test cac0ca Y la rama contendrá únicamente trabajo desde esa confirmación de cambios hacia atrás."
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-662
-  hecho: Al crear una rama con git branch, Git le asigna el SHA-1 de la última confirmación de la rama actual.
-  evidencia: "lo que hace Git es añadir, a cualquier nueva referencia que vayas a crear, el valor SHA-1 de la última confirmación de cambios en esa rama"
+  hecho: Con comandos como git branch (nombrederama), Git añade a la nueva referencia el valor SHA-1 de la última confirmación de cambios.
+  evidencia: "Cuando lanzas comandos como git branch (nombrederama), lo que hace Git es añadir, a cualquier nueva referencia que vayas a crear, el valor SHA-1 de la última confirmación de cambios en esa rama"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-663
   hecho: Git sabe cuál es la última confirmación gracias al archivo HEAD.
-  evidencia: "La respuesta a esta pregunta es el archivo HEAD (CABEZA)."
+  evidencia: "¿cómo sabe Git cuál es el valor SHA-1 de la última confirmación de cambios?. La respuesta a esta pregunta es el archivo HEAD (CABEZA)."
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2509,7 +2578,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-665
   hecho: Una referencia simbólica contiene un enlace a otra referencia en lugar de un valor SHA-1.
-  evidencia: "a diferencia de una referencia normal, esta contiene un enlace a otra referencia en lugar de un valor SHA-1"
+  evidencia: "Por referencia simbólica nos referimos a que, a diferencia de una referencia normal, esta contiene un enlace a otra referencia en lugar de un valor SHA-1"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2523,7 +2592,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-667
   hecho: git checkout test cambia el contenido de HEAD a la rama test.
-  evidencia: "Si lanzas el comando git checkout test, Git actualiza el contenido del archivo"
+  evidencia: "Si lanzas el comando git checkout test, Git actualiza el contenido del archivo: $ cat .git/HEAD ref: refs/heads/test"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2537,21 +2606,21 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-669
   hecho: El comando symbolic-ref es la alternativa más segura a editar HEAD a mano.
-  evidencia: "Puedes editar manualmente este archivo, pero, también para esta tarea existe un comando más seguro: symbolic-ref."
+  evidencia: "en HEAD. Puedes editar manualmente este archivo, pero, también para esta tarea existe un comando más seguro: symbolic-ref."
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-670
   hecho: git symbolic-ref HEAD lee el valor de HEAD.
-  evidencia: "Puedes leer el valor de HEAD a través de él"
+  evidencia: "Puedes leer el valor de HEAD a través de él: $ git symbolic-ref HEAD refs/heads/master"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-671
   hecho: git symbolic-ref HEAD refs/heads/test cambia el valor de HEAD.
-  evidencia: "$ git symbolic-ref HEAD refs/heads/test"
+  evidencia: "Y también puedes cambiar el valor de HEAD a través de él: $ git symbolic-ref HEAD refs/heads/test"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2564,8 +2633,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-673
-  hecho: Además de blob, árbol y confirmación, hay un cuarto tipo de objeto: la etiqueta.
-  evidencia: "Acabamos de conocer los tres principales tipos de objetos Git, pero hay un cuarto."
+  hecho: Hay tres tipos principales de objetos Git y un cuarto, el objeto tipo etiqueta.
+  evidencia: "Acabamos de conocer los tres principales tipos de objetos Git, pero hay un cuarto. El objeto tipo etiqueta es muy parecido al tipo confirmación de cambios"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2579,7 +2648,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-675
   hecho: Una etiqueta es como una referencia a una rama que permanece siempre inmóvil.
-  evidencia: "Es como una referencia a una rama, pero permaneciendo siempre inmóvil"
+  evidencia: "El objeto tipo etiqueta es muy parecido al tipo confirmación de cambios, --contiene un marcador, una fecha, un mensaje y un enlace--. Su principal diferencia reside en que generalmente apunta a una confirmación de cambios (commit) en lugar de a un árbol (tree). Es como una referencia a una rama, pero permaneciendo siempre inmóvil"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2600,7 +2669,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-678
   hecho: Se puede crear una etiqueta ligera con git update-ref sobre refs/tags.
-  evidencia: "$ git update-ref refs/tags/v1.0 cac0cab538b970a37ea1e769cbbde608743bc96d"
+  evidencia: "Puedes crear una etiqueta ligera lanzando un comando tal como: $ git update-ref refs/tags/v1.0 cac0cab538b970a37ea1e769cbbde608743bc96d"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2614,13 +2683,13 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-680
   hecho: La opción -a de git tag indica que la etiqueta es anotada.
-  evidencia: "la opción -a indica que la etiqueta es anotativa"
+  evidencia: "Puedes comprobarlo creando una: (la opción -a indica que la etiqueta es anotativa) $ git tag -a v1.1 1a410efbd13591db07496601ebc7a059dd55cfe9 -m 'test tag'"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-681
-  hecho: El objeto etiqueta empieza apuntando al SHA-1 de la confirmación etiquetada.
+  hecho: En el ejemplo, el inicio del objeto apunta al SHA-1 de la confirmación de cambios recién etiquetada.
   evidencia: "Merece destacar que el inicio del objeto apunta al SHA-1 de la confirmación de cambios recién etiquetada."
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
@@ -2628,7 +2697,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-682
   hecho: Se puede etiquetar cualquier tipo de objeto Git, no solo confirmaciones.
-  evidencia: "realmente puedes etiquetar cualquier tipo de objeto Git"
+  evidencia: "Y también el que no ha sido necesario apuntar directamente a una confirmación de cambios; realmente puedes etiquetar cualquier tipo de objeto Git"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2656,14 +2725,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-686
   hecho: Con git checkout a una referencia remota, Git no apunta HEAD a ella, así que commit nunca la actualiza.
-  evidencia: "Puedes hacer git checkout a una, pero Git no apuntará HEAD a ella, de modo que nunca la actualizarás con el comando commit."
+  evidencia: "Las referencias a sitios remotos son distintas de las ramas normales (referencias en refs/heads), principalmente porque se las considera de sólo lectura. Puedes hacer git checkout a una, pero Git no apuntará HEAD a ella, de modo que nunca la actualizarás con el comando commit."
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
 
 - id: h01-687
   hecho: Git usa las referencias remotas solo como marcadores del último estado conocido de cada rama en cada remoto.
-  evidencia: "Git las utiliza solamente como marcadores al último estado conocido de cada rama en cada servidor remoto declarado"
+  evidencia: "Las referencias a sitios remotos son distintas de las ramas normales (referencias en refs/heads), principalmente porque se las considera de sólo lectura. Puedes hacer git checkout a una, pero Git no apuntará HEAD a ella, de modo que nunca la actualizarás con el comando commit. Git las utiliza solamente como marcadores al último estado conocido de cada rama en cada servidor remoto declarado"
   fuente: f01-13
   ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Referencias-Git
   consultada: 2026-11-12
@@ -2686,14 +2755,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-703
   hecho: El árbol HEAD guarda la última instantánea de commit, que será el padre del siguiente.
-  evidencia: "Última instantánea del commit, próximo padre"
+  evidencia: "HEAD Última instantánea del commit, próximo padre"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-704
   hecho: El árbol índice guarda la instantánea propuesta para el siguiente commit.
-  evidencia: "Siguiente instantánea del commit propuesta"
+  evidencia: "Índice Siguiente instantánea del commit propuesta"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2707,7 +2776,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-706
   hecho: El índice es lo mismo que el área de preparación, porque es lo que Git ve al ejecutar git commit.
-  evidencia: "También nos hemos estado refiriendo a este concepto como el “Área de Preparación” de Git ya que esto es lo que Git ve cuando ejecutas git commit."
+  evidencia: "El índice es tu siguiente commit propuesto. También nos hemos estado refiriendo a este concepto como el “Área de Preparación” de Git ya que esto es lo que Git ve cuando ejecutas git commit."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2720,8 +2789,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-708
-  hecho: El directorio de trabajo descomprime ese contenido en archivos reales, que son más fáciles de editar.
-  evidencia: "El Directorio de trabajo los descomprime en archivos reales, lo que hace que sea mucho más fácil para ti editarlos."
+  hecho: El directorio de trabajo descomprime el contenido de los otros dos árboles en archivos reales, que son mucho más fáciles de editar.
+  evidencia: "Los otros dos árboles almacenan su contenido de manera eficiente pero inconveniente, dentro de la carpeta .git. El Directorio de trabajo los descomprime en archivos reales, lo que hace que sea mucho más fácil para ti editarlos."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2748,8 +2817,8 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-712
-  hecho: git commit también actualiza la rama para que apunte al nuevo commit.
-  evidencia: "actualiza master para apuntar a ese “commit”."
+  hecho: git commit crea un objeto de commit que apunta a la instantánea y actualiza master para apuntar a ese commit.
+  evidencia: "Luego ejecutamos git commit, que toma los contenidos del índice y los guarda como una instantánea permanente, crea un objeto de “commit” que apunta a esa instantánea y actualiza master para apuntar a ese “commit”."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2770,7 +2839,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-715
   hecho: Un archivo aparece como cambio por confirmar cuando el índice y HEAD difieren.
-  evidencia: "debajo de “Changes to be committed” porque el Índice y el HEAD difieren"
+  evidencia: "veremos el archivo en verde debajo de “Changes to be committed” porque el Índice y el HEAD difieren"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2784,14 +2853,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-717
   hecho: reset hace hasta tres operaciones básicas sobre los tres árboles.
-  evidencia: "Hace hasta tres operaciones básicas."
+  evidencia: "Hablemos ahora sobre lo que reset hace exactamente cuando es llamado. Manipula directamente estos tres árboles de una manera simple y predecible. Hace hasta tres operaciones básicas."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-718
   hecho: El primer paso de reset es mover la rama a la que apunta HEAD, algo distinto de cambiar HEAD, que es lo que hace checkout.
-  evidencia: "Esto no es lo mismo que cambiar HEAD en sí mismo (que es lo que hace checkout), reset mueve la rama a la que HEAD apunta."
+  evidencia: "Lo primero que reset hará es mover a lo que HEAD apunta. Esto no es lo mismo que cambiar HEAD en sí mismo (que es lo que hace checkout), reset mueve la rama a la que HEAD apunta."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2804,35 +2873,35 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-720
-  hecho: Con --soft, reset se detiene tras mover la rama.
-  evidencia: "Con reset --soft, simplemente se detendrá allí."
+  hecho: Con reset --soft, el comando se detiene tras lo primero que siempre intenta hacer.
+  evidencia: "esto es lo primero que siempre intentará hacer. Con reset --soft, simplemente se detendrá allí."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-721
-  hecho: reset --soft deshace el último git commit.
-  evidencia: "esencialmente deshizo el último comando git commit."
+  hecho: reset --soft esencialmente deshace el último comando git commit.
+  evidencia: "Con reset --soft, simplemente se detendrá allí. Ahora tómate un segundo para mirar ese diagrama y darte cuenta de lo que sucedió: esencialmente deshizo el último comando git commit."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-722
-  hecho: Un reset a HEAD~ devuelve la rama a su posición anterior sin cambiar el índice ni el directorio de trabajo.
+  hecho: Al hacer reset de vuelta a HEAD~ (el padre de HEAD), la rama vuelve a donde estaba, sin cambiar el índice ni el directorio de trabajo.
   evidencia: "Cuando haces reset de vuelta a HEAD~ (el padre de HEAD), está volviendo a colocar la rama donde estaba, sin cambiar el Índice o el Directorio de Trabajo."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-723
-  hecho: Tras un reset --soft se puede actualizar el índice y volver a hacer commit para lograr lo mismo que git commit --amend.
-  evidencia: "Ahora puedes actualizar el Índice y ejecutar git commit nuevamente para lograr lo que git commit --amend hubiera hecho"
+  hecho: Tras volver con reset a HEAD~, se puede actualizar el índice y ejecutar git commit de nuevo para lograr lo que habría hecho git commit --amend.
+  evidencia: "Cuando haces reset de vuelta a HEAD~ (el padre de HEAD), está volviendo a colocar la rama donde estaba, sin cambiar el Índice o el Directorio de Trabajo. Ahora puedes actualizar el Índice y ejecutar git commit nuevamente para lograr lo que git commit --amend hubiera hecho"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-724
-  hecho: El segundo paso de reset es actualizar el índice con el contenido de la instantánea a la que apunta HEAD.
+  hecho: Lo siguiente que hace reset es actualizar el índice con el contenido de la instantánea a la que HEAD apunta ahora.
   evidencia: "Lo siguiente que reset hará es actualizar el Índice con los contenidos de cualquier instantánea que HEAD señale ahora."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
@@ -2840,21 +2909,21 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-725
   hecho: Con --mixed, reset se detiene tras actualizar el índice.
-  evidencia: "Si especificas la opción --mixed, reset se detendrá en este punto."
+  evidencia: "Lo siguiente que reset hará es actualizar el Índice con los contenidos de cualquier instantánea que HEAD señale ahora. Si especificas la opción --mixed, reset se detendrá en este punto."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-726
   hecho: --mixed es el comportamiento por defecto de reset.
-  evidencia: "Este también es el comportamiento por defecto, por lo que si no especificas ninguna opción (sólo git reset HEAD~, en este caso), aquí es donde el comando se detendrá."
+  evidencia: "Si especificas la opción --mixed, reset se detendrá en este punto. Este también es el comportamiento por defecto, por lo que si no especificas ninguna opción (sólo git reset HEAD~, en este caso), aquí es donde el comando se detendrá."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-727
-  hecho: Un reset mixto deshace el último commit y además saca todo del área de preparación.
-  evidencia: "deshizo tu último commit y también hizo unstaged de todo."
+  hecho: En el ejemplo de git reset HEAD~ sin opciones, el comando deshizo el último commit y también hizo unstaged de todo.
+  evidencia: "(sólo git reset HEAD~, en este caso), aquí es donde el comando se detendrá. Ahora tómate otro segundo para mirar ese diagrama y darte cuenta de lo que sucedió: deshizo tu último commit y también hizo unstaged de todo."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2868,7 +2937,7 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-729
   hecho: reset --hard deshace el último commit, los git add y git commit, y el trabajo hecho en el directorio de trabajo.
-  evidencia: "Deshizo tu último commit, los comandos git add y git commit, y todo el trabajo que realizaste en tu Directorio de Trabajo."
+  evidencia: "Si usas la opción --hard, continuará en esta etapa. Entonces, pensemos en lo que acaba de pasar. Deshizo tu último commit, los comandos git add y git commit, y todo el trabajo que realizaste en tu Directorio de Trabajo."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -2888,14 +2957,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-732
-  hecho: Lo que se había confirmado antes de un reset --hard se puede recuperar mirando el reflog.
-  evidencia: "todavía tenemos la versión v3 de nuestro archivo en un “commit” en nuestro DB de Git, y podríamos recuperarla mirando nuestro reflog"
+  hecho: En el caso particular del ejemplo, la versión v3 del archivo sigue en un commit de la base de datos de Git y se podría recuperar mirando el reflog.
+  evidencia: "En este caso particular, todavía tenemos la versión v3 de nuestro archivo en un “commit” en nuestro DB de Git, y podríamos recuperarla mirando nuestro reflog"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-733
-  hecho: Lo que no se había confirmado, Git lo sobrescribe en un reset --hard y es irrecuperable.
+  hecho: Si no se hubiera hecho commit al archivo, Git lo habría sobrescrito y sería irrecuperable.
   evidencia: "pero si no le hubiéramos hecho “commit”, Git hubiese sobrescrito el archivo y sería irrecuperable."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
@@ -2909,63 +2978,63 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-735
-  hecho: Con una ruta no se mueve HEAD porque es un puntero y no puede apuntar a parte de un commit y parte de otro.
-  evidencia: "HEAD es solo un puntero, y no se puede apuntar a sólo una parte de un “commit” y otra parte de otro."
+  hecho: Que reset con ruta omita el paso 1 tiene sentido porque HEAD es solo un puntero y no puede apuntar a una parte de un commit y a otra de otro.
+  evidencia: "reset omitirá el paso 1 y limitará el resto de sus acciones a un archivo o conjunto específico de archivos. Esto realmente tiene sentido – HEAD es solo un puntero, y no se puede apuntar a sólo una parte de un “commit” y otra parte de otro."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-736
   hecho: git reset file.txt equivale a git reset --mixed HEAD file.txt.
-  evidencia: "es una abreviatura de git reset --mixed HEAD file.txt"
+  evidencia: "Entonces, supongamos que ejecutamos git reset file.txt. Este formulario (ya que no especificó un commit SHA-1 o una rama, y no especificó --soft o --hard) es una abreviatura de git reset --mixed HEAD file.txt"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-737
-  hecho: git reset file.txt copia el archivo de HEAD al índice.
-  evidencia: "Por lo tanto, básicamente solo copia archivo.txt de HEAD al Índice."
+  hecho: En ese caso, hacer que el índice se vea como HEAD básicamente solo copia archivo.txt de HEAD al índice.
+  evidencia: "Haga que el Índice se vea como HEAD (deténgase aquí) Por lo tanto, básicamente solo copia archivo.txt de HEAD al Índice."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-738
-  hecho: Ese reset con ruta tiene el efecto práctico de sacar el archivo del área de preparación.
-  evidencia: "Esto tiene el efecto práctico de hacer unstaging al archivo."
+  hecho: Copiar archivo.txt de HEAD al índice tiene el efecto práctico de hacer unstaging al archivo.
+  evidencia: "Por lo tanto, básicamente solo copia archivo.txt de HEAD al Índice. Esto tiene el efecto práctico de hacer unstaging al archivo."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-739
-  hecho: Sobre el índice, git reset con ruta y git add son operaciones opuestas.
-  evidencia: "Si miramos el diagrama para ese comando y pensamos en lo que hace git add, son exactamente opuestos."
+  hecho: El diagrama del comando que hace unstaging al archivo y lo que hace git add son exactamente opuestos.
+  evidencia: "Esto tiene el efecto práctico de hacer unstaging al archivo. Si miramos el diagrama para ese comando y pensamos en lo que hace git add, son exactamente opuestos."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-740
-  hecho: Indicando un commit concreto, reset con ruta lleva al índice la versión del archivo de ese commit.
-  evidencia: "especificando un “commit” específico para extraer esa versión del archivo."
+  hecho: Para extraer de un commit concreto la versión del archivo, en lugar de la de HEAD, bastaría ejecutar algo como git reset eb43bf file.txt.
+  evidencia: "especificando un “commit” específico para extraer esa versión del archivo. Simplemente ejecutaríamos algo como git reset eb43bf file.txt."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-741
-  hecho: Con git reset --soft HEAD~2 se puede mover la rama a un commit anterior para aplastar commits.
+  hecho: Se puede ejecutar git reset --soft HEAD~2 para mover la rama HEAD a un commit anterior.
   evidencia: "Puedes ejecutar git reset --soft HEAD~2 para mover la rama HEAD a un “commit” anterior"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-742
-  hecho: Tras ese reset --soft basta con ejecutar git commit de nuevo para obtener un único commit.
-  evidencia: "Y luego simplemente ejecuta git commit nuevamente:"
+  hecho: Después de git reset --soft HEAD~2 se ejecuta simplemente git commit de nuevo.
+  evidencia: "Puedes ejecutar git reset --soft HEAD~2 para mover la rama HEAD a un “commit” anterior (el primer “commit” que deseas mantener): Y luego simplemente ejecuta git commit nuevamente:"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-743
-  hecho: El commit intermedio aplastado deja de estar en el historial alcanzable.
+  hecho: El commit con la versión v2 del archivo ya no está en el historial.
   evidencia: "El “commit” con la versión v2 del archivo ya no está en el historial."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
@@ -3001,14 +3070,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-748
   hecho: Estando en develop, git reset master hace que develop apunte al mismo commit que master.
-  evidencia: "Si ejecutamos git reset master, develop ahora apuntará al mismo “commit” que master."
+  evidencia: "actualmente estamos en develop (así que HEAD la señala). Si ejecutamos git reset master, develop ahora apuntará al mismo “commit” que master."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-749
   hecho: Estando en develop, git checkout master no mueve develop: mueve HEAD.
-  evidencia: "Si en cambio ejecutamos git checkout master, develop no se mueve, HEAD sí lo hace."
+  evidencia: "actualmente estamos en develop (así que HEAD la señala). Si ejecutamos git reset master, develop ahora apuntará al mismo “commit” que master. Si en cambio ejecutamos git checkout master, develop no se mueve, HEAD sí lo hace."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -3022,14 +3091,14 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
 
 - id: h01-751
   hecho: checkout con ruta actualiza el índice con ese archivo y además sobrescribe el archivo del directorio de trabajo.
-  evidencia: "Es como git reset [branch] file en que actualiza el índice con ese archivo en ese “commit”, pero también sobrescribe el archivo en el Directorio de Trabajo."
+  evidencia: "La otra forma de ejecutar checkout es con una ruta de archivo, que como reset, no mueva HEAD. Es como git reset [branch] file en que actualiza el índice con ese archivo en ese “commit”, pero también sobrescribe el archivo en el Directorio de Trabajo."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-752
-  hecho: checkout con ruta no es seguro para el directorio de trabajo.
-  evidencia: "no está directorio-de-trabajo seguro, y no mueve a HEAD."
+  hecho: Sería exactamente como git reset --hard [branch] file (si reset permitiera ejecutar eso): no está seguro para el directorio de trabajo y no mueve HEAD.
+  evidencia: "Sería exactamente como git reset --hard [branch] file (si reset permitiera ejecutar eso) - no está directorio-de-trabajo seguro, y no mueve a HEAD."
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -3049,43 +3118,43 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   consultada: 2026-11-12
 
 - id: h01-755
-  hecho: Según la tabla, reset --soft [commit] mueve la rama, no toca el índice ni el directorio de trabajo y es seguro para este último.
-  evidencia: "reset --soft [commit] REF NO NO SI"
+  hecho: Según la tabla resumen, reset --soft [commit] tiene REF en HEAD, NO en Index, NO en Workdir y SI en WD Safe?.
+  evidencia: "HEAD Index Workdir WD Safe? Nivel de Commit reset --soft [commit] REF NO NO SI"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-756
-  hecho: Según la tabla, reset [commit] mueve la rama, cambia el índice, no toca el directorio de trabajo y es seguro para este último.
-  evidencia: "reset [commit] REF SI NO SI"
+  hecho: Según la tabla resumen, reset [commit] tiene REF en HEAD, SI en Index, NO en Workdir y SI en WD Safe?.
+  evidencia: "HEAD Index Workdir WD Safe? Nivel de Commit reset --soft [commit] REF NO NO SI reset [commit] REF SI NO SI"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-757
-  hecho: Según la tabla, reset --hard [commit] mueve la rama, cambia índice y directorio de trabajo, y no es seguro para este último.
-  evidencia: "reset --hard [commit] REF SI SI NO"
+  hecho: Según la tabla resumen, reset --hard [commit] tiene REF en HEAD, SI en Index, SI en Workdir y NO en WD Safe?.
+  evidencia: "HEAD Index Workdir WD Safe? Nivel de Commit reset --soft [commit] REF NO NO SI reset [commit] REF SI NO SI reset --hard [commit] REF SI SI NO"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-758
-  hecho: Según la tabla, checkout [commit] mueve HEAD, cambia índice y directorio de trabajo, y es seguro para este último.
-  evidencia: "checkout [commit] HEAD SI SI SI"
+  hecho: Según la tabla resumen, checkout [commit] tiene HEAD en HEAD, SI en Index, SI en Workdir y SI en WD Safe?.
+  evidencia: "HEAD Index Workdir WD Safe? Nivel de Commit reset --soft [commit] REF NO NO SI reset [commit] REF SI NO SI reset --hard [commit] REF SI SI NO checkout [commit] HEAD SI SI SI"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-759
-  hecho: Según la tabla, reset (commit) [archivo] no mueve nada, cambia el índice, no toca el directorio de trabajo y es seguro.
-  evidencia: "reset (commit) [file] NO SI NO SI"
+  hecho: Según la tabla resumen, reset (commit) [archivo] tiene NO en HEAD, SI en Index, NO en Workdir y SI en WD Safe?.
+  evidencia: "HEAD Index Workdir WD Safe? Nivel de Commit reset --soft [commit] REF NO NO SI reset [commit] REF SI NO SI reset --hard [commit] REF SI SI NO checkout [commit] HEAD SI SI SI Nivel de Archivo reset (commit) [file] NO SI NO SI"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
 
 - id: h01-760
-  hecho: Según la tabla, checkout (commit) [archivo] no mueve HEAD, cambia índice y directorio de trabajo, y no es seguro para este último.
-  evidencia: "checkout (commit) [file] NO SI SI NO"
+  hecho: Según la tabla resumen, checkout (commit) [archivo] tiene NO en HEAD, SI en Index, SI en Workdir y NO en WD Safe?.
+  evidencia: "HEAD Index Workdir WD Safe? Nivel de Commit reset --soft [commit] REF NO NO SI reset [commit] REF SI NO SI reset --hard [commit] REF SI SI NO checkout [commit] HEAD SI SI SI Nivel de Archivo reset (commit) [file] NO SI NO SI checkout (commit) [file] NO SI SI NO"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
@@ -3172,4 +3241,11 @@ Ids por sección: la sección 1.k usa h01-k01 a h01-k99.
   evidencia: "git restore: discard changes"
   fuente: f01-16
   ancla: https://missing.csail.mit.edu/2026/version-control/
+  consultada: 2026-11-12
+
+- id: h01-773
+  hecho: Una serie de confirmaciones con mensajes como «oops.» o «WIP» se puede aplastar con reset en una sola confirmación.
+  evidencia: "Supongamos que tienes una serie de confirmaciones con mensajes como “oops.”, “WIP” y “se olvidó de este archivo”. Puedes usar reset para aplastarlos rápida y fácilmente en una sola confirmación"
+  fuente: f01-15
+  ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
   consultada: 2026-11-12
