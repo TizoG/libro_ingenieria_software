@@ -61,6 +61,10 @@ Fuentes añadidas el 2026-11-12 para cubrir lo que la edición en español de Pr
 | 1.7 | [Documentación de Git: git-reflog](https://git-scm.com/docs/git-reflog) | ✔ |
 | 1.7 | [Pro Git 10.7, Mantenimiento y recuperación de datos](https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos) | ✔ |
 | 1.4 | [Documentación de Git: merge-strategies](https://git-scm.com/docs/merge-strategies) (estrategia `ort`) | ✔ |
+| 1.2, 1.3, 1.5, 1.7 | [Pro Git 7.1, Revisión por selección](https://git-scm.com/book/es/v2/Herramientas-de-Git-Revisi%C3%B3n-por-selecci%C3%B3n) (hash abreviado, `HEAD~N`, `^`) | ✔ |
+| 1.2, 1.3, 1.6 | [Documentación de Git: gitrevisions](https://git-scm.com/docs/gitrevisions) (`~`, `^`, `^{tree}`, `@{n}`) | ✔ |
+| 1.2, 1.3 | [Documentación de Git: git-log](https://git-scm.com/docs/git-log) (`--oneline`) | ✔ |
+| Apertura | [Pro Git 1.6, Configurando Git por primera vez](https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez) | ✔ |
 
 ### Capítulo 2: Flujo de contribución
 

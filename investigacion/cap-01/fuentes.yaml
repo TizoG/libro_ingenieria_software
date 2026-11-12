@@ -110,3 +110,20 @@ f01-27:
   titulo: "Documentación de Git, merge-strategies"
   url: https://git-scm.com/docs/merge-strategies
   secciones: ["1.4"]
+# Añadidas el 2026-11-12 durante la redacción, para hechos que faltaban.
+f01-28:
+  titulo: "Pro Git 7.1, Revisión por selección"
+  url: https://git-scm.com/book/es/v2/Herramientas-de-Git-Revisi%C3%B3n-por-selecci%C3%B3n
+  secciones: ["1.2", "1.3", "1.5", "1.7"]
+f01-29:
+  titulo: "Documentación de Git, gitrevisions"
+  url: https://git-scm.com/docs/gitrevisions
+  secciones: ["1.2", "1.3", "1.6"]
+f01-30:
+  titulo: "Documentación de Git, git-log"
+  url: https://git-scm.com/docs/git-log
+  secciones: ["1.2", "1.3"]
+f01-31:
+  titulo: "Pro Git 1.6, Configurando Git por primera vez"
+  url: https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez
+  secciones: ["apertura"]
