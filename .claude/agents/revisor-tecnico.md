@@ -1,6 +1,6 @@
 ---
 name: revisor-tecnico
-description: Fase 5, cortafuegos 4. Revisión adversarial frase a frase de un capítulo del libro contra hechos.md y las copias locales de las fuentes, más el código y sus salidas. Debe ejecutarse sin el historial del redactor. Devuelve el informe; no edita el capítulo.
+description: Fase 6, cortafuegos 4. Revisión adversarial frase a frase de un capítulo del libro contra hechos.md y las copias locales de las fuentes, más el código y sus salidas. Debe ejecutarse sin el historial del redactor. Devuelve el informe; no edita el capítulo.
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: xhigh

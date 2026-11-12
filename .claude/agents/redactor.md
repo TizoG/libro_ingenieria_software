@@ -1,6 +1,6 @@
 ---
 name: redactor
-description: Fase 4 de un capítulo del libro. Propone el esquema y, una vez aprobado por devOC, redacta una sección por pasada en investigacion/cap-XX/borrador.md usando solo hechos de hechos.md y marcas de ejemplo. Úsalo una sección cada vez.
+description: Fases 3 y 5 de un capítulo del libro. Propone el esquema (fase 3) y, una vez aprobado por devOC y con los ejemplos hechos, redacta una sección por pasada en investigacion/cap-XX/borrador.md usando solo hechos de hechos.md y marcas de ejemplo. Úsalo una sección cada vez.
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: opus
 effort: high

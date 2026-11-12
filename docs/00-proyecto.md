@@ -240,17 +240,18 @@ La web vive en otro proyecto (`01-web`) y solo lee `contenido/`. El formato que 
 
 ## 7. Cómo se produce un capítulo
 
-Cada capítulo pasa por estas fases, en este orden. El estado se registra en `docs/estado.md`.
+Cada capítulo pasa por estas fases, en este orden. (El 2026-11-12, con el capítulo piloto, devOC aprobó proponer el esquema antes de programar los ejemplos, porque los ejemplos dependen del esquema.) El estado se registra en `docs/estado.md`.
 
 | Fase | Quién | Qué hace | Sale |
 | --- | --- | --- | --- |
 | 1. Fuentes | Claude Code | Comprueba que el capítulo tiene mapa en `docs/03-indice-con-fuentes.md`; si no, lo construye con las reglas de ese archivo | Mapa verificado |
 | 2. Investigación | Cowork o Claude Code | Descarga cada fuente a `fuentes-cache/` y escribe `investigacion/cap-XX/hechos.md`: hechos atómicos, cada uno con su evidencia literal, que el script valida | Hechos verificados |
-| 3. Ejemplos | Claude Code | Escribe y ejecuta los ejemplos en `ejemplos/cap-XX/` y guarda la salida real y las versiones | Código que funciona |
-| 4. Redacción | Claude Code | Primero el esquema (que aprueba devOC); después, una sección por pasada, solo con hechos de `hechos.md` y marcas de ejemplo | Borrador |
-| 5. Revisión | Claude Code, en otra pasada o con un subagente revisor | Aplica la lista de control de la sección 8 y corrige | Revisado |
-| 6. Aprobación | devOC | Lee y aprueba o pide cambios | Aprobado |
-| 7. Publicación | Claude Code | Convierte ids de hechos en referencias numeradas, comprueba enlaces, valida el contrato con la web y hace commit | Publicado |
+| 3. Esquema | Claude Code (redactor) | Propone en `investigacion/cap-XX/esquema.md` las secciones, el hilo narrativo, los hechos de cada sección y la lista de ejemplos que necesita; devOC lo aprueba | Esquema aprobado |
+| 4. Ejemplos | Claude Code (programador) | Escribe y ejecuta en `ejemplos/cap-XX/` los ejemplos que pide el esquema y guarda la salida real y las versiones | Código que funciona |
+| 5. Redacción | Claude Code (redactor) | Una sección por pasada, solo con hechos de `hechos.md` y marcas de ejemplo | Borrador |
+| 6. Revisión | Claude Code, en otra pasada o con un subagente revisor | Aplica la lista de control de la sección 8 y corrige | Revisado |
+| 7. Aprobación | devOC | Lee y aprueba o pide cambios | Aprobado |
+| 8. Publicación | Claude Code | Convierte ids de hechos en referencias numeradas, comprueba enlaces, valida el contrato con la web y hace commit | Publicado |
 
 ### Reparto entre Claude Code y Cowork
 
@@ -263,9 +264,10 @@ Cada capítulo pasa por estas fases, en este orden. El estado se registra en `do
 Si se definen subagentes (`.claude/agents/`), estos encajan con el flujo:
 
 - **investigador:** fases 1 y 2.
-- **redactor:** fase 4.
-- **revisor-técnico:** comprueba código, salidas y exactitud contra las notas.
-- **revisor-de-fuentes:** comprueba que cada afirmación tiene referencia y que nada está copiado.
+- **redactor:** fases 3 (esquema) y 5 (redacción).
+- **programador:** fase 4.
+- **revisor-tecnico:** fase 6; comprueba código, salidas y exactitud contra las notas.
+- **revisor-de-fuentes:** fase 6; comprueba que cada afirmación tiene referencia y que nada está copiado.
 
 Separar redacción y revisión importa: quien acaba de escribir un texto tiende a darlo por bueno.
 

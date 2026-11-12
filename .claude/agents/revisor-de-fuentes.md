@@ -1,6 +1,6 @@
 ---
 name: revisor-de-fuentes
-description: Fase 5. Comprueba que cada afirmación del borrador de un capítulo tiene referencia, que todas las fuentes están autorizadas y que ningún párrafo copia o sigue de cerca la redacción o la estructura de una fuente. Devuelve el informe; no edita el capítulo.
+description: Fase 6. Comprueba que cada afirmación del borrador de un capítulo tiene referencia, que todas las fuentes están autorizadas y que ningún párrafo copia o sigue de cerca la redacción o la estructura de una fuente. Devuelve el informe; no edita el capítulo.
 tools: Read, Grep, Glob, Bash
 model: opus
 effort: xhigh

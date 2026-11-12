@@ -17,10 +17,10 @@ Modelos disponibles hoy: Haiku 5.5, Sonnet 5.5, Opus 5.5 y, según el plan, Fabl
 | --- | --- | --- | --- |
 | 1. Mapa de fuentes (buscar, abrir, verificar URLs) | Sonnet 5.5 | medium | Mucho volumen y poco razonamiento; los scripts comprueban el resultado |
 | 2. Investigación (extraer hechos con evidencia) | Sonnet 5.5 | high | Lectura atenta; el script de evidencias rechaza lo que no esté en la fuente |
-| Esquema del capítulo (secciones, hilo, ejemplos) | Opus 5.5, o `opusplan` | high | Decisiones de estructura que condicionan todo el capítulo |
-| 3. Ejemplos de código | Sonnet 5.5 | high | La ejecución real verifica el resultado |
-| 4. Redacción por secciones | Opus 5.5 | high (xhigh en los capítulos densos) | Explicar el porqué con claridad es lo más difícil del libro |
-| 5. Revisión adversarial | El modelo más capaz que tengas (Fable 5.2 u Opus 5.5) | xhigh | Encontrar fallos sutiles exige más que escribir; en una sesión distinta a la del redactor |
+| 3. Esquema del capítulo (secciones, hilo, ejemplos) | Opus 5.5, o `opusplan` | high | Decisiones de estructura que condicionan todo el capítulo |
+| 4. Ejemplos de código | Sonnet 5.5 | high | La ejecución real verifica el resultado |
+| 5. Redacción por secciones | Opus 5.5 | high (xhigh en los capítulos densos) | Explicar el porqué con claridad es lo más difícil del libro |
+| 6. Revisión adversarial | El modelo más capaz que tengas (Fable 5.2 u Opus 5.5) | xhigh | Encontrar fallos sutiles exige más que escribir; en una sesión distinta a la del redactor |
 | Tareas mecánicas (formato, frontmatter, recuentos, enlaces) | Haiku 5.5 | low | Son deterministas; pensar más no aporta |
 
 **Capítulos densos, con xhigh en la redacción:**

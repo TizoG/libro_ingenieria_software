@@ -46,6 +46,21 @@ Fuentes base:
 
 Comunidad: [mouredev, Hello Git: curso de Git y GitHub desde cero](https://github.com/mouredev/hello-git). Complemento en español para practicar comandos.
 
+Fuentes añadidas el 2026-11-12 para cubrir lo que la edición en español de Pro Git no trata o trata con una versión antigua de Git (ver `investigacion/cap-01/huecos.md`). La documentación de referencia de git-scm.com describe la última versión de Git; los ejemplos del libro se ejecutan con la versión fijada en la cabecera del capítulo.
+
+| Sección | Fuente | Estado |
+| --- | --- | --- |
+| 1.2, 1.4 | [Documentación de Git: git-init](https://git-scm.com/docs/git-init) (rama inicial, `init.defaultBranch`) | ✔ |
+| 1.2 | [Documentación de Git: hash-function-transition](https://git-scm.com/docs/hash-function-transition) (SHA-1 y SHA-256) | ✔ |
+| 1.3, 1.7 | [Documentación de Git: git-restore](https://git-scm.com/docs/git-restore) | ✔ |
+| 1.4 | [Documentación de Git: git-switch](https://git-scm.com/docs/git-switch) | ✔ |
+| 1.4, 1.7 | [Documentación de Git: git-checkout](https://git-scm.com/docs/git-checkout) (HEAD desacoplado) | ✔ |
+| 1.4 | [Documentación de Git: git-merge](https://git-scm.com/docs/git-merge) (`--abort`) | ✔ |
+| 1.5 | [Documentación de Git: git-rebase](https://git-scm.com/docs/git-rebase) (`--abort`, `--skip`, `drop`) | ✔ |
+| 1.5 | [Documentación de Git: git-revert](https://git-scm.com/docs/git-revert) | ✔ |
+| 1.7 | [Documentación de Git: git-reflog](https://git-scm.com/docs/git-reflog) | ✔ |
+| 1.7 | [Pro Git 10.7, Mantenimiento y recuperación de datos](https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos) | ✔ |
+
 ### Capítulo 2: Flujo de contribución
 
 | Sección | Principal | Profundizar |

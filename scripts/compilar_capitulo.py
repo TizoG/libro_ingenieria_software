@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fase 7: convierte el borrador de un capítulo en el archivo que se publica en contenido/.
+"""Fase 8: convierte el borrador de un capítulo en el archivo que se publica en contenido/.
 
 Uso:
     python scripts/compilar_capitulo.py 1

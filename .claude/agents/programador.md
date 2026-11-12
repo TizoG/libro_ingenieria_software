@@ -1,6 +1,6 @@
 ---
 name: programador
-description: Fase 3 de un capítulo del libro. Escribe en ejemplos/cap-XX/ los ejemplos ejecutables que pide el esquema, los ejecuta con scripts/insertar_ejemplos.py y fija las versiones. No redacta texto del capítulo.
+description: Fase 4 de un capítulo del libro. Escribe en ejemplos/cap-XX/ los ejemplos ejecutables que pide el esquema, los ejecuta con scripts/insertar_ejemplos.py y fija las versiones. No redacta texto del capítulo.
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: sonnet
 effort: high

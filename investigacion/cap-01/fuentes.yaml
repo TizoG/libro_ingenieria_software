@@ -64,3 +64,44 @@ f01-16:
   titulo: "The Missing Semester 2026, Version Control and Git"
   url: https://missing.csail.mit.edu/2026/version-control/
   secciones: ["1.7"]
+# Añadidas el 2026-11-12 para cubrir los huecos de investigacion/cap-01/huecos.md.
+f01-17:
+  titulo: "Documentación de Git, git-init"
+  url: https://git-scm.com/docs/git-init
+  secciones: ["1.2", "1.4"]
+f01-18:
+  titulo: "Documentación de Git, hash-function-transition"
+  url: https://git-scm.com/docs/hash-function-transition
+  secciones: ["1.2"]
+f01-19:
+  titulo: "Documentación de Git, git-restore"
+  url: https://git-scm.com/docs/git-restore
+  secciones: ["1.3", "1.7"]
+f01-20:
+  titulo: "Documentación de Git, git-switch"
+  url: https://git-scm.com/docs/git-switch
+  secciones: ["1.4"]
+f01-21:
+  titulo: "Documentación de Git, git-checkout"
+  url: https://git-scm.com/docs/git-checkout
+  secciones: ["1.4", "1.7"]
+f01-22:
+  titulo: "Documentación de Git, git-merge"
+  url: https://git-scm.com/docs/git-merge
+  secciones: ["1.4"]
+f01-23:
+  titulo: "Documentación de Git, git-rebase"
+  url: https://git-scm.com/docs/git-rebase
+  secciones: ["1.5"]
+f01-24:
+  titulo: "Documentación de Git, git-revert"
+  url: https://git-scm.com/docs/git-revert
+  secciones: ["1.5"]
+f01-25:
+  titulo: "Documentación de Git, git-reflog"
+  url: https://git-scm.com/docs/git-reflog
+  secciones: ["1.7"]
+f01-26:
+  titulo: "Pro Git 10.7, Mantenimiento y recuperación de datos"
+  url: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  secciones: ["1.7"]
