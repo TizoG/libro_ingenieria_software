@@ -3,18 +3,12 @@ source "$EJEMPLO_DIR/_facturas.sh"  # preparación
 
 facturas_historial 3  # preparación
 
-git switch -c redondeo
+f_r_descuentos  # preparación
 
-f_factura_v3  # preparación
+cat .git/refs/heads/main
 
-git add factura.py
+cat .git/refs/heads/descuentos
 
-git commit -m "Redondea el total a dos decimales"
+git merge descuentos
 
-git switch main
-
-git merge redondeo
-
-git branch -d redondeo
-
-git log --oneline --graph
+cat .git/refs/heads/main

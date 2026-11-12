@@ -5,22 +5,14 @@ facturas_historial 3  # preparación
 
 f_factura_v3  # preparación
 
-mkdir tests  # preparación
-
-printf 'from factura import total\ndef test_redondeo():\n    assert total(0.1) == 0.12\n' > tests/test_factura.py  # preparación
-
 git add factura.py
 
-git commit -m "Redondea el total y lo prueba"
+git commit -m "Cambia la función total"
 
-git status -s
+git commit --amend -m "Redondea el total a dos decimales"
 
-git log --oneline -1
+git cat-file -p HEAD
 
-git add tests/test_factura.py
+git cat-file -p HEAD@{1}
 
-git commit --amend --no-edit
-
-git log --oneline
-
-git reflog
+git reflog -2

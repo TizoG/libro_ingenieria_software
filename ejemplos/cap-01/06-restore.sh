@@ -9,6 +9,8 @@ git add factura.py
 
 git status
 
+git status -s
+
 git restore --staged factura.py
 
 git status -s

@@ -21,4 +21,8 @@ git add factura.py
 
 git commit -m "Empieza los descuentos"
 
+cat .git/refs/heads/main
+
+cat .git/refs/heads/descuentos
+
 git log --oneline --decorate --graph --all

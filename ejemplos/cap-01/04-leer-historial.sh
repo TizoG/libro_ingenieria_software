@@ -1,7 +1,7 @@
 # versiones: git
 source "$EJEMPLO_DIR/_facturas.sh"  # preparación
 
-FACTURAS_AUTOR_TESTS="Marta Ruiz" facturas_historial 5  # preparación
+facturas_historial 5  # preparación
 
 git log --oneline
 

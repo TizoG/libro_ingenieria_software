@@ -3,13 +3,7 @@ source "$EJEMPLO_DIR/_facturas.sh"  # preparación
 
 facturas_historial 3  # preparación
 
-git switch -q -c descuentos  # preparación
-
-f_factura_descuento  # preparación
-
-f_commit "Aplica un descuento al total"  # preparación
-
-git switch -q main  # preparación
+f_r_descuentos  # preparación
 
 f_c_redondeo  # preparación
 
@@ -18,12 +12,6 @@ git log --oneline --graph --all
 git merge descuentos  # falla
 
 git status
-
-git merge --abort
-
-git status -s
-
-git merge descuentos  # falla
 
 cat factura.py
 
@@ -36,8 +24,10 @@ PY
 
 git add factura.py
 
-git commit --no-edit
+git commit -m "Fusiona los descuentos con el redondeo"
 
 git log --oneline --graph
 
 git cat-file -p HEAD
+
+git log --oneline -1 HEAD^2

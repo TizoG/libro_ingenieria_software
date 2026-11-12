@@ -1,17 +1,22 @@
 # versiones: git
+source "$EJEMPLO_DIR/_facturas.sh"  # preparación
 
-git init facturas
+facturas_historial 4  # preparación
 
-cd facturas
+find .git/objects -type f | wc -l
 
-ls .git
+cat .git/refs/heads/main
 
-find .git/objects -type f
+echo "def test_sin_iva():" >> tests/test_factura.py
 
-echo 'hola' | git hash-object -w --stdin
+echo "    assert total(100, iva=0) == 100" >> tests/test_factura.py
 
-find .git/objects -type f
+git add tests/test_factura.py
 
-git cat-file -t 5c1b14949828006ed75a3e8858957f86a2f7e2eb
+git commit -m "Prueba el total sin IVA"
 
-git cat-file -p 5c1b14949828006ed75a3e8858957f86a2f7e2eb
+find .git/objects -type f | wc -l
+
+cat .git/refs/heads/main
+
+git rev-list --objects HEAD~1..HEAD

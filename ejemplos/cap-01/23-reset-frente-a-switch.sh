@@ -1,28 +1,24 @@
 # versiones: git
 source "$EJEMPLO_DIR/_facturas.sh"  # preparación
 
-facturas_historial 3  # preparación
+facturas_asistente rebase  # preparación
 
-git switch -q -c develop  # preparación
-
-f_c_tests  # preparación
-
-inicio=$(git rev-parse develop)  # preparación
+inicio=$(git rev-parse HEAD)  # preparación
 
 cat .git/HEAD
 
-git log --oneline --all --decorate
+cat .git/refs/heads/exportar-csv
 
-git reset main
+git reset --soft HEAD~2
 
 cat .git/HEAD
 
-git log --oneline --all --decorate
+cat .git/refs/heads/exportar-csv
 
 git reset -q --hard "$inicio"  # preparación
 
-git switch main
+git switch --detach HEAD~2
 
 cat .git/HEAD
 
-git log --oneline --all --decorate
+cat .git/refs/heads/exportar-csv

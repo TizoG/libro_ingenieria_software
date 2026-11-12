@@ -1,7 +1,7 @@
 # versiones: git
 source "$EJEMPLO_DIR/_facturas.sh"  # preparación
 
-facturas_historial 1  # preparación
+facturas_historial 3  # preparación
 
 cd ..  # preparación
 

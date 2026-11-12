@@ -7,6 +7,8 @@ f_c_iva  # preparación
 
 git log --oneline
 
+git diff HEAD~1 HEAD
+
 git cat-file -p HEAD~1^{tree}
 
 git cat-file -p HEAD^{tree}

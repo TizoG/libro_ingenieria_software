@@ -7,6 +7,15 @@
 # insertar_ejemplos.py), así que todos tienen la misma fecha y cada commit
 # cambia contenido o mensaje: si no, dos commits con el mismo padre, árbol y
 # mensaje tendrían el mismo hash.
+#
+# Marta Ruiz es siempre la autora del commit «Añade tests de total» (el
+# confirmador sigue siendo devOC).
+
+# Otra fecha de confirmación, solo para los rebases. Con autor, confirmador y
+# fecha fijos, un commit reaplicado sin cambios tendría el mismo hash aunque
+# Git lo reescribiera. Con esta fecha en los rebases, que un hash se conserve
+# prueba que Git no reescribió ese commit.
+FACTURAS_FECHA_REBASE="2026-01-02T12:00:00+01:00"
 
 # --- Contenido de los archivos -------------------------------------------
 
@@ -65,8 +74,7 @@ f_c_iva() {
     f_factura_v2
     f_commit "Cambia el tipo de IVA al 21 %"
 }
-# Si FACTURAS_AUTOR_TESTS tiene valor, ese nombre es el autor del commit
-# (el confirmador sigue siendo devOC).
+# Autora: Marta Ruiz. Confirmador: devOC.
 f_c_tests() {
     mkdir -p tests
     cat > tests/test_factura.py <<'EOF'
@@ -74,11 +82,7 @@ from factura import total
 def test_total_con_iva_general():
     assert total(100) == 121.0
 EOF
-    if [ -n "$FACTURAS_AUTOR_TESTS" ]; then
-        GIT_AUTHOR_NAME="$FACTURAS_AUTOR_TESTS" GIT_AUTHOR_EMAIL="marta@ejemplo.dev" f_commit "Añade tests de total"
-    else
-        f_commit "Añade tests de total"
-    fi
+    GIT_AUTHOR_NAME="Marta Ruiz" GIT_AUTHOR_EMAIL="marta@ejemplo.dev" f_commit "Añade tests de total"
 }
 f_c_readme_iva() {
     printf 'El IVA general es del 21 %%.\n' >> README.md
@@ -87,6 +91,13 @@ f_c_readme_iva() {
 f_c_redondeo() {
     f_factura_v3
     f_commit "Redondea el total a dos decimales"
+}
+# Rama «descuentos» a partir del tercer commit, con un commit; termina en main.
+f_r_descuentos() {
+    git switch -q -c descuentos || return 1
+    f_factura_descuento
+    f_commit "Empieza los descuentos" || return 1
+    git switch -q main
 }
 
 # --- Repositorios --------------------------------------------------------
@@ -106,8 +117,13 @@ facturas_historial() {
     done
 }
 
-# --- Rama exportar-csv (secciones 1.5) -----------------------------------
+# --- Rama exportar-csv (secciones 1.5 y 1.7) -------------------------------
 
+# Los cuatro commits de «El problema», sobre el tercer commit de main:
+#   A: Añade exportación a CSV
+#   B: Añade la cabecera al CSV (con un separador equivocado)
+#   C: Corrige el separador de la cabecera (corrige B)
+#   D: Prueba el formato con punto y coma (experimento que sobra)
 f_e_exportar() {
     cat > exportar.py <<'EOF'
 from factura import total
@@ -116,31 +132,83 @@ def a_csv(base):
 EOF
     f_commit "Añade exportación a CSV"
 }
-f_e_wip() {
-    echo "pendiente: separador configurable" > notas.txt
-    f_commit "WIP"
+# B: cabecera con punto y coma, que no es el separador de las filas.
+f_e_cabecera_mal() {
+    cat > exportar.py <<'EOF'
+from factura import total
+def a_csv(base):
+    return "base;total\n" + f"{base},{total(base)}"
+EOF
+    f_commit "Añade la cabecera al CSV"
 }
-# f_e_cabecera "mensaje": añade la cabecera al CSV.
+# B': la cabecera ya correcta, con el mismo mensaje que B. Es el contenido que
+# queda al fundir C en B, y el que usa facturas_divergentes.
 f_e_cabecera() {
     cat > exportar.py <<'EOF'
 from factura import total
 def a_csv(base):
     return "base,total\n" + f"{base},{total(base)}"
 EOF
-    f_commit "$1"
+    f_commit "Añade la cabecera al CSV"
 }
+# C: corrige el separador de la cabecera.
+f_e_corrige() {
+    cat > exportar.py <<'EOF'
+from factura import total
+def a_csv(base):
+    return "base,total\n" + f"{base},{total(base)}"
+EOF
+    f_commit "Corrige el separador de la cabecera"
+}
+# D: experimento que sobra.
 f_e_prueba() {
-    echo "# probando otro formato" > prueba.py
-    f_commit "Prueba descartada"
+    cat > exportar.py <<'EOF'
+from factura import total
+def a_csv(base):
+    return "base,total\n" + f"{base};{total(base)}"
+EOF
+    f_commit "Prueba el formato con punto y coma"
 }
 
-# facturas_divergentes: tres commits en main y dos en exportar-csv que salen
-# del tercero; main avanza con un cuarto commit. Termina en main.
+# facturas_exportar_csv: sobre un repositorio con tres commits, crea la rama
+# exportar-csv con A, B, C y D y se queda en ella.
+facturas_exportar_csv() {
+    git switch -q -c exportar-csv || return 1
+    f_e_exportar || return 1
+    f_e_cabecera_mal || return 1
+    f_e_corrige || return 1
+    f_e_prueba
+}
+
+# facturas_asistente [rebase]: reproduce las órdenes del asistente de «El
+# problema» sobre tres commits de main más los cuatro de exportar-csv:
+#   1. git rebase -i HEAD~4 con fixup en la línea 3 y drop en la 4 (A se
+#      conserva y B' es nuevo)
+#   2. git reset --soft HEAD~2
+#   3. git commit -m "Añade la exportación a CSV"
+# Con el argumento «rebase» se detiene tras el paso 1 (rama con A y B').
+# Crea el repositorio desde cero y termina en exportar-csv.
+facturas_asistente() {
+    facturas_historial 3 || return 1
+    facturas_exportar_csv || return 1
+    GIT_COMMITTER_DATE="$FACTURAS_FECHA_REBASE" \
+        GIT_SEQUENCE_EDITOR="sed -i -e '3s/^pick/fixup/' -e '4s/^pick/drop/'" \
+        git rebase -q -i HEAD~4 || return 1
+    if [ "$1" = "rebase" ]; then
+        return 0
+    fi
+    git reset -q --soft HEAD~2 || return 1
+    git commit -q -m "Añade la exportación a CSV"
+}
+
+# facturas_divergentes: tres commits en main y dos en exportar-csv (A y B')
+# que salen del tercero; main avanza con el cuarto commit (los tests de
+# Marta). Termina en main.
 facturas_divergentes() {
     facturas_historial 3 || return 1
     git switch -q -c exportar-csv || return 1
     f_e_exportar || return 1
-    f_e_cabecera "Añade la cabecera al CSV" || return 1
+    f_e_cabecera || return 1
     git switch -q main || return 1
     f_c_tests
 }
