@@ -4217,3 +4217,108 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   fuente: f01-29
   ancla: https://git-scm.com/docs/gitrevisions
   consultada: 2026-11-12
+
+- id: h01-831
+  hecho: La opción --no-edit de git commit usa el mensaje de commit elegido sin lanzar un editor.
+  evidencia: "--no-edit Use the selected commit message without launching an editor."
+  fuente: f01-32
+  ancla: https://git-scm.com/docs/git-commit
+  consultada: 2026-11-12
+
+- id: h01-832
+  hecho: git commit --amend --no-edit modifica un commit sin cambiar su mensaje.
+  evidencia: "For example, git commit --amend --no-edit amends a commit without changing its commit message."
+  fuente: f01-32
+  ancla: https://git-scm.com/docs/git-commit
+  consultada: 2026-11-12
+
+- id: h01-833
+  hecho: El modo strip de --cleanup elimina las líneas vacías al principio y al final, los espacios finales, los comentarios y colapsa las líneas vacías consecutivas.
+  evidencia: "strip Strip leading and trailing empty lines, trailing whitespace, commentary and collapse consecutive empty lines."
+  fuente: f01-32
+  ancla: https://git-scm.com/docs/git-commit
+  consultada: 2026-11-12
+
+- id: h01-834
+  hecho: El modo por defecto de --cleanup equivale a strip si el mensaje se va a editar y a whitespace en caso contrario.
+  evidencia: "default Same as strip if the message is to be edited. Otherwise whitespace."
+  fuente: f01-32
+  ancla: https://git-scm.com/docs/git-commit
+  consultada: 2026-11-12
+
+- id: h01-835
+  hecho: En git merge, la opción --no-edit sirve para aceptar el mensaje de fusión autogenerado, aunque en general se desaconseja.
+  evidencia: "Invoke an editor before committing successful mechanical merge to further edit the auto-generated merge message, so that the user can explain and justify the merge. The --no-edit option can be used to accept the auto-generated message (this is generally discouraged)."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-836
+  hecho: Con --cleanup=scissors y un conflicto de fusión, git merge añade la línea de tijeras a MERGE_MSG antes de pasarlo al mecanismo de commit.
+  evidencia: "if the <mode> is given a value of scissors, scissors will be appended to MERGE_MSG before being passed on to the commit machinery in the case of a merge conflict."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-837
+  hecho: La documentación de git log presenta --pretty[=<formato>] y --format=<formato> juntas, en una misma entrada que imprime el contenido de los logs de commits en un formato dado.
+  evidencia: "--pretty[=<format>] --format=<format> Pretty-print the contents of the commit logs in a given format"
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-838
+  hecho: fuller es uno de los valores que puede tomar el formato de --pretty y --format, junto con oneline, short, medium, full, reference, email y raw.
+  evidencia: "where <format> can be one of oneline, short, medium, full, fuller, reference, email, raw, format:<string> and tformat:<string>."
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-839
+  hecho: El formato fuller muestra el hash del commit, el autor con su fecha de autoría y el committer con su fecha de commit.
+  evidencia: "fuller commit <hash> Author: <author> AuthorDate: <author-date> Commit: <committer> CommitDate: <committer-date>"
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-840
+  hecho: Con --first-parent, al encontrar un commit de fusión git log sigue solo el primer padre para decidir qué commits incluir.
+  evidencia: "When finding commits to include, follow only the first parent commit upon seeing a merge commit."
+  fuente: f01-30
+  ancla: https://git-scm.com/docs/git-log
+  consultada: 2026-11-12
+
+- id: h01-841
+  hecho: En una fusión confirmada, el primer padre es la rama en la que se estaba al fusionar y el segundo es el commit de la rama que se fusionó.
+  evidencia: "El primer padre es la rama en el que se estaba al momento de fusionar, y el segundo es el “commit” en la rama en la que se fusionó"
+  fuente: f01-28
+  ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Revisi%C3%B3n-por-selecci%C3%B3n
+  consultada: 2026-11-12
+
+- id: h01-842
+  hecho: La opción --quiet de git rebase (-q) silencia la salida e implica --no-stat.
+  evidencia: "--quiet Be quiet. Implies --no-stat."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-843
+  hecho: git diff <commit> <commit> sirve para ver los cambios entre dos commits cualesquiera.
+  evidencia: "git diff [<options>] [--merge-base] <commit> <commit> [--] [<path>...] This is to view the changes between two arbitrary <commit>."
+  fuente: f01-33
+  ancla: https://git-scm.com/docs/git-diff
+  consultada: 2026-11-12
+
+- id: h01-844
+  hecho: git diff <commit>..<commit> es sinónimo de la forma sin los dos puntos para ver los cambios entre dos commits cualesquiera.
+  evidencia: "git diff [<options>] <commit>..<commit> [--] [<path>...] This is synonymous to the earlier form (without the ..) for viewing the changes between two arbitrary <commit>."
+  fuente: f01-33
+  ancla: https://git-scm.com/docs/git-diff
+  consultada: 2026-11-12
+
+- id: h01-845
+  hecho: En el ejemplo de git hash-object -w --stdin, la opción --stdin indica al comando que lea desde la entrada estándar.
+  evidencia: "echo 'test content' | git hash-object -w --stdin d670460b4b4aece5915caf5c68d12f560a9fe3e4 La opción -w indica a hash-object que ha de guardar el objeto; de otro modo, el comando solo te respondería cual sería su clave. La opción --stdin indica al comando de leer desde la entrada estándar stdin"
+  fuente: f01-12
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Los-objetos-Git
+  consultada: 2026-11-12
