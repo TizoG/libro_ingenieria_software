@@ -1,0 +1,8 @@
+{
+  "name": "libro-devoc-verificacion",
+  "private": true,
+  "description": "Herramientas de verificación del libro que necesitan Node (validar diagramas Mermaid).",
+  "devDependencies": {
+    "mermaid": "11.4.1"
+  }
+}

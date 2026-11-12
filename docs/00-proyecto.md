@@ -221,8 +221,9 @@ El borrador vive en `investigacion/cap-XX/borrador.md`, no en `contenido/`. `scr
 | `informe_capitulo.py N` | Sección 8 | Métricas del capítulo; `--guardar` las escribe en `docs/estado.md` |
 | `compilar_capitulo.py N` | 7 | Borrador → `contenido/` |
 | `validar_contrato.py` | 7 | `contenido/` cumple `docs/06-contrato-con-la-web.md` |
+| `validar_mermaid.js rutas` (Node) | Revisión | Renderiza cada bloque ```` ```mermaid ```` con Chromium y falla si alguno está roto; requiere `npm install` |
 
-Dependencias en `requirements.txt` (Python 3.13). Tests: `python -m pytest -q`.
+Dependencias en `requirements.txt` (Python 3.13) y `package.json` (solo Mermaid, para `validar_mermaid.js`). Tests: `python -m pytest -q`.
 
 ### Por qué esta separación
 
