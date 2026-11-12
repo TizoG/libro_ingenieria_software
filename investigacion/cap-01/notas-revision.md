@@ -10,3 +10,6 @@ Cosas detectadas durante la redacción que no son PENDIENTES pero hay que mirar.
 - **1.2 → 1.6.** El «Ojo con la versión» de 1.2 promete contar «por qué se eligió SHA-256»; los hechos solo dicen por qué dejar SHA-1 y que SHA-256 se eligió entre candidatos. Cambiar 1.2 a «por qué Git busca un sucesor de SHA-1».
 - **1.6, packfiles.** Hay un PENDIENTE sobre *packfiles*, pero la decisión 7 deja ese tema fuera. En la pasada final: quitarlo, o consultar a devOC si se da de alta Pro Git 10.4 para una sola frase.
 - **Extensión tras 1.6:** 8.531 sin ids. Quedan 1.7 y el cierre; habrá que recortar en la pasada final (lista de recortes del esquema, decisión 9).
+- **El problema (apertura) frente a 1.7.** El asistente da `rebase -i`, `reset --soft HEAD~2` y `push --force`, sin un `git commit` tras el reset; la 1.7 dice que el reset «era solo la primera mitad de aplastar». Añadir el commit a la lista de «El problema» o hacerlo explícito.
+- **1.7, h01-732.** Se aplica por analogía al ejemplo 21 (misma forma que el de Pro Git). El revisor debe mirarlo.
+- **Extensión tras 1.7:** 9.728 sin ids, sin el cierre. Hará falta recortar unas 1.000 palabras en la pasada final.

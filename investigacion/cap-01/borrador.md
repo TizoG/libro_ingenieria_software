@@ -1160,3 +1160,179 @@ Caso límite: dos archivos con nombres distintos e idéntico contenido. Son un s
 > **Error típico.** Editar a mano `.git/HEAD` o los archivos de `.git/refs`. Técnicamente basta con escribir un hash en un archivo de `refs/heads` [h01-655], pero no es conveniente: usa `git update-ref` y `git symbolic-ref`, que son más seguros [h01-657, h01-658, h01-669]. `symbolic-ref`, por ejemplo, no te deja fijar una referencia simbólica fuera de `refs` [h01-672].
 
 > **Ojo con la versión.** ¿Por qué busca Git un sucesor de SHA-1? El 23 de febrero de 2017, el ataque SHAttered demostró una colisión práctica de SHA-1 [h01-288]. Desde la 2.13.0, Git usa por defecto una implementación reforzada que lo resiste, pero SHA-1 sigue siendo débil y se considera prudente dejarlo atrás [h01-289, h01-290, h01-291]. A finales de 2018 el proyecto eligió SHA-256 entre varios candidatos [h01-292]. Aun así, `git init` sigue usando SHA-1 por defecto y los dos formatos no interoperan por ahora [h01-280, h01-283]: el cálculo del ejemplo 17 es el de tus repositorios [h01-294].
+
+## 1.7 reset sin miedo
+
+`git reset` mueve la rama a la que apunta `HEAD` y después puede copiar ese commit al índice y el índice al directorio de trabajo: `--soft` se para tras el primer paso, `--mixed` tras el segundo y `--hard` da los tres [h01-717, h01-718, h01-720, h01-724, h01-725, h01-728, h01-729]. Solo `--hard` es peligroso, porque sobrescribe tus archivos, y aun así lo confirmado se recupera, normalmente con el *reflog* (registro de referencias) [h01-730, h01-731, h01-345, h01-784, h01-774].
+
+Pro Git explica `reset` con tres árboles, entendidos como colecciones de archivos [h01-701, h01-702]. Ya los conoces: `HEAD`, la última instantánea confirmada; el índice, la que propones para el próximo commit, y el directorio de trabajo, los archivos reales que editas [h01-703, h01-704, h01-708].
+
+```mermaid
+flowchart LR
+    H["HEAD → rama"] -- "1. mover la rama" --> C(("commit destino"))
+    C -- "2. copiar al índice" --> I["Índice"]
+    I -- "3. copiar al directorio" --> W["Directorio de trabajo"]
+    C -.- S["--soft: se para aquí"]
+    I -.- M["--mixed, por defecto: se para aquí"]
+    W -.- D["--hard: llega hasta aquí"]
+```
+
+El primer paso no cambia `HEAD`, que sigue señalando la misma rama: lo que se mueve es la rama [h01-718]. El ejemplo suma a los dos commits de la sección 1.2 uno que redondea el total y prueba los tres modos con `HEAD~`; entre uno y otro reconfirma el redondeo sin enseñarlo.
+
+<!-- ejemplo: ejemplos/cap-01/21-reset-tres-modos.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git log --oneline
+0fdde2b Redondea el total a dos decimales
+d382532 Cambia el tipo de IVA al 21 %
+ce4f8a1 Primera versión de la factura
+$ git reset --soft HEAD~
+$ git status -s
+M  factura.py
+$ git reset HEAD~
+Unstaged changes after reset:
+M	factura.py
+$ git status -s
+ M factura.py
+$ git reset --hard HEAD~
+HEAD is now at d382532 Cambia el tipo de IVA al 21 %
+$ git status -s
+$ cat factura.py
+IVA = 0.21
+def total(base, iva=IVA):
+    """Calcula el total de una factura."""
+    return base * (1 + iva)
+$ git log --oneline
+d382532 Cambia el tipo de IVA al 21 %
+ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+Tras `--soft`, `main` vuelve a `d382532`, pero el índice y el directorio de trabajo conservan el redondeo [h01-720, h01-722]. Como el índice ya no coincide con `HEAD`, `git status -s` lo da como preparado, `M ` [h01-715, h01-250]. Has deshecho el último commit y nada más [h01-721]; si retocas el índice y confirmas, logras lo mismo que con `--amend` [h01-723].
+
+El reset sin opción es `--mixed` [h01-726]: tras mover la rama, copia al índice la instantánea de `d382532` y se para [h01-724, h01-725]. Deshace el commit y saca todo del área de preparación [h01-727]. El cambio queda en ` M`, solo en disco [h01-714].
+
+`--hard` da el tercer paso: el directorio de trabajo se iguala al índice [h01-728]. `git status -s` sale vacío, porque los tres árboles coinciden [h01-713], y `cat` enseña la versión sin redondeo. Ha deshecho el commit, el `git add` previo y lo que tenías en el directorio de trabajo [h01-729]. Los otros modos se deshacen con facilidad; este no, porque sobrescribe a la fuerza tus archivos [h01-731].
+
+Con una ruta, `reset` se salta el primer paso y aplica el resto solo a esos archivos [h01-734]. Tiene sentido: `HEAD` es un puntero y no puede señalar un trozo de un commit y otro trozo de otro [h01-735]. `git reset factura.py` abrevia `git reset --mixed HEAD factura.py`: copia el archivo de `HEAD` al índice, lo que en la práctica lo saca del área de preparación [h01-736, h01-737, h01-738]. Es exactamente lo contrario de `git add` [h01-739], y equivale a `git restore --staged`, que devuelve el archivo del índice a su versión de `HEAD` [h01-354, h01-356, h01-361]. El ejemplo lo comprueba y después pide la versión de un commit concreto [h01-740].
+
+<!-- ejemplo: ejemplos/cap-01/22-reset-con-ruta.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ echo "IVA_REDUCIDO = 0.10" >> factura.py
+$ git add factura.py
+$ git reset factura.py
+Unstaged changes after reset:
+M	factura.py
+$ git status -s
+ M factura.py
+$ git add factura.py
+$ git restore --staged factura.py
+$ git status -s
+ M factura.py
+$ git reset HEAD~2 factura.py
+Unstaged changes after reset:
+M	factura.py
+$ git status -s
+MM factura.py
+$ git log --oneline
+0fdde2b Redondea el total a dos decimales
+d382532 Cambia el tipo de IVA al 21 %
+ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+`git reset factura.py` y `git restore --staged factura.py` dejan el mismo ` M`. `git reset HEAD~2 factura.py` mete en el índice el `factura.py` de `ce4f8a1`, con el IVA del 20 %, sin tocar el disco ni la rama [h01-740, h01-759]. El índice difiere de `HEAD` y del directorio de trabajo, de ahí el `MM` [h01-715, h01-714], y `git log` sigue empezando en `0fdde2b`.
+
+`--soft` tiene otro uso. Si tu rama acaba en commits como «WIP» u «oops», puedes aplastarlos en uno [h01-773]. `git reset --soft HEAD~2` lleva la rama al primer commit que quieres conservar, y un `git commit` confirma de una vez lo que sigue en el índice [h01-741, h01-742, h01-755]. Es la alternativa al `fixup` de la sección 1.5.
+
+Cambiar de rama también actualiza los tres árboles [h01-716]. Pro Git compara `git checkout <rama>`, el cambio de rama que hoy hace `git switch`, con `git reset --hard <rama>` [h01-744, h01-479, h01-471]. Hay dos diferencias. `checkout` comprueba que no pisa archivos con cambios, igual que `git switch`, y `reset --hard` lo reemplaza todo sin mirar [h01-745, h01-476, h01-746]. Además, `reset` mueve la rama a la que apunta `HEAD`, y `checkout` mueve `HEAD` a otra rama [h01-747]. El ejemplo parte de `develop`, un commit por delante de `main`.
+
+<!-- ejemplo: ejemplos/cap-01/23-reset-frente-a-switch.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ cat .git/HEAD
+ref: refs/heads/develop
+$ git log --oneline --all --decorate
+7971f23 (HEAD -> develop) Añade tests de total
+c87074a (main) Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git reset main
+$ cat .git/HEAD
+ref: refs/heads/develop
+$ git log --oneline --all --decorate
+c87074a (HEAD -> develop, main) Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git switch main
+Switched to branch 'main'
+$ cat .git/HEAD
+ref: refs/heads/main
+$ git log --oneline --all --decorate
+7971f23 (develop) Añade tests de total
+c87074a (HEAD -> main) Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+`git reset main` deja `.git/HEAD` igual, pero `develop` pasa a `c87074a`, el commit de `main`, y `7971f23` se queda sin rama [h01-748]. Con `develop` devuelta a `7971f23` sin enseñarlo, `git switch main` no la toca: lo que cambia es `.git/HEAD` [h01-749].
+
+En la tabla, la columna «Mueve» dice si el comando mueve la rama a la que apunta `HEAD` o el propio `HEAD` [h01-753]; si la última dice «no», piénsalo antes de ejecutar [h01-754].
+
+| Comando | Mueve | Índice | Directorio de trabajo | Protege el directorio de trabajo |
+| --- | --- | --- | --- | --- |
+| `git reset --soft <commit>` | la rama | no | no | sí [h01-755] |
+| `git reset <commit>` | la rama | sí | no | sí [h01-756] |
+| `git reset --hard <commit>` | la rama | sí | sí | no [h01-757] |
+| `git checkout <commit>` | `HEAD` | sí | sí | sí [h01-758] |
+| `git reset [<commit>] <archivo>` | nada | sí | no | sí [h01-759] |
+| `git checkout [<commit>] <archivo>` | nada | sí | sí | no [h01-760] |
+
+Fíjate en la última fila. Con ruta, `checkout` tampoco mueve `HEAD`, pero copia el archivo al índice y también al directorio de trabajo, sin proteger tus cambios [h01-750, h01-751, h01-752].
+
+La sección 1.4 rescató con el reflog un experimento; ahora toca el caso típico que cita Pro Git, un `reset --hard` que abandona commits [h01-781].
+
+<!-- ejemplo: ejemplos/cap-01/24-recuperar-con-reflog.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git reset --hard HEAD~2
+HEAD is now at c87074a Cambia el tipo de IVA al 21 %
+$ git log --oneline
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git reflog
+c87074a HEAD@{0}: reset: moving to HEAD~2
+9af4ac5 HEAD@{1}: commit: Documenta el IVA en el README
+7971f23 HEAD@{2}: commit: Añade tests de total
+c87074a HEAD@{3}: commit: Cambia el tipo de IVA al 21 %
+c2466c3 HEAD@{4}: commit: Añade un ejemplo de uso al README
+ce4f8a1 HEAD@{5}: commit (initial): Primera versión de la factura
+$ git branch recuperada HEAD@{1}
+$ git log --oneline recuperada
+9af4ac5 Documenta el IVA en el README
+7971f23 Añade tests de total
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git branch -D recuperada
+Deleted branch recuperada (was 9af4ac5).
+$ rm -rf .git/logs
+$ git fsck --full
+dangling commit 9af4ac5a6255e33eac352d96f4dcfb0c3fc89886
+```
+<!-- /ejemplo -->
+
+Tras el reset, `git log` ha perdido `9af4ac5` y `7971f23`, porque ninguna rama los alcanza [h01-782]. Como en la sección 1.5, hay que localizar el hash y ponerle una rama [h01-783]. El reflog cubre todas las acciones recientes [h01-778]: su primera línea es el propio reset, y `HEAD@{1}`, la posición anterior, `9af4ac5` [h01-775]. `git branch recuperada HEAD@{1}` le pone nombre, y el log vuelve a enseñar los dos commits [h01-788, h01-789]. `git log -g` da lo mismo con el formato de `git log` [h01-787].
+
+¿Y si el reflog ya no lo tiene? `git reflog expire` poda las entradas antiguas, por defecto las de más de 90 días [h01-779, h01-780], y el reflog vive en `.git/logs/` [h01-790]. El final del ejemplo borra esa carpeta y la rama `recuperada`. Queda `git fsck`, que comprueba la integridad de la base de datos: con `--full` lista los objetos sin referencias, y el commit perdido aparece tras `dangling commit` [h01-791, h01-792, h01-793]. Se recupera igual, con una rama [h01-793]. Si nada lo referencia, la recolección de basura acabará borrándolo [h01-485].
+
+> **Error típico.** Lanzar `git reset --hard` con cambios sin confirmar. Es la única forma peligrosa de `reset` y no comprueba nada [h01-730, h01-746]. En el ejemplo 21 el redondeo estaba confirmado y el reflog lo recuerda [h01-786, h01-732]; si no lo hubieras confirmado, sería irrecuperable [h01-733]. Confirma antes lo que quieras conservar [h01-345].
+
+> **Ojo con la versión.** La tabla de Pro Git usa `checkout` para las dos cosas que hoy hacen `git switch` y `git restore` (sección 1.4) [h01-479]. Su última fila es lo que hoy escribes como `git restore --source <commit> --staged --worktree <archivo>` [h01-358, h01-355, h01-362].
+
+Ya puedes cerrar «El problema». `git rebase -i HEAD~4` creó commits nuevos (sección 1.5). `git reset --soft HEAD~2` llevó tu rama dos commits atrás sin tocar el índice ni el directorio de trabajo: los cambios de esos commits quedaron preparados, listos para confirmarse juntos [h01-741, h01-755, h01-828, h01-715]. Era solo la primera mitad de aplastar: con un `git commit` detrás, dos commits pasan a ser uno [h01-742, h01-773]. Y `git push --force` sobrescribió la historia del servidor [h01-522]. Ningún commit se borró: los que quedaron sin rama siguen localizables en tu reflog [h01-768, h01-774, h01-783, h01-784].
+
+En la revisión, defiende el modelo. `reset` mueve una rama y, según el modo, copia al índice y al directorio de trabajo; solo `--hard` destruye datos, y solo los que no confirmaste [h01-718, h01-730, h01-733, h01-345]. Lo que rompió el trabajo de tu compañera fue reescribir una rama sobre la que ella ya trabajaba [h01-591]. Para deshacer algo publicado, la próxima vez, `git revert` [h01-535, h01-594].
