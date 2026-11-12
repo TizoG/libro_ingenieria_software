@@ -129,3 +129,21 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 
 ## Informes de métricas
 
+<!-- informe:cap-01 -->
+### Capítulo 1 (informe del 2026-11-12)
+
+| Métrica | Valor | Objetivo |
+| --- | --- | --- |
+| Frases técnicas sin id de hecho | 0 | 0 |
+| Evidencias que no aparecen en su fuente (y ids mal citados) | 0 | 0 |
+| Ejemplos que fallan al ejecutarse | 0 | 0 |
+| Frases NO SOPORTADAS o PARCIALES sin resolver | 0 | 0 |
+| PENDIENTES abiertos | 1 | visibles y comunicados |
+| Párrafos sin ningún id (pista) | 9 | revisar |
+| Hechos válidos | 613 | |
+| Ejemplos | 23 (sin ejecutar) | |
+| Palabras | 10307 | 5.000 a 10.000 |
+
+- Falta el informe de revisión (`revision.md`): las métricas 1 y 4 no son fiables.
+Puede pasar a «revisado»: **no**.
+<!-- /informe:cap-01 -->

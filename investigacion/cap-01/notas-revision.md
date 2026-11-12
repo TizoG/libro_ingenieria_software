@@ -1,5 +1,7 @@
 # Notas para la pasada final y la revisión del capítulo 1
 
+**Pasada final (2026-11-12):** resueltos el hilo de autoría (frase en 1.3), la promesa de SHA-256 en 1.2, el commit que faltaba en «El problema», el PENDIENTE de packfiles (quitado) y la extensión (9.563 sin ids). Quedan abiertas las notas del cierre (ejercicios) para las soluciones y `_parte.md`, y el ejemplo 20, que ya no se usa.
+
 Cosas detectadas durante la redacción que no son PENDIENTES pero hay que mirar.
 
 - **Hilo de `facturas` (1.3 frente a 1.5).** En la 1.3, el commit «Añade tests de total» es de Marta Ruiz (`795693a`); en los ejemplos 11, 12 y 15 lo crea devOC (`7971f23`) y el quinto commit del 15 es `9af4ac5`, no `938b805`. Decidir si se unifica el autor en `_facturas.sh` (cambian hashes citados en la prosa y diagramas de 1.5: `7971f23`, `649bb22`, `f8f6c01`, `4b2e63c`, `15aa51f`) o se acepta y se dice en el texto.
