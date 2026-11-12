@@ -192,11 +192,36 @@ Siempre con el mismo nombre, escritos como cita Markdown con título en negrita 
 │   │   ├── cap-01-git-por-dentro.md
 │   │   └── soluciones.md
 │   └── 99-apendices/
-├── investigacion/                # hechos.md por capítulo (no se publica)
+├── investigacion/                # Trabajo por capítulo (no se publica)
+│   └── cap-01/
+│       ├── fuentes.yaml          # Fuentes del capítulo: id fNN-MM, título y URL
+│       ├── hechos.md             # Hechos atómicos con evidencia literal
+│       ├── esquema.md            # Esquema que aprueba devOC
+│       ├── borrador.md           # Borrador con ids [h01-003] y marcas de ejemplo
+│       └── revision.md           # Informe del revisor (veredicto por frase)
 ├── fuentes-cache/                # Copias locales de las fuentes (en .gitignore)
 ├── ejemplos/                     # Código ejecutable de cada capítulo
-└── scripts/                      # Verificación: evidencias, ejemplos, ids, enlaces, informe
+├── scripts/                      # Verificación: evidencias, ejemplos, ids, enlaces, informe
+├── tests/                        # Tests de los scripts (pytest)
+└── .claude/agents/               # Subagentes del flujo (sección 7)
 ```
+
+El borrador vive en `investigacion/cap-XX/borrador.md`, no en `contenido/`. `scripts/compilar_capitulo.py` lo convierte en el archivo publicable de `contenido/`: cambia los ids de hechos por referencias numeradas, genera `## Fuentes`, quita las marcas de ejemplo y valida el contrato. Así `contenido/` nunca contiene marcas internas.
+
+### Scripts
+
+| Script | Cortafuegos o fase | Qué hace |
+| --- | --- | --- |
+| `descargar_fuentes.py N` | 1 | Descarga las fuentes de `fuentes.yaml` a `fuentes-cache/` con fecha y huella; `--comprobar` avisa si una página cambió |
+| `verificar_evidencias.py N` | 2 | Rechaza los hechos cuya evidencia no está literalmente en la copia local, o cuya fuente no está autorizada |
+| `insertar_ejemplos.py borrador` | 3 | Ejecuta los ejemplos e inserta código y salida real; `--comprobar` falla si algo cambió |
+| `comprobar_ids.py N` | Redacción cerrada | Cada id citado existe y pasa el cortafuegos 2 |
+| `comprobar_enlaces.py rutas` | Revisión | Enlaces relativos y anclas existen; URLs externas autorizadas; `--red` las pide |
+| `informe_capitulo.py N` | Sección 8 | Métricas del capítulo; `--guardar` las escribe en `docs/estado.md` |
+| `compilar_capitulo.py N` | 7 | Borrador → `contenido/` |
+| `validar_contrato.py` | 7 | `contenido/` cumple `docs/06-contrato-con-la-web.md` |
+
+Dependencias en `requirements.txt` (Python 3.13). Tests: `python -m pytest -q`.
 
 ### Por qué esta separación
 

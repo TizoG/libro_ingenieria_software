@@ -1,0 +1,7 @@
+# Copias locales de las fuentes: verificación privada, no se publica (cortafuegos 1)
+fuentes-cache/
+
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

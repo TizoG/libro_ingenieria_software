@@ -15,6 +15,12 @@ Antes de cualquier tarea nueva, lee `docs/00-proyecto.md` y `docs/05-metodo-sin-
 - `docs/06-contrato-con-la-web.md`: formato que debe cumplir `contenido/`.
 - `docs/estado.md`: tablero de progreso; actualízalo al cambiar el estado de un capítulo.
 
+## Archivos de trabajo y scripts
+
+- Por capítulo, en `investigacion/cap-XX/`: `fuentes.yaml`, `hechos.md`, `esquema.md`, `borrador.md` y `revision.md`. El borrador nunca va a `contenido/`; lo convierte `scripts/compilar_capitulo.py`.
+- Scripts en `scripts/` (uso con `--help`; tabla en `docs/00-proyecto.md`, sección 5). Tests con `python -m pytest -q`; deben pasar antes de cada commit que toque `scripts/`.
+- Subagentes en `.claude/agents/`: investigador, programador, redactor, revisor-tecnico, revisor-de-fuentes y mecanico.
+
 ## Reglas que no se rompen
 
 1. El modelo propone y los scripts verifican. Ninguna afirmación técnica sin un hecho de `investigacion/cap-XX/hechos.md` con evidencia literal validada por `scripts/verificar_evidencias.py`.
