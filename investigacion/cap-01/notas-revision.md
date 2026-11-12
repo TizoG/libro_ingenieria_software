@@ -7,3 +7,6 @@ Cosas detectadas durante la redacción que no son PENDIENTES pero hay que mirar.
 - **Esquema, 1.5.** `exec` no es nuevo (Pro Git en español ya lo lista); la lista de tareas del 13 se filtra con `grep` y no muestra los comandos.
 - **Hashes en la prosa.** Están copiados de la salida real; si cambia un ejemplo o `_facturas.sh`, hay que revisarlos (insertar_ejemplos `--comprobar` no los detecta).
 - **Extensión.** Tras 1.5 el cuerpo va por 7.240 (contador con ids); objetivo total ≤ 10.000 de prosa.
+- **1.2 → 1.6.** El «Ojo con la versión» de 1.2 promete contar «por qué se eligió SHA-256»; los hechos solo dicen por qué dejar SHA-1 y que SHA-256 se eligió entre candidatos. Cambiar 1.2 a «por qué Git busca un sucesor de SHA-1».
+- **1.6, packfiles.** Hay un PENDIENTE sobre *packfiles*, pero la decisión 7 deja ese tema fuera. En la pasada final: quitarlo, o consultar a devOC si se da de alta Pro Git 10.4 para una sola frase.
+- **Extensión tras 1.6:** 8.531 sin ids. Quedan 1.7 y el cierre; habrá que recortar en la pasada final (lista de recortes del esquema, decisión 9).

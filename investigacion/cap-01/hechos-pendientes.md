@@ -17,3 +17,6 @@ Se extraen en `secciones/9-adicionales.md` (ids desde h01-809) y después el red
 | 1.4 | Por qué el mensaje del merge conserva el bloque `# Conflicts:` | Documentación de `git commit` (no está en el mapa) |
 | 1.5 | `git rebase -q` / `--quiet` | f01-23, líneas 285-286 («--quiet / Be quiet. Implies --no-stat.») |
 | 1.5 | `git diff <rama> <rama>` (diff vacío entre dos ramas) | Documentación de `git diff` (no está en el mapa) |
+| 1.6 | Modo `040000` de una entrada de árbol que es carpeta | Solo en salidas de ejemplo de f01-12; haría falta otra fuente |
+| 1.6 | *Packfiles* (por qué un clon no muestra objetos sueltos) | Pro Git 10.4 (no está en el mapa; tema fuera de alcance según la decisión 7) |
+| 1.6 | `git hash-object --stdin` | f01-12, justo antes de la evidencia de h01-619 |

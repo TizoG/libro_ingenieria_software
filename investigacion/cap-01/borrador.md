@@ -949,3 +949,214 @@ El primer commit se aplica; el segundo, `cfbac44`, choca, y Git se detiene con e
 > **Ojo con la versión.** Pro Git en español enseña `pick`, `reword`, `edit`, `squash` y `fixup`, y descarta un commit borrando su línea [h01-548, h01-549, h01-550, h01-551, h01-552, h01-554]. La documentación actual añade, entre otras, `drop`, `break` y la variante `fixup -c` [h01-580, h01-578, h01-582]. El ejemplo 13 usa `drop` con Git 2.43.
 
 > PENDIENTE: falta fuente para «En un proyecto real» (cómo integran sus PR gentle-shell y FastAPI); llegará con las guías de contribución del capítulo 2.
+
+## 1.6 Bajo el capó: objetos y referencias
+
+Por debajo, Git es un almacén de clave y valor: le das un contenido y te devuelve una clave, su hash, para recuperarlo cuando quieras [h01-615, h01-616, h01-619]. Ahí guarda cuatro tipos de objeto que no cambian, y encima pone referencias que sí cambian; cada comando de Git añade objetos y añade o mueve referencias [h01-673, h01-766, h01-768].
+
+Pro Git lo describe como un sistema de archivos direccionable por contenido con una interfaz de control de versiones construida encima [h01-601]. Sus comandos son de dos familias: los de porcelana, más amigables, y los de fontanería, de bajo nivel, que se encadenan al estilo UNIX y muchas veces no están pensados para teclearlos a mano, sino para scripts [h01-602, h01-603, h01-604]. Con los de fontanería vas a confirmar el modelo que has ido montando: objetos inmutables nombrados por su contenido y nombres mutables que apuntan a ellos [h01-214, h01-765, h01-766].
+
+```mermaid
+flowchart TB
+    H["HEAD"] -- "ref:" --> M["refs/heads/main"]
+    M --> C4(("7971f23"))
+    C4 -- padre --> C3(("c87074a"))
+    C3 -- padre --> C2(("c2466c3"))
+    C2 -- padre --> C1(("ce4f8a1"))
+    V1["refs/tags/v1.0"] --> E{{"etiqueta dc01a82"}}
+    E --> C3
+    V0["refs/tags/v0.1"] --> C1
+    C4 -- árbol --> A4["árbol 49049ff"]
+    C3 -- árbol --> A3["árbol de c87074a"]
+    A4 --> G["blob .gitignore"]
+    A4 --> R["blob README.md"]
+    A4 --> F["blob factura.py"]
+    A4 --> T["árbol tests"]
+    T --> P["blob test_factura.py"]
+    A3 --> G
+    A3 --> R
+    A3 --> F
+```
+
+`7971f23` es el commit «Añade tests de total» de la sección 1.5. El árbol de su padre no tiene `tests/` y apunta a los mismos tres archivos, porque no cambiaron [h01-204].
+
+Empieza por el almacén vacío: el ejemplo crea un repositorio, mira dentro de `.git`, guarda `hola` con `git hash-object` y lo recupera con `git cat-file`.
+
+<!-- ejemplo: ejemplos/cap-01/16-dentro-de-git.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git init facturas
+Initialized empty Git repository in /tmp/ejemplo/facturas/.git/
+$ cd facturas
+$ ls .git
+HEAD
+branches
+config
+description
+hooks
+info
+objects
+refs
+$ find .git/objects -type f
+$ echo 'hola' | git hash-object -w --stdin
+5c1b14949828006ed75a3e8858957f86a2f7e2eb
+$ find .git/objects -type f
+.git/objects/5c/1b14949828006ed75a3e8858957f86a2f7e2eb
+$ git cat-file -t 5c1b14949828006ed75a3e8858957f86a2f7e2eb
+blob
+$ git cat-file -p 5c1b14949828006ed75a3e8858957f86a2f7e2eb
+hola
+```
+<!-- /ejemplo -->
+
+De lo que lista `ls .git`, cuatro entradas importan: los archivos `HEAD` e `index` y las carpetas `objects` y `refs` [h01-610]. `index`, el del área de preparación, aún no aparece [h01-614]. `objects` guarda el contenido de la base de datos, y `refs`, los punteros a los commits [h01-611, h01-612]. El primer `find` no encuentra nada.
+
+`git hash-object` es un comando de fontanería que guarda datos en `.git` y te devuelve su clave, una suma de 40 caracteres [h01-617, h01-619]. Con `-w` guarda el objeto; sin ella, solo te diría qué clave tendría [h01-618]. El segundo `find` enseña dónde ha ido: un archivo por objeto, en una subcarpeta con los dos primeros caracteres del hash, `5c`, y los 38 restantes como nombre [h01-621, h01-622]. `cat-file -t` te da el tipo de un objeto a partir de su clave, y `-p`, su contenido [h01-625, h01-624]. El tipo es *blob* (objeto binario grande): guarda solo el contenido, sin nombre de archivo [h01-626, h01-627].
+
+¿De dónde sale exactamente `5c1b149`? Git antepone al contenido una cabecera: el tipo de objeto, un espacio, el tamaño del contenido y un byte nulo [h01-645, h01-646]. Calcula el SHA-1 del conjunto y lo comprime todo con zlib [h01-620, h01-647, h01-648]. El ejemplo hace el cálculo en Python, lo compara con Git y descomprime el archivo guardado.
+
+<!-- ejemplo: ejemplos/cap-01/17-hash-a-mano.py -->
+```python
+# Ejecutado con Python 3.13.18, Git 2.43.0
+import hashlib
+import subprocess
+import zlib
+
+contenido = b"hola\n"
+subprocess.run(["git", "init", "-q", "repo"], check=True)
+
+cabecera = b"blob %d\0" % len(contenido)
+a_mano = hashlib.sha1(cabecera + contenido).hexdigest()
+git = subprocess.run(["git", "hash-object", "-w", "--stdin"], cwd="repo", input=contenido,
+                     capture_output=True, check=True).stdout.decode().strip()
+print("a mano:", a_mano)
+print("git:   ", git)
+print("iguales:", a_mano == git)
+
+ruta = f"repo/.git/objects/{git[:2]}/{git[2:]}"
+with open(ruta, "rb") as archivo:
+    descomprimido = zlib.decompress(archivo.read())
+print("archivo:", ruta)
+print("contenido:", descomprimido)
+```
+
+```text
+a mano: 5c1b14949828006ed75a3e8858957f86a2f7e2eb
+git:    5c1b14949828006ed75a3e8858957f86a2f7e2eb
+iguales: True
+archivo: repo/.git/objects/5c/1b14949828006ed75a3e8858957f86a2f7e2eb
+contenido: b'blob 5\x00hola\n'
+```
+<!-- /ejemplo -->
+
+Los dos hashes coinciden. `hola` y su salto de línea ocupan cinco bytes; de ahí `blob 5` [h01-646]. Descomprimido, el archivo es la cabecera, con su byte nulo (`\x00`), y el contenido [h01-646, h01-648]. Árboles y commits se guardan igual, con `tree` o `commit` en la cabecera [h01-649, h01-650]; detrás, un blob admite casi cualquier cosa, y un árbol o un commit siguen un formato interno concreto [h01-651].
+
+Mira ese formato en `facturas` con cuatro commits: el ejemplo baja del commit de `HEAD` a su árbol, al subárbol `tests` y al blob del test.
+
+<!-- ejemplo: ejemplos/cap-01/18-arbol-y-commit.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git cat-file -p HEAD
+tree 49049ff53a78a6c89a52640220800608fc6140d5
+parent c87074a060dbf507d64ec3e5e304398bd8e17de3
+author devOC <devoc@ejemplo.dev> 1767265200 +0100
+committer devOC <devoc@ejemplo.dev> 1767265200 +0100
+
+Añade tests de total
+$ git cat-file -p HEAD^{tree}
+100644 blob 7a60b85e148f80966a550e5ab6a762a907c69ca6	.gitignore
+100644 blob 866692569556ca36d04daf1b94ed88ee9e03606f	README.md
+100644 blob 8ff14bec51fd28b8c6601ab9bcafa262cae0cbdb	factura.py
+040000 tree e11b3b861512536ee23c90a2742f7f968593a4a7	tests
+$ git cat-file -p e11b3b861512536ee23c90a2742f7f968593a4a7
+100644 blob 549689f79d442dbb2706af1b1c4bf69f0cbc3ef3	test_factura.py
+$ git cat-file -p 549689f79d442dbb2706af1b1c4bf69f0cbc3ef3
+from factura import total
+def test_total_con_iva_general():
+    assert total(100) == 121.0
+```
+<!-- /ejemplo -->
+
+Esto ya lo viste en la sección 1.4; ahora lo ves por dentro. El commit guarda el árbol con el estado del proyecto, su padre, el autor y el confirmador, una línea en blanco y el mensaje [h01-638, h01-570, h01-640]. `1767265200 +0100` es la marca de tiempo que acompaña al nombre y al correo [h01-639].
+
+El árbol guarda los nombres y agrupa los archivos; corresponde a una carpeta [h01-628, h01-629]. `tests` no es un blob, sino un puntero a otro árbol: así se anidan las carpetas [h01-630, h01-632]. Además del `100644` de un archivo normal, verás `100755` en un ejecutable y `120000` en un enlace simbólico [h01-635, h01-636].
+
+> PENDIENTE: falta hecho sobre el modo `040000` de `tests`. Pro Git 10.2 (f01-12) admite otros modos para carpetas; no se ha extraído.
+
+`.gitignore` y `factura.py` tienen los mismos hashes que en el ejemplo 03, aunque allí el historial era otro: el hash solo depende de cabecera y contenido, así que el mismo contenido da el mismo blob en cualquier parte [h01-647, h01-294].
+
+Con estas piezas puedes hacer un commit sin `git commit`. Git suele crear los árboles a partir del índice, y `git write-tree` escribe el área de preparación como un objeto árbol [h01-633, h01-634]. `git commit-tree` crea un commit a partir del hash de un árbol y de los commits que lo preceden, si los hay [h01-637]. `git update-ref` actualiza una referencia de forma segura, y `git symbolic-ref HEAD` te dice a qué apunta `HEAD` [h01-658, h01-670]. El ejemplo construye así dos commits en un repositorio nuevo.
+
+<!-- ejemplo: ejemplos/cap-01/19-commit-a-mano.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git init facturas
+Initialized empty Git repository in /tmp/ejemplo/facturas/.git/
+$ cd facturas
+$ echo "# facturas" > README.md
+$ git add README.md
+$ git write-tree
+6da4eda05f1f7094dbbecc3d77f7cc59e42595c8
+$ c1=$(git commit-tree $(git write-tree) -m "Primer commit a mano")
+$ echo "$c1"
+c822fbeff82dceab815e144ddab961ede9401744
+$ echo "Calcula el total de una factura con IVA." >> README.md
+$ git add README.md
+$ c2=$(git commit-tree $(git write-tree) -p $c1 -m "Segundo commit a mano")
+$ echo "$c2"
+0b2b7d119be47c00b785c2f8ce741b335b9fdebe
+$ git update-ref refs/heads/main $c2
+$ git symbolic-ref HEAD
+refs/heads/main
+$ git log --oneline
+0b2b7d1 Segundo commit a mano
+c822fbe Primer commit a mano
+$ git commit-tree $(git write-tree) -p $c1 -m "Segundo commit a mano"
+0b2b7d119be47c00b785c2f8ce741b335b9fdebe
+```
+<!-- /ejemplo -->
+
+`write-tree` imprime el hash del árbol, y cada `commit-tree`, el de su commit: el primero sin padre y el segundo con `$c1` como anterior [h01-637, h01-641]. Ninguna rama los alcanza hasta que `update-ref` escribe en `refs/heads/main` el hash del segundo, que es como Pro Git crea una rama a mano [h01-660, h01-652]. `symbolic-ref` confirma que `HEAD` ya apuntaba allí [h01-670], y `git log` enseña el historial. Es lo que la sección 1.4 te contó de `git add` y `git commit`: objetos nuevos y una rama que avanza [h01-643, h01-712].
+
+> **Bajo el capó.** La última orden del ejemplo 19 repite el segundo `commit-tree` y obtiene el mismo hash, `0b2b7d1`. El hash se calcula sobre todo lo que guarda el commit: árbol, padres, autor y confirmador con su marca de tiempo, y mensaje [h01-638, h01-570, h01-639, h01-640, h01-647, h01-649]. Los ejemplos del libro fijan autor y fecha, así que el mismo árbol, el mismo padre y el mismo mensaje dan el mismo commit; por eso cada commit de los ejemplos cambia algo. En tu máquina cambian autor y fecha, y con ellos los hashes de los commits [h01-639, h01-647].
+
+Te falta el cuarto tipo de objeto. Una etiqueta marca un commit como una rama que nunca se mueve, y las hay ligeras y anotadas [h01-675, h01-676]. El ejemplo pone `v0.1` en el primer commit de `facturas` y `v1.0` en el tercero, anotada con `-a` [h01-680].
+
+<!-- ejemplo: ejemplos/cap-01/20-etiquetas.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git log --oneline
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git tag v0.1 HEAD~2
+$ git tag -a v1.0 -m "Primera versión estable"
+$ cat .git/refs/tags/v0.1
+ce4f8a10e453c4b73af2a16502a375af28fd31a8
+$ cat .git/refs/tags/v1.0
+dc01a82e791f8ec2dbf88ec27d5c2bdbaeab7759
+$ git cat-file -t v0.1
+commit
+$ git cat-file -t v1.0
+tag
+$ git cat-file -p v1.0
+object c87074a060dbf507d64ec3e5e304398bd8e17de3
+type commit
+tag v1.0
+tagger devOC <devoc@ejemplo.dev> 1767265200 +0100
+
+Primera versión estable
+```
+<!-- /ejemplo -->
+
+`.git/refs/tags/v0.1` guarda el hash de `ce4f8a1`, y `cat-file -t` dice `commit`: una etiqueta ligera es solo una referencia que nunca se mueve [h01-677]. `v1.0` guarda otro hash, `dc01a82`, de tipo `tag`. Al anotar, Git crea un objeto etiqueta y la referencia apunta a él, no al commit [h01-679]. `cat-file -p` lo abre: empieza por el hash del commit etiquetado, `c87074a`, y sigue con el tipo, el nombre, la línea `tagger` con la fecha y el mensaje [h01-681, h01-674].
+
+Relee el capítulo con esta lente. Un commit escribe objetos y adelanta una rama [h01-643, h01-712]; `--amend` y rebase crean commits nuevos y mueven la rama hacia ellos [h01-764]; `git branch` añade una referencia con el hash del último commit [h01-662]. Y casi todo lo que haces solo añade información a la base de datos [h01-215].
+
+Caso límite: dos archivos con nombres distintos e idéntico contenido. Son un solo blob, porque Git guarda un archivo por pieza de contenido, nombrado por su hash, y el nombre va en el árbol [h01-621, h01-626, h01-630]. El árbol tendrá dos entradas con el mismo hash.
+
+> PENDIENTE: falta hecho sobre los *packfiles* (por si un clon no muestra objetos sueltos en `.git/objects`); Pro Git 10.4 no está en el mapa.
+
+> **Error típico.** Editar a mano `.git/HEAD` o los archivos de `.git/refs`. Técnicamente basta con escribir un hash en un archivo de `refs/heads` [h01-655], pero no es conveniente: usa `git update-ref` y `git symbolic-ref`, que son más seguros [h01-657, h01-658, h01-669]. `symbolic-ref`, por ejemplo, no te deja fijar una referencia simbólica fuera de `refs` [h01-672].
+
+> **Ojo con la versión.** ¿Por qué busca Git un sucesor de SHA-1? El 23 de febrero de 2017, el ataque SHAttered demostró una colisión práctica de SHA-1 [h01-288]. Desde la 2.13.0, Git usa por defecto una implementación reforzada que lo resiste, pero SHA-1 sigue siendo débil y se considera prudente dejarlo atrás [h01-289, h01-290, h01-291]. A finales de 2018 el proyecto eligió SHA-256 entre varios candidatos [h01-292]. Aun así, `git init` sigue usando SHA-1 por defecto y los dos formatos no interoperan por ahora [h01-280, h01-283]: el cálculo del ejemplo 17 es el de tus repositorios [h01-294].
