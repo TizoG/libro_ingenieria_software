@@ -13,3 +13,5 @@ Se extraen en `secciones/9-adicionales.md` (ids desde h01-809) y después el red
 | 1.2 | `<rev>^{tree}` en general | f01-29 |
 | 1.3 | `git commit --no-edit` (usa el mensaje sin abrir el editor) | Documentación de `git commit` (no está en el mapa) |
 | 1.3 | `--format=<estilo>` equivale a `--pretty=<estilo>` y admite `fuller` | f01-30 (git-log), hacia la línea 762 |
+| 1.4 | Orden de las líneas `parent` de un merge: el primer padre es la rama en la que estabas (`^1`), el segundo la fusionada (`^2`) | f01-30 (`--first-parent`), documentación de `git merge` (f01-22) |
+| 1.4 | Por qué el mensaje del merge conserva el bloque `# Conflicts:` | Documentación de `git commit` (no está en el mapa) |

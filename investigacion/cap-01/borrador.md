@@ -397,3 +397,278 @@ Vuelve al ejemplo 05. ¿Dónde está `552d7cd`? `git log` ya no lo enseña, pero
 > **Error típico.** Usar `git restore <archivo>`, o el antiguo `git checkout -- <archivo>`, para «limpiar» y descubrir después que querías ese cambio. El archivo se sobrescribe con otra versión y lo que le hubieras hecho desaparece [h01-342, h01-352]. Pro Git llama peligroso a `git checkout -- <archivo>` y pide no usarlo salvo que estés completamente seguro de que ya no quieres el archivo [h01-341, h01-343]. Si dudas, confirma antes: lo confirmado se recupera, y lo que nunca confirmaste puede que no [h01-345, h01-347].
 
 > **Ojo con la versión.** Pro Git en español saca un archivo del área de preparación con `git reset HEAD <archivo>`, que es lo que sugiere su `git status` [h01-336], y descarta cambios con `git checkout -- <archivo>` [h01-340, h01-341]. El `git status` de Git 2.43 del ejemplo 06 sugiere ya `git restore --staged`. La documentación actual de `git restore` dice que devolver un archivo del índice a la versión de `HEAD` equivale a usar `git reset`, y que restaurar a la vez el índice y el directorio de trabajo equivale a usar `git checkout` [h01-361, h01-362]. El libro usa la forma que te sugiere tu propio Git.
+
+## 1.4 Las ramas son punteros
+
+Una rama es un archivo de `.git` con el hash de un commit, y `HEAD` es otro archivo que dice en qué rama estás; al confirmar, Git añade un commit cuyo padre es el que señalaba `HEAD` y adelanta esa rama [h01-424, h01-664, h01-668, h01-420]. Fusionar es adelantar un puntero, si tu commit es ancestro directo del que fusionas, o crear un commit con dos padres a partir del ancestro común; y el conflicto aparece cuando los dos lados han cambiado la misma zona de un archivo [h01-434, h01-440, h01-442, h01-445, h01-448].
+
+Separa el grafo en dos clases de piezas. Los commits no se mueven: cada uno guarda el hash de sus padres y, como viste con `--amend`, no se pueden editar [h01-570, h01-763]. Las ramas sí se mueven: son punteros que pueden pasar a señalar otro commit [h01-409, h01-766]. Y `HEAD` es un puntero a un puntero: señala la rama en la que estás [h01-416, h01-664].
+
+```mermaid
+flowchart TB
+    subgraph antes["Antes del commit"]
+        direction RL
+        a3(("c87074a")) -- padre --> a2(("c2466c3"))
+        am["main"] --> a3
+        ad["descuentos"] --> a3
+        ah["HEAD"] --> ad
+    end
+    subgraph despues["Después del commit"]
+        direction RL
+        b4(("ac83193")) -- padre --> b3(("c87074a"))
+        b3 -- padre --> b2(("c2466c3"))
+        bm["main"] --> b3
+        bd["descuentos"] --> b4
+        bh["HEAD"] --> bd
+    end
+```
+
+De un dibujo a otro solo se ha movido una flecha, la de `descuentos`. `main` sigue en `c87074a` y `HEAD` sigue señalando a `descuentos` [h01-420, h01-664].
+
+Compruébalo en `facturas`. El ejemplo parte de los tres primeros commits de la sección 1.3, crea la rama `descuentos`, lee los archivos de las ramas y el de `HEAD`, cambia de rama y confirma el primer cambio de los descuentos.
+
+<!-- ejemplo: ejemplos/cap-01/07-rama-es-un-archivo.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git branch descuentos
+$ cat .git/refs/heads/main
+c87074a060dbf507d64ec3e5e304398bd8e17de3
+$ cat .git/refs/heads/descuentos
+c87074a060dbf507d64ec3e5e304398bd8e17de3
+$ cat .git/HEAD
+ref: refs/heads/main
+$ git switch descuentos
+Switched to branch 'descuentos'
+$ cat .git/HEAD
+ref: refs/heads/descuentos
+$ git add factura.py
+$ git commit -m "Empieza los descuentos"
+[descuentos ac83193] Empieza los descuentos
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+$ git log --oneline --decorate --graph --all
+* ac83193 (HEAD -> descuentos) Empieza los descuentos
+* c87074a (main) Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+`git branch descuentos` no imprime nada ni te cambia de rama: solo crea un puntero nuevo en el commit en el que estás [h01-415, h01-417]. Los dos primeros `cat` lo enseñan. Cada rama es un archivo de `.git/refs/heads` con los 40 caracteres del hash de su commit, y los dos guardan el mismo [h01-424, h01-652]. Crear una rama cuesta lo que escribir 41 bytes en un archivo [h01-425]. En otros sistemas supone copiar el proyecto entero a otro directorio, y puede llevar minutos; en Git es instantáneo [h01-426]. Es aquel objetivo de diseño de la sección 1.1, miles de ramas en paralelo [h01-130].
+
+El tercer `cat` cierra lo que la sección 1.3 dejó a medias. `.git/HEAD` no guarda un hash, sino `ref: refs/heads/main`: es una referencia simbólica, que enlaza con otra referencia en lugar de con un commit [h01-664, h01-665, h01-666]. `HEAD` apunta a la rama actual y la rama, a su último commit [h01-705]. Así sabe Git cuál es la última instantánea confirmada, la que será padre del próximo commit [h01-663, h01-703].
+
+`git switch descuentos` cambia de rama [h01-471], y el último `cat` lo refleja: `HEAD` dice ahora `ref: refs/heads/descuentos`. Al cambiar, Git añade, quita y modifica archivos para que tu copia de trabajo quede como la rama en su último commit [h01-432, h01-472]. Es la flecha «cambiar de rama» del diagrama de los tres lugares, en la sección 1.2.
+
+El commit sale como `[descuentos ac83193]`. El `git log` final, con `--oneline --decorate --graph --all`, enseña dónde apunta cada rama [h01-423]: `ac83193` lleva `HEAD -> descuentos`, el puntero a puntero del dibujo, y `main` se ha quedado un commit atrás, en `c87074a`.
+
+¿Qué ha cambiado en el repositorio con ese commit? Dos cosas importan. Entre `git add` y `git commit`, Git ha escrito objetos nuevos: el contenido de los archivos modificados, los árboles y el commit, enlazado con el anterior [h01-643]. Ese anterior es el que señalaba `HEAD` [h01-668]. Además, la rama a la que apunta `HEAD` avanza: su archivo guarda ahora el hash del commit nuevo, y las demás ramas se quedan donde estaban [h01-411, h01-420, h01-424]. `HEAD` no cambia, porque sigues en la misma rama [h01-664].
+
+Esa es la respuesta corta a qué es una rama: un nombre que cambia de commit, sobre un grafo de commits que no cambian [h01-765, h01-766, h01-763]. Una rama señala la cabeza de una línea de trabajo [h01-659]; el resto de la línea se alcanza siguiendo los padres hacia atrás, porque cada commit guarda los suyos [h01-570].
+
+Tarde o temprano, el trabajo de una rama vuelve a `main`. Para fusionar, te colocas en la rama que recibe los cambios y lanzas `git merge` con la otra [h01-433]. Lo que haga Git depende de la forma del grafo.
+
+```mermaid
+flowchart TB
+    subgraph ff["Avance rápido: main solo se adelanta"]
+        direction RL
+        f4(("6c3625e")) -- padre --> f3(("c87074a"))
+        fa["main antes del merge"] -.-> f3
+        fm["main después del merge"] --> f4
+        fr["redondeo"] --> f4
+    end
+    subgraph tb["Tres bandas: un commit nuevo con dos padres"]
+        direction RL
+        t7(("a6a4677")) -- padre --> t5(("6c3625e"))
+        t7 -- padre --> t6(("a660e13"))
+        t5 -- padre --> t3(("c87074a: ancestro común"))
+        t6 -- padre --> t3
+        tm["main"] --> t7
+        td["descuentos"] --> t6
+    end
+```
+
+Arriba basta con adelantar `main` [h01-434]; abajo, las dos ramas han avanzado desde `c87074a` y hace falta un commit con dos padres [h01-440, h01-445]. `HEAD`, que no se dibuja, señala `main` en los dos casos.
+
+Empieza por el caso fácil, un arreglo urgente. El ejemplo crea la rama `redondeo` y se cambia a ella en un paso con `git switch -c` [h01-473], confirma el redondeo del total, vuelve a `main` y fusiona.
+
+<!-- ejemplo: ejemplos/cap-01/08-avance-rapido.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git switch -c redondeo
+Switched to a new branch 'redondeo'
+$ git add factura.py
+$ git commit -m "Redondea el total a dos decimales"
+[redondeo 6c3625e] Redondea el total a dos decimales
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git switch main
+Switched to branch 'main'
+$ git merge redondeo
+Updating c87074a..6c3625e
+Fast-forward
+ factura.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git branch -d redondeo
+Deleted branch redondeo (was 6c3625e).
+$ git log --oneline --graph
+* 6c3625e Redondea el total a dos decimales
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+La salida dice `Fast-forward`, y en `Updating c87074a..6c3625e` aparecen la punta anterior de `main` y la de `redondeo`. `6c3625e` está directamente por delante de `c87074a`, así que no hay trabajo divergente que combinar: Git se limita a avanzar el puntero, sin crear ningún commit de fusión [h01-434, h01-435, h01-497]. Es lo que se llama *fast-forward* (avance rápido) [h01-435]. Después, `git branch -d` borra `redondeo`, que ya no hace falta porque señala el mismo commit que `main` [h01-437]. El log lo confirma: `6c3625e` sigue en la historia lineal de `main`. Has borrado un nombre, no un commit [h01-424].
+
+Si quieres que la fusión quede registrada aunque se pudiera avanzar, `git merge --no-ff` crea un commit de fusión en todos los casos [h01-498].
+
+Ahora el caso de abajo. En `descuentos` has añadido un descuento a `total()` y en `main` has redondeado su resultado, así que ninguna de las dos puntas es ancestro de la otra. Git hace entonces una fusión a tres bandas, con la instantánea de cada punta y la del ancestro común [h01-440, h01-441, h01-442]. Con el resultado crea una instantánea nueva y un commit que apunta a ella, el commit de fusión, que tiene más de un padre [h01-443, h01-444, h01-445]. Pero si los dos lados han cambiado de forma distinta la misma porción de un archivo, no puede fusionarlos directamente [h01-448]. Es lo que pasa con la línea `return` de `total()`. El ejemplo provoca el conflicto, lo aborta, lo repite y lo resuelve.
+
+<!-- ejemplo: ejemplos/cap-01/09-conflicto.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git log --oneline --graph --all
+* a660e13 Aplica un descuento al total
+| * 6c3625e Redondea el total a dos decimales
+|/  
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+$ git merge descuentos
+Auto-merging factura.py
+CONFLICT (content): Merge conflict in factura.py
+Automatic merge failed; fix conflicts and then commit the result.
+$ git status
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   factura.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git merge --abort
+$ git status -s
+$ git merge descuentos
+Auto-merging factura.py
+CONFLICT (content): Merge conflict in factura.py
+Automatic merge failed; fix conflicts and then commit the result.
+$ cat factura.py
+IVA = 0.21
+def total(base, iva=IVA, descuento=0):
+    """Calcula el total de una factura."""
+<<<<<<< HEAD
+    return round(base * (1 + iva), 2)
+=======
+    return base * (1 + iva) * (1 - descuento)
+>>>>>>> descuentos
+$ cat > factura.py <<'PY'
+> IVA = 0.21
+> def total(base, iva=IVA, descuento=0):
+>     """Calcula el total de una factura."""
+>     return round(base * (1 + iva) * (1 - descuento), 2)
+> PY
+$ git add factura.py
+$ git commit --no-edit
+[main a6a4677] Merge branch 'descuentos'
+$ git log --oneline --graph
+*   a6a4677 Merge branch 'descuentos'
+|\  
+| * a660e13 Aplica un descuento al total
+* | 6c3625e Redondea el total a dos decimales
+|/  
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+$ git cat-file -p HEAD
+tree 385c27e65b91457544ca1fd1d4815107d5aeb2d2
+parent 6c3625ec7e97da8cf33b156f12063e9647bfc66c
+parent a660e13464f9b3cdb0e2043b9ec4b8334ab3ec5b
+author devOC <devoc@ejemplo.dev> 1767265200 +0100
+committer devOC <devoc@ejemplo.dev> 1767265200 +0100
+
+Merge branch 'descuentos'
+
+# Conflicts:
+#	factura.py
+```
+<!-- /ejemplo -->
+
+El primer log dibuja la bifurcación: dos puntas que salen de `c87074a` [h01-314]. `git merge descuentos` responde con `CONFLICT (content)` y «Automatic merge failed» [h01-449]. Git no ha creado el commit de fusión: se ha detenido a esperar que resuelvas [h01-450, h01-488]. `git status` lo confirma con «You have unmerged paths» y lista `factura.py` como modificado por ambos lados [h01-451, h01-452].
+
+Esa misma salida te ofrece la vía de escape, `git merge --abort`, que intenta reconstruir el estado anterior a la fusión [h01-489]; `git status -s` sale vacío. Fíjate en el «intenta»: si empezaste con cambios sin confirmar, a veces no podrá devolvértelos, y por eso la documentación recomienda confirmarlos o apartarlos antes de fusionar [h01-490, h01-491].
+
+En el segundo intento, `cat factura.py` enseña la zona en conflicto entre los marcadores `<<<<<<<`, `=======` y `>>>>>>>` [h01-453, h01-493]. Encima de `=======` está la versión de `HEAD`, la rama en la que estabas al fusionar; debajo, la del otro lado, `descuentos` [h01-454, h01-494]. Git no elige uno al azar: te deja lo que hizo cada lado en esa zona para que lo resuelvas tú [h01-492]. La línea `def`, que solo cambió `descuentos`, ya trae `descuento=0` y queda fuera: los marcadores encierran solo la zona donde chocan los dos cambios [h01-493].
+
+Pro Git plantea la resolución como elegir a mano el contenido de un lado o del otro [h01-455]. El ejemplo escribe una tercera versión, que redondea y aplica el descuento, y la prepara con `git add`: marcar un archivo como preparado le dice a Git que su conflicto está resuelto [h01-456, h01-457]. `git commit` termina la fusión [h01-460] con el mensaje que Git propone por defecto, «Merge branch 'descuentos'» [h01-461].
+
+El grafo final se cierra en `a6a4677`, y `git cat-file -p HEAD` enseña lo que lo hace distinto: dos líneas `parent`, una por cada punta [h01-404, h01-570]. La primera es `6c3625e`, la punta que tenía `main`; la segunda, `a660e13`, la de `descuentos`. Con dos padres, `HEAD^2` por fin nombra algo: la sintaxis de la sección 1.3 solo sirve en commits de fusión [h01-823, h01-824]. Las demás líneas las verás en la sección 1.6. Al final del mensaje, además, ha quedado un bloque `# Conflicts:` con el archivo que chocó.
+
+> PENDIENTE: faltan dos hechos sobre el commit de fusión del ejemplo 09: que el orden de sus líneas `parent` es el que numeran `^1` y `^2` (y que el primer padre es la rama en la que estabas al fusionar), y por qué el mensaje propuesto conserva el bloque `# Conflicts:`. Para lo primero, la opción `--first-parent` de la documentación de `git log` (f01-30) es un punto de partida; para lo segundo haría falta la página de `git commit`, que no está en el mapa.
+
+¿Cómo encuentra Git la tercera banda? Gracias a que cada commit guarda sus padres: con ellos, encontrar la base de la fusión es automático y, por lo general, sencillo [h01-427]. Git elige él mismo el mejor ancestro común; en CVS o Subversion tiene que hacerlo el desarrollador [h01-446, h01-447].
+
+> **Bajo el capó.** Los marcadores normales te enseñan dos de las tres bandas de la fusión: tu lado y el del otro [h01-494, h01-442]. Si pones la variable de configuración `merge.conflictStyle` a `diff3` o a `zdiff3`, Git usa un estilo alternativo [h01-495]. `diff3` añade antes de `=======` un marcador `|||||||` seguido del texto original [h01-496]. Es la tercera banda, la del ancestro común [h01-442]. Compárala con cada lado y sabrás quién cambió qué.
+
+Hasta aquí, `HEAD` siempre ha señalado una rama, que es lo normal [h01-480]. A veces, sin embargo, te interesa colocarte en un commit que no es la punta de ninguna rama, o incluso crear uno que ninguna rama referencie [h01-481]. Para eso está `git switch --detach`: te lleva a un commit para inspeccionarlo o para hacer experimentos que puedes tirar [h01-474].
+
+```mermaid
+flowchart RL
+    e(("bc671c4")) -- padre --> c2(("c2466c3"))
+    c3(("c87074a")) -- padre --> c2
+    c2 -- padre --> c1(("ce4f8a1"))
+    h["HEAD"] --> e
+    m["main"] --> c3
+```
+
+Tras confirmar el experimento, `HEAD` señala su commit directamente, sin rama de por medio [h01-483]. ¿Qué será de `bc671c4` cuando `HEAD` vuelva a `main`?
+
+El ejemplo se desacopla en `HEAD~1`, confirma un experimento con el IVA de Canarias, vuelve a `main` y rescata el experimento.
+
+<!-- ejemplo: ejemplos/cap-01/10-head-desacoplado.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git switch --detach HEAD~1
+HEAD is now at c2466c3 Añade un ejemplo de uso al README
+$ cat .git/HEAD
+c2466c3069368f441ff3f5b77e633c6f1d89ec71
+$ git commit -m "Experimento: IVA de Canarias"
+[detached HEAD bc671c4] Experimento: IVA de Canarias
+ 1 file changed, 1 insertion(+)
+$ git switch main
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:
+
+  bc671c4 Experimento: IVA de Canarias
+
+Switched to branch 'main'
+$ git log --oneline --all
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git reflog -4
+c87074a HEAD@{0}: checkout: moving from bc671c4c1729981859fb461f6b0c345319ab1e57 to main
+bc671c4 HEAD@{1}: commit: Experimento: IVA de Canarias
+c2466c3 HEAD@{2}: checkout: moving from main to HEAD~1
+c87074a HEAD@{3}: commit: Cambia el tipo de IVA al 21 %
+$ git branch experimento HEAD@{1}
+$ git log --oneline --all
+bc671c4 Experimento: IVA de Canarias
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+Ahora `cat .git/HEAD` no dice `ref:`; guarda un hash, el de `c2466c3`. `HEAD` apunta al commit y no a una rama: es el estado de *detached HEAD* (HEAD desacoplado) [h01-482, h01-483]. Hasta la salida de `git commit` lo indica, con `[detached HEAD bc671c4]`, y ese commit solo lo referencia `HEAD` [h01-484].
+
+Al volver a `main`, Git 2.43 avisa de que dejas atrás un commit «not connected to any of your branches», y `git log --oneline --all` ya no lo muestra. Es el caso que describe la documentación de `git checkout`: cuando nada referencia el commit, la recolección de basura de Git acabará eliminándolo, salvo que antes crees una referencia [h01-485].
+
+Si no te hubieras movido, bastaría con ponerle nombre allí mismo con `git switch -c`, `git branch` o `git tag` [h01-475, h01-486]. Como ya te has ido, primero tienes que recuperar su hash, normalmente con `git reflog` [h01-487]. El reflog de `HEAD` anota también los cambios de rama [h01-778], y el experimento sigue en la lista como `HEAD@{1}`. La documentación explica que `HEAD@{2}` es donde estaba `HEAD` dos movimientos antes; `HEAD@{1}`, por tanto, es un movimiento atrás [h01-775]. `git branch experimento HEAD@{1}` crea una rama en ese commit, y el último log vuelve a enseñarlo [h01-788, h01-789].
+
+> **Error típico.** Borrar con `-D` una rama que no has fusionado. `git branch -d` da un error si la rama tiene trabajo sin fusionar [h01-468], y `git branch --no-merged` te dice cuáles están así [h01-467]. `-D` fuerza el borrado aunque pierdas ese trabajo [h01-469]. Con los cambios sin confirmar, Git es más cauto: cambiar de rama no exige tenerlo todo limpio, pero se aborta si fuera a perder cambios locales, salvo que lo pidas con `--discard-changes` [h01-476]. Aun así, conviene llegar limpio [h01-431].
+
+> **Ojo con la versión.** Pro Git en español cambia de rama con `git checkout`, y crea una rama y salta a ella con `git checkout -b`, un atajo de `git branch` seguido de `git checkout` [h01-418, h01-428, h01-429]. La documentación actual tiene `git switch` y `git switch -c` [h01-471, h01-473], y explica que `git checkout` hace dos trabajos: cambiar de rama y restaurar otra versión de un archivo [h01-479]. El libro usa `git switch` para lo primero y, desde la sección 1.3, `git restore` para lo segundo. Con `git checkout`, `HEAD` se desacopla pasándole un commit en lugar de una rama [h01-482]. Y `checkout` asoma aunque no lo uses: el reflog del ejemplo 10 anota tus cambios de rama como `checkout`.
+>
+> Con las fusiones pasa algo parecido. Al fusionar una sola rama, la estrategia de fusión predeterminada es hoy `ort` [h01-801], escrita para reemplazar a `recursive` [h01-801, h01-803], que lo fue hasta Git 2.33.0 [h01-806]. Desde Git 2.50.0, `recursive` es solo otro nombre de `ort` [h01-804, h01-805]; si la ves en un texto antiguo, es la estrategia de antes.
