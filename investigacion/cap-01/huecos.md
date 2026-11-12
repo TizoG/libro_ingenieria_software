@@ -22,3 +22,4 @@ Lo que el capítulo podría necesitar y las fuentes iniciales (Pro Git en españ
 ## Erratas de la traducción que el redactor no debe heredar
 
 - 10.3: «en dicho sitio remoto» para `refs/remotes` (que es local); 10.2: un árbol «tiene una o más entradas de tipo árbol»; 7.6: «cambios del SHA-1», «alijos», «área de ensayo»; 7.7: «que como reset, no mueva HEAD»; 2.2: «el comando mv» por `git mv`.
+- 7.6 (f01-11 l.35): «cada confirmación … será reescrita, aún si cambias el mensaje o no»: falso con Git 2.43 y con la documentación actual (rebase avanza sobre los commits que no cambian). 10.3 (f01-13 l.64): «marcador» por *tagger* (quien creó la etiqueta). 3.6: la fusión que crea `git pull` tras un push forzado no ocurre con Git 2.43 sin configurar (`git pull` se niega).

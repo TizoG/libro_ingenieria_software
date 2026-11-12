@@ -11,6 +11,7 @@ Métricas bloqueantes (deben ser 0 para pasar a «revisado»):
 2. Evidencias que no aparecen en su fuente (y, además, ids citados inexistentes o rechazados).
 3. Ejemplos que fallan al ejecutarse o cuya salida ya no coincide con el borrador.
 4. Frases del informe de revisión que no salieron SOPORTADA y siguen sin resolver.
+5. Fragmentos copiados literalmente de una fuente (scripts/detectar_copia.py).
 
 Informativas: PENDIENTES abiertos, párrafos sin ningún id (pista para el revisor) y palabras.
 
@@ -35,6 +36,7 @@ from pathlib import Path
 
 import comun
 import comprobar_ids
+import detectar_copia
 import compilar_capitulo
 import insertar_ejemplos
 import verificar_evidencias
@@ -58,6 +60,7 @@ class Informe:
     revision_existe: bool = False
     pendientes: int = 0
     parrafos_sin_id: int = 0
+    literales: int = 0
     palabras: int = 0
 
     @property
@@ -67,6 +70,7 @@ class Informe:
             "Evidencias que no aparecen en su fuente (y ids mal citados)": self.evidencias_rechazadas + self.ids_mal,
             "Ejemplos que fallan al ejecutarse": self.ejemplos_mal,
             "Frases NO SOPORTADAS o PARCIALES sin resolver": self.no_soportadas,
+            "Fragmentos literales de una fuente (8+ palabras sin comillas, o citas de 15+)": self.literales,
         }
 
     @property
@@ -126,6 +130,7 @@ def generar(numero: int, ejecutar: bool = True) -> Informe:
         inf.ids_mal = len(ids.inexistentes) + len(ids.rechazados)
         inf.pendientes = len(comun.PENDIENTE.findall(comun.sin_bloques_de_codigo(cuerpo)))
         inf.parrafos_sin_id = parrafos_sin_id(cuerpo)
+        inf.literales = len(detectar_copia.buscar(borrador, detectar_copia.cargar_fuentes(numero)))
         # Sin ids de hechos: el lector no los verá (se convierten en [n] al compilar).
         inf.palabras = compilar_capitulo.contar_palabras(comun.CITA_HECHOS.sub("", cuerpo))
         inf.ejemplos = len(comun.MARCA_EJEMPLO.findall(cuerpo))

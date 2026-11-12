@@ -110,6 +110,18 @@ El redactor trabaja con reglas que lo encierran dentro de las notas:
 
 ---
 
+## 3 bis. No copiar: la otra cara de la fidelidad
+
+Lección del capítulo piloto (2026-11-12). Los cortafuegos anteriores impiden inventar, pero empujan a copiar: un hecho fiel se parece a su fuente, y un borrador que transcribe hechos acaba calcando la redacción, el orden y los ejemplos del capítulo de origen. El revisor de fuentes encontró 49 casos en el capítulo 1. Para evitarlo:
+
+1. **Los hechos son respaldo, no texto.** El redactor escribe cada párrafo a partir de lo que muestra un ejemplo propio o de la idea que quiere explicar, con sus palabras, y después cita los hechos que lo sostienen. Nunca redacta retocando el texto de un hecho.
+2. **El esquema no sigue el índice de una fuente.** Cada sección se organiza alrededor del problema y del repositorio de ejemplo del capítulo. Si una sección recorre los mismos pasos, en el mismo orden, que un capítulo ajeno, hay que reordenarla.
+3. **Los ejemplos son propios.** No se adapta un ejemplo de una fuente cambiando nombres o lenguaje. Se parte de la misión y del repositorio del capítulo. Si una demostración ajena es insustituible, se dice en el texto de quién es y se consulta a devOC, porque varias fuentes tienen licencias que se heredan (Pro Git, MDN y Composing Programs son CC BY-SA o BY-NC-SA).
+4. **Un script lo vigila.** `scripts/detectar_copia.py` busca en el borrador secuencias de 8 o más palabras que aparecen tal cual en una copia local (y citas entre comillas de 15 o más). Es una métrica bloqueante de `informe_capitulo.py`. No detecta la paráfrasis cercana ni el calco de estructura: eso sigue siendo trabajo del revisor de fuentes.
+5. **La versión manda sobre la fuente.** Cuando una fuente antigua describe un comportamiento, se comprueba con la versión fijada del capítulo (un ejemplo ejecutado) y con la documentación actual antes de afirmarlo. En el piloto, tres afirmaciones fieles a Pro Git en español eran falsas con Git 2.43.
+
+---
+
 ## 4. Trabajo en piezas pequeñas
 
 Ningún paso trabaja con más de una sección a la vez. Un capítulo de 7 secciones son unas 25 o 30 pasadas pequeñas, no una grande:
@@ -159,7 +171,7 @@ Sus cursos son valiosos para practicar y para ver cómo se explica algo en espa�
 
 ## 7. Métricas de cada capítulo
 
-`scripts/informe_capitulo.py` genera estas cifras y se guardan en `docs/estado.md`. Un capítulo con cualquiera de las cuatro primeras métricas fuera de su objetivo no puede pasar a «revisado».
+`scripts/informe_capitulo.py` genera estas cifras y se guardan en `docs/estado.md`. Un capítulo con cualquiera de las cinco primeras métricas fuera de su objetivo no puede pasar a «revisado».
 
 | Métrica | Objetivo |
 | --- | --- |
@@ -167,6 +179,7 @@ Sus cursos son valiosos para practicar y para ver cómo se explica algo en espa�
 | Evidencias que no aparecen en su fuente | 0 |
 | Ejemplos que fallan al ejecutarse | 0 |
 | Frases NO SOPORTADAS sin resolver | 0 |
+| Fragmentos literales de una fuente (`detectar_copia.py`) | 0 |
 | PENDIENTES abiertos | Los que haya, siempre visibles y comunicados a devOC |
 | Afirmaciones del muestreo humano que fallan | 0 |
 

@@ -135,3 +135,12 @@ f01-33:
   titulo: "Documentación de Git, git-diff"
   url: https://git-scm.com/docs/git-diff
   secciones: ["1.5"]
+# Añadidas el 2026-11-12 tras la revisión (comportamiento actual que Pro Git en español no recoge).
+f01-34:
+  titulo: "Documentación de Git, git-pull"
+  url: https://git-scm.com/docs/git-pull
+  secciones: ["1.5"]
+f01-35:
+  titulo: "Documentación de Git, git-reset"
+  url: https://git-scm.com/docs/git-reset
+  secciones: ["1.7"]

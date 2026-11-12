@@ -67,6 +67,8 @@ Fuentes añadidas el 2026-11-12 para cubrir lo que la edición en español de Pr
 | Apertura | [Pro Git 1.6, Configurando Git por primera vez](https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez) | ✔ |
 | 1.3, 1.4 | [Documentación de Git: git-commit](https://git-scm.com/docs/git-commit) (`--no-edit`, mensaje tras un conflicto) | ✔ |
 | 1.5 | [Documentación de Git: git-diff](https://git-scm.com/docs/git-diff) (comparar dos commits o ramas) | ✔ |
+| 1.5 | [Documentación de Git: git-pull](https://git-scm.com/docs/git-pull) (ramas divergentes, `pull.rebase`) | ✔ |
+| 1.7 | [Documentación de Git: git-reset](https://git-scm.com/docs/git-reset) (modos, reset con ruta) | ✔ |
 
 ### Capítulo 2: Flujo de contribución
 

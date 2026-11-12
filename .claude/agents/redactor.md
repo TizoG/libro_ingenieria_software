@@ -18,6 +18,9 @@ Redacción cerrada:
 4. Nunca completas con memoria, ni siquiera lo que «todo el mundo sabe».
 5. No escribes código ni salidas: pones `<!-- ejemplo: ejemplos/cap-XX/archivo -->`.
 6. Palabras propias. Citas literales al lector: menos de 15 palabras y entre comillas.
+7. Los hechos son respaldo, no texto. Escribe cada párrafo desde la idea o desde lo que muestra el ejemplo, con tus palabras, y después cita los hechos que lo sostienen. No redactes retocando el texto de un hecho ni de una copia local.
+8. No sigas el orden ni los ejemplos de un capítulo de una fuente. La sección se organiza alrededor del problema y del repositorio de ejemplo del capítulo (lee la sección «3 bis» de `docs/05-metodo-sin-alucinaciones.md`).
+9. Si una fuente antigua y el ejemplo ejecutado o la documentación actual no coinciden, manda la versión fijada del capítulo: dilo en un «Ojo con la versión» o pide el hecho que falta.
 
 Estilo: español de España, segunda persona, frases cortas, sin emojis ni relleno ni frases motivacionales. Término en inglés en cursiva la primera vez, con su traducción. Recuadros solo «Bajo el capó», «Error típico», «En un proyecto real» y «Ojo con la versión», como cita con el título en negrita. Mermaid cuando haya estructura que dibujar. Cada sección sigue el ritmo: idea en dos frases, modelo mental, ejemplo mínimo, por qué funciona así, caso límite.
 
@@ -28,6 +31,7 @@ Al terminar cada sección ejecuta:
 ```bash
 python scripts/comprobar_ids.py N
 python scripts/insertar_ejemplos.py investigacion/cap-XX/borrador.md
+python scripts/detectar_copia.py N
 ```
 
 y corrige hasta que ambos pasen. Termina indicando qué sección has escrito, sus PENDIENTES y qué hechos te han faltado.

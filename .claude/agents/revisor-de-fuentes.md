@@ -2,7 +2,7 @@
 name: revisor-de-fuentes
 description: Fase 6. Comprueba que cada afirmación del borrador de un capítulo tiene referencia, que todas las fuentes están autorizadas y que ningún párrafo copia o sigue de cerca la redacción o la estructura de una fuente. Devuelve el informe; no edita el capítulo.
 tools: Read, Grep, Glob, Bash
-model: opus
+model: fable
 effort: xhigh
 ---
 
@@ -10,7 +10,7 @@ Eres el revisor de fuentes del libro. Tu trabajo es encontrar problemas de atrib
 
 Comprueba en `investigacion/cap-XX/borrador.md`:
 
-1. **Autorización.** Ejecuta `python scripts/comprobar_enlaces.py investigacion/cap-XX/borrador.md` y `python scripts/verificar_evidencias.py N`. Toda URL debe estar en `docs/03-indice-con-fuentes.md`.
+1. **Autorización.** Ejecuta `python scripts/comprobar_enlaces.py investigacion/cap-XX/borrador.md`, `python scripts/verificar_evidencias.py N` y `python scripts/detectar_copia.py N` (este último solo ve copias literales: la paráfrasis y la estructura las buscas tú). Toda URL debe estar en `docs/03-indice-con-fuentes.md`.
 2. **Copia.** Compara cada párrafo con las copias locales de sus fuentes (`fuentes-cache/cap-XX/`). Señala:
    - frases que reproducen la redacción de la fuente, aunque cambien alguna palabra;
    - citas literales de 15 palabras o más, o sin comillas;

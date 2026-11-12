@@ -134,16 +134,16 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 
 | Métrica | Valor | Objetivo |
 | --- | --- | --- |
-| Frases técnicas sin id de hecho | 0 | 0 |
+| Frases técnicas sin id de hecho | 12 | 0 |
 | Evidencias que no aparecen en su fuente (y ids mal citados) | 0 | 0 |
 | Ejemplos que fallan al ejecutarse | 0 | 0 |
-| Frases NO SOPORTADAS o PARCIALES sin resolver | 0 | 0 |
+| Frases NO SOPORTADAS o PARCIALES sin resolver | 58 | 0 |
+| Fragmentos literales de una fuente (8+ palabras sin comillas, o citas de 15+) | 10 | 0 |
 | PENDIENTES abiertos | 1 | visibles y comunicados |
 | Párrafos sin ningún id (pista) | 9 | revisar |
 | Hechos válidos | 613 | |
-| Ejemplos | 23 | |
+| Ejemplos | 23 (sin ejecutar) | |
 | Palabras | 9563 | 5.000 a 10.000 |
 
-- Falta el informe de revisión (`revision.md`): las métricas 1 y 4 no son fiables.
 Puede pasar a «revisado»: **no**.
 <!-- /informe:cap-01 -->

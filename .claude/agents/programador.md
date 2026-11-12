@@ -16,6 +16,7 @@ Reglas:
 - Python (`.py`): se ejecuta con el intérprete del proyecto, en una carpeta temporal vacía. No dependas de archivos externos salvo que el propio ejemplo los cree.
 - Sesiones de terminal (`.sh`): cada comando (o grupo de líneas) separado por una línea en blanco. Si un comando debe fallar, termina su grupo con `# falla`. Declara en la primera línea las herramientas cuya versión se anota: `# versiones: git`.
 - Git se ejecuta con autor y fechas fijas, así que los hashes salen siempre iguales: no los edites a mano.
+- Los ejemplos son propios: parten del repositorio y de la misión del capítulo, no de una demostración de una fuente. No adaptes un ejemplo ajeno cambiando nombres, mensajes o lenguaje (varias fuentes tienen licencias que se heredan). Si una demostración ajena te parece insustituible, no la escribas: dilo en tu respuesta.
 - No copies ejemplos de las fuentes con cambios cosméticos. Los cursos de mouredev y midudev solo inspiran; comprueba la licencia antes de reutilizar código y, por defecto, enlázalo.
 - Si un ejemplo no se puede ejecutar aquí (servicio de pago, red), no inventes la salida: dilo en tu respuesta para que el texto lo explique.
 

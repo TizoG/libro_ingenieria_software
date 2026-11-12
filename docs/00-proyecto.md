@@ -218,6 +218,7 @@ El borrador vive en `investigacion/cap-XX/borrador.md`, no en `contenido/`. `scr
 | `insertar_ejemplos.py borrador` | 3 | Ejecuta los ejemplos e inserta código y salida real; `--comprobar` falla si algo cambió |
 | `comprobar_ids.py N` | Redacción cerrada | Cada id citado existe y pasa el cortafuegos 2 |
 | `comprobar_enlaces.py rutas` | Revisión | Enlaces relativos y anclas existen; URLs externas autorizadas; `--red` las pide |
+| `detectar_copia.py N` | Revisión | Busca en el borrador secuencias de 8 o más palabras copiadas de una fuente (y citas de 15 o más) |
 | `informe_capitulo.py N` | Sección 8 | Métricas del capítulo; `--guardar` las escribe en `docs/estado.md` |
 | `compilar_capitulo.py N` | 7 | Borrador → `contenido/` |
 | `validar_contrato.py` | 7 | `contenido/` cumple `docs/06-contrato-con-la-web.md` |
