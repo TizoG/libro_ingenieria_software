@@ -672,3 +672,280 @@ Si no te hubieras movido, bastaría con ponerle nombre allí mismo con `git swit
 > **Ojo con la versión.** Pro Git en español cambia de rama con `git checkout`, y crea una rama y salta a ella con `git checkout -b`, un atajo de `git branch` seguido de `git checkout` [h01-418, h01-428, h01-429]. La documentación actual tiene `git switch` y `git switch -c` [h01-471, h01-473], y explica que `git checkout` hace dos trabajos: cambiar de rama y restaurar otra versión de un archivo [h01-479]. El libro usa `git switch` para lo primero y, desde la sección 1.3, `git restore` para lo segundo. Con `git checkout`, `HEAD` se desacopla pasándole un commit en lugar de una rama [h01-482]. Y `checkout` asoma aunque no lo uses: el reflog del ejemplo 10 anota tus cambios de rama como `checkout`.
 >
 > Con las fusiones pasa algo parecido. Al fusionar una sola rama, la estrategia de fusión predeterminada es hoy `ort` [h01-801], escrita para reemplazar a `recursive` [h01-801, h01-803], que lo fue hasta Git 2.33.0 [h01-806]. Desde Git 2.50.0, `recursive` es solo otro nombre de `ort` [h01-804, h01-805]; si la ves en un texto antiguo, es la estrategia de antes.
+
+## 1.5 Rebase y reescribir historia
+
+Rebase no mueve commits: vuelve a aplicar los cambios de cada uno sobre otra base y crea commits nuevos, con hashes nuevos [h01-503, h01-520, h01-570, h01-214]. La instantánea final es la misma que daría un merge y solo cambia el historial; por eso es inofensivo con commits que nunca has compartido y dañino con los que otros ya tienen, y para deshacer algo publicado tienes `git revert` [h01-510, h01-529, h01-591, h01-594].
+
+En la rama `exportar-csv` has escrito la exportación a CSV en dos commits y, mientras tanto, `main` ha recibido los tests. Ya sabes integrarlas con una fusión a tres bandas [h01-501, h01-502]. Rebase es la otra forma: Git va al ancestro común, saca las diferencias que introduce cada commit de tu rama, las guarda en archivos temporales, lleva tu rama al commit de la otra y aplica de nuevo esas diferencias, en el mismo orden [h01-503, h01-504, h01-505, h01-506, h01-507, h01-508, h01-514].
+
+```mermaid
+flowchart TB
+    subgraph antes["Antes del rebase"]
+        direction RL
+        a1(("00f86cc")) -- padre --> a0(("c87074a"))
+        a2(("68dcc79")) -- padre --> a1
+        at(("7971f23")) -- padre --> a0
+        am["main"] --> at
+        ae["exportar-csv"] --> a2
+    end
+    subgraph despues["Después del rebase"]
+        direction RL
+        b1(("649bb22")) -- padre --> bt(("7971f23"))
+        b2(("f8f6c01")) -- padre --> b1
+        bt -- padre --> b0(("c87074a"))
+        o1(("00f86cc")) -. padre .-> b0
+        o2(("68dcc79")) -. padre .-> o1
+        bm["main"] --> bt
+        be["exportar-csv"] --> b2
+    end
+    classDef abandonado stroke-dasharray: 5 5
+    class o1,o2 abandonado
+```
+
+Las copias no conservan el hash porque tienen otro padre: cada commit guarda el SHA-1 de sus padres, y su nombre sale de su contenido [h01-570, h01-214]. Es lo que viste con `--amend` en la sección 1.3, aplicado a una fila entera. Los commits son inmutables, así que reescribir es crear commits nuevos y mover la rama hacia ellos [h01-763, h01-764].
+
+El ejemplo hace rebase de `exportar-csv` sobre `main` y luego fusiona desde `main`.
+
+<!-- ejemplo: ejemplos/cap-01/11-rebase.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git switch exportar-csv
+Switched to branch 'exportar-csv'
+$ git log --oneline --graph --all
+* 68dcc79 Añade la cabecera al CSV
+* 00f86cc Añade exportación a CSV
+| * 7971f23 Añade tests de total
+|/  
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+$ git rebase -q main
+$ git log --oneline --graph --all
+* f8f6c01 Añade la cabecera al CSV
+* 649bb22 Añade exportación a CSV
+* 7971f23 Añade tests de total
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+$ git switch main
+Switched to branch 'main'
+$ git merge exportar-csv
+Updating 7971f23..f8f6c01
+Fast-forward
+ exportar.py | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 exportar.py
+```
+<!-- /ejemplo -->
+
+El primer log dibuja la bifurcación; el segundo, una sola línea [h01-511]. Los mensajes son los mismos, pero `00f86cc` es ahora `649bb22`, y `68dcc79`, `f8f6c01`. El padre de `649bb22` ya no es `c87074a`, sino `7971f23`, la punta de `main`. Como `exportar-csv` queda por delante, el merge final es un avance rápido [h01-509, h01-434]. Por eso se suele hacer rebase antes de proponer tu trabajo: a quien mantiene el proyecto le basta con avanzar [h01-512, h01-513].
+
+> PENDIENTE: falta hecho sobre `git rebase -q`, que usan los ejemplos 11 a 13; está en f01-23 («Be quiet. Implies --no-stat.»).
+
+¿Y `00f86cc` y `68dcc79`? Rebase los abandona y crea otros [h01-520]: ninguna rama los alcanza ya, como le pasaba a `552d7cd` en la sección 1.3. Responde a la segunda pregunta de «El problema»: tus commits «desaparecidos» se han quedado sin rama. Para recuperar un commit perdido hay que localizar su hash y ponerle una rama, y para lo primero el reflog, que anota los movimientos de las puntas de las ramas, suele ser la vía más rápida [h01-783, h01-784, h01-774]. La sección 1.7 lo hace.
+
+¿Qué has ganado frente al merge? El ejemplo integra lo mismo de las dos maneras: copia `exportar-csv` en `con-merge` y en `con-rebase`, fusiona `main` en la primera y hace rebase de la segunda.
+
+<!-- ejemplo: ejemplos/cap-01/12-misma-foto.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git switch con-merge
+Switched to branch 'con-merge'
+$ git merge main -m "Integra main en con-merge"
+Merge made by the 'ort' strategy.
+ tests/test_factura.py | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 tests/test_factura.py
+$ git switch con-rebase
+Switched to branch 'con-rebase'
+$ git rebase -q main
+$ git diff con-merge con-rebase
+$ git cat-file -p con-merge | head -n 1
+tree e7e3ac802fb69892ddda0dcff783da904beca5ac
+$ git cat-file -p con-rebase | head -n 1
+tree e7e3ac802fb69892ddda0dcff783da904beca5ac
+$ git log --oneline --graph con-merge
+*   4b2e63c Integra main en con-merge
+|\  
+| * 7971f23 Añade tests de total
+* | 68dcc79 Añade la cabecera al CSV
+* | 00f86cc Añade exportación a CSV
+|/  
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+$ git log --oneline --graph con-rebase
+* f8f6c01 Añade la cabecera al CSV
+* 649bb22 Añade exportación a CSV
+* 7971f23 Añade tests de total
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+`git diff` entre las dos puntas no imprime nada, y la línea `tree` de ambos commits es la misma, `e7e3ac8`. Un commit contiene el árbol con el estado del proyecto [h01-638], así que los dos dicen lo mismo de tus archivos [h01-510]. Lo que cambia es el grafo: `con-merge` termina en `4b2e63c`, que combina las dos puntas con dos padres, y `con-rebase` es una línea [h01-515, h01-404, h01-511].
+
+```mermaid
+flowchart RL
+    m(("4b2e63c")) -- padre --> x2(("68dcc79"))
+    m -- padre --> t(("7971f23"))
+    x2 -- padre --> x1(("00f86cc"))
+    x1 -- padre --> c(("c87074a"))
+    t -- padre --> c
+    r2(("f8f6c01")) -- padre --> r1(("649bb22"))
+    r1 -- padre --> t
+    cm["con-merge"] --> m
+    cr["con-rebase"] --> r2
+    m -- árbol --> T["e7e3ac8: misma instantánea"]
+    r2 -- árbol --> T
+```
+
+Rebase sirve también para limpiar. Git no tiene una orden para modificar commits antiguos, pero el rebase interactivo, `git rebase -i`, hace ese papel [h01-540, h01-542]. Es la primera orden del asistente de «El problema»: `git rebase -i HEAD~4` reescribe todos los commits del rango `HEAD~4..HEAD`, cambies algo en ellos o no [h01-543].
+
+Git te da primero una lista de tareas, una línea por commit con una acción delante, y la ejecuta de arriba abajo, en orden inverso al de `git log`; puedes reordenar sus líneas [h01-547, h01-589, h01-546, h01-553]. `pick` usa el commit; `reword` cambia su mensaje; `edit` se detiene para que lo modifiques; `squash` lo funde con el anterior, y `fixup` hace lo mismo pero descarta su mensaje [h01-548, h01-549, h01-550, h01-551, h01-552]. `drop`, o borrar la línea, descarta el commit [h01-580].
+
+La lista se edita con el editor que fija `sequence.editor`, y la variable de entorno `GIT_SEQUENCE_EDITOR` se impone a esa configuración [h01-807, h01-808]. El ejemplo la usa dos veces: con un comando que solo imprime la lista y con otro que pone `fixup` en las líneas 2 y 3 y `drop` en la 4.
+
+<!-- ejemplo: ejemplos/cap-01/13-rebase-interactivo.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git log --oneline
+3238d41 Prueba descartada
+0963eaa oops, falta la cabecera
+c5fefdb WIP
+f0130ce Añade exportación a CSV
+ce4f8a1 Primera versión de la factura
+$ GIT_SEQUENCE_EDITOR="grep '^[a-z]'" git rebase -q -i HEAD~4
+pick f0130ce Añade exportación a CSV
+pick c5fefdb WIP
+pick 0963eaa oops, falta la cabecera
+pick 3238d41 Prueba descartada
+$ GIT_SEQUENCE_EDITOR="sed -i -e '2,3s/^pick/fixup/' -e '4s/^pick/drop/'" git rebase -q -i HEAD~4
+$ git log --oneline
+7c3a467 Añade exportación a CSV
+ce4f8a1 Primera versión de la factura
+$ git commit --fixup HEAD~1
+[exportar-csv 3b1e951] fixup! Añade exportación a CSV
+ 1 file changed, 1 insertion(+)
+$ git log --oneline -3
+3b1e951 fixup! Añade exportación a CSV
+dda4199 Exporta también a JSON
+7c3a467 Añade exportación a CSV
+$ GIT_SEQUENCE_EDITOR="grep '^[a-z]'" git rebase -q -i --autosquash HEAD~3
+pick 7c3a467 Añade exportación a CSV
+fixup 3b1e951 fixup! Añade exportación a CSV
+pick dda4199 Exporta también a JSON
+$ git log --oneline -2
+312cf8b Exporta también a JSON
+c023b78 Añade exportación a CSV
+```
+<!-- /ejemplo -->
+
+La lista empieza por `f0130ce`, el más antiguo de los cuatro, y acaba en `3238d41`, el primero que enseña `git log`. Tras la limpieza queda uno solo sobre `ce4f8a1`, `7c3a467`, con el mensaje del primero: `fixup` ha fundido «WIP» y «oops» descartando sus mensajes, y `drop` ha quitado «Prueba descartada» [h01-581, h01-582, h01-580]. La segunda parte automatiza esa limpieza. `git commit --fixup` crea un commit titulado `fixup!` más el título del commit que corrige, y `--autosquash` lo coloca detrás de él y le cambia `pick` por `fixup` [h01-590, h01-588, h01-587, h01-589].
+
+¿Cuándo reescribir, entonces? Pro Git describe dos maneras de ver el historial. Para unos es el registro de lo que pasó, y cambiarlo es mentir sobre ello [h01-531, h01-532]. Para otros es la historia de cómo se hizo el proyecto, contada de la mejor manera para quien la lea después [h01-533, h01-534]. Su propuesta aprovecha las dos: haz rebase de tu trabajo local antes de compartirlo y nunca de lo que ya has compartido [h01-535, h01-519]. Con commits que nunca fueron públicos no tendrás problemas [h01-529]; con una rama en la que otros ya basan su trabajo, sí [h01-591].
+
+Para deshacer algo ya publicado no reescribes: `git revert` registra commits nuevos que deshacen el efecto de otros anteriores, y exige un árbol de trabajo limpio [h01-535, h01-594, h01-595]. El ejemplo revierte en `main` el cambio del IVA.
+
+<!-- ejemplo: ejemplos/cap-01/15-revert.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git log --oneline
+9af4ac5 Documenta el IVA en el README
+7971f23 Añade tests de total
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git revert --no-edit HEAD~2
+[main 15aa51f] Revert "Cambia el tipo de IVA al 21 %"
+ Date: Thu Jan 1 12:00:00 2026 +0100
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git log --oneline
+15aa51f Revert "Cambia el tipo de IVA al 21 %"
+9af4ac5 Documenta el IVA en el README
+7971f23 Añade tests de total
+c87074a Cambia el tipo de IVA al 21 %
+c2466c3 Añade un ejemplo de uso al README
+ce4f8a1 Primera versión de la factura
+$ git log --stat -1
+commit 15aa51f420656ff18a7e13bf447aabf8b38922ae
+Author: devOC <devoc@ejemplo.dev>
+Date:   Thu Jan 1 12:00:00 2026 +0100
+
+    Revert "Cambia el tipo de IVA al 21 %"
+    
+    This reverts commit c87074a060dbf507d64ec3e5e304398bd8e17de3.
+
+ factura.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+<!-- /ejemplo -->
+
+`15aa51f` deshace la línea que cambió `c87074a`, y `c87074a` sigue en el log [h01-594]. No se ha reescrito nada: `main` solo ha ganado un commit. Un commit de fusión, en cambio, no se revierte sin más, porque no está claro qué lado es la línea principal; se lo indicas con `-m` y el número de padre [h01-598].
+
+Caso límite: una de las copias choca con la base. En el ejemplo, las dos ramas añaden una línea al final del README.
+
+<!-- ejemplo: ejemplos/cap-01/14-rebase-conflicto.sh -->
+```console
+# Ejecutado con Bash 5.2.21, Git 2.43.0
+$ git switch exportar-csv
+Switched to branch 'exportar-csv'
+$ git log --oneline --graph --all
+* cfbac44 Documenta la exportación en el README
+* 00f86cc Añade exportación a CSV
+| * 42dd13a Documenta cómo ejecutar los tests
+|/  
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+$ git rebase main
+Rebasing (1/2)
+Rebasing (2/2)
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+error: could not apply cfbac44... Documenta la exportación en el README
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply cfbac44... Documenta la exportación en el README
+$ git status
+interactive rebase in progress; onto 42dd13a
+Last commands done (2 commands done):
+   pick 00f86cc Añade exportación a CSV
+   pick cfbac44 Documenta la exportación en el README
+No commands remaining.
+You are currently rebasing branch 'exportar-csv' on '42dd13a'.
+  (fix conflicts and then run "git rebase --continue")
+  (use "git rebase --skip" to skip this patch)
+  (use "git rebase --abort" to check out the original branch)
+
+Unmerged paths:
+  (use "git restore --staged <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+	both modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git rebase --abort
+$ git log --oneline --graph --all
+* cfbac44 Documenta la exportación en el README
+* 00f86cc Añade exportación a CSV
+| * 42dd13a Documenta cómo ejecutar los tests
+|/  
+* c87074a Cambia el tipo de IVA al 21 %
+* c2466c3 Añade un ejemplo de uso al README
+* ce4f8a1 Primera versión de la factura
+```
+<!-- /ejemplo -->
+
+El primer commit se aplica; el segundo, `cfbac44`, choca, y Git se detiene con el conflicto en `README.md`. `git status` te lo recuerda: «You are currently rebasing branch 'exportar-csv'». Tienes tres salidas: resolver el conflicto y seguir con `git rebase --continue`, saltarte ese commit con `--skip` o volver atrás con `--abort` [h01-574, h01-576, h01-575]. Tras `--abort`, el log enseña `00f86cc` y `cfbac44`, los hashes de antes: la rama vuelve a su estado original [h01-575].
+
+> **Error típico.** Hacer rebase de una rama que otros ya tienen y subirla con `git push --force`, que sobrescribe el registro del servidor [h01-522]. Es el final de «El problema». Tu compañera había basado su trabajo en commits que tu rebase abandonó [h01-520, h01-523]. Al traer tus cambios, `git pull` creó una fusión con las dos líneas del historial, la vieja y la reescrita, y su `git log` enseña dos commits con el mismo autor, fecha y mensaje [h01-523, h01-524]: tus commits repetidos. Ahora ella tiene que arreglar su historial a mano, y también quien dependa de su rama [h01-591, h01-593]. La regla que lo evita: no hagas rebase de commits que hayas enviado a un repositorio público [h01-519]. La orden intermedia, `git reset --soft`, la verás en la sección 1.7.
+
+> **Bajo el capó.** Además del SHA-1, Git calcula para cada commit un `patch-id`, una suma basada en el parche que introduce [h01-525]. Con él, si tu compañera hace rebase de su trabajo sobre tus commits nuevos, Git puede reconocer qué parte era suya y aplicar solo esa, siempre que los parches viejos y nuevos sean muy parecidos [h01-526, h01-527]. `git pull --rebase` simplifica el proceso, y Pro Git aconseja que todo el equipo lo use si alguna vez hay que reescribir algo compartido [h01-528, h01-530].
+
+> **Ojo con la versión.** Pro Git en español enseña `pick`, `reword`, `edit`, `squash` y `fixup`, y descarta un commit borrando su línea [h01-548, h01-549, h01-550, h01-551, h01-552, h01-554]. La documentación actual añade, entre otras, `drop`, `break` y la variante `fixup -c` [h01-580, h01-578, h01-582]. El ejemplo 13 usa `drop` con Git 2.43.
+
+> PENDIENTE: falta fuente para «En un proyecto real» (cómo integran sus PR gentle-shell y FastAPI); llegará con las guías de contribución del capítulo 2.
