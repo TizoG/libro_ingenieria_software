@@ -1336,3 +1336,58 @@ Tras el reset, `git log` ha perdido `9af4ac5` y `7971f23`, porque ninguna rama l
 Ya puedes cerrar «El problema». `git rebase -i HEAD~4` creó commits nuevos (sección 1.5). `git reset --soft HEAD~2` llevó tu rama dos commits atrás sin tocar el índice ni el directorio de trabajo: los cambios de esos commits quedaron preparados, listos para confirmarse juntos [h01-741, h01-755, h01-828, h01-715]. Era solo la primera mitad de aplastar: con un `git commit` detrás, dos commits pasan a ser uno [h01-742, h01-773]. Y `git push --force` sobrescribió la historia del servidor [h01-522]. Ningún commit se borró: los que quedaron sin rama siguen localizables en tu reflog [h01-768, h01-774, h01-783, h01-784].
 
 En la revisión, defiende el modelo. `reset` mueve una rama y, según el modo, copia al índice y al directorio de trabajo; solo `--hard` destruye datos, y solo los que no confirmaste [h01-718, h01-730, h01-733, h01-345]. Lo que rompió el trabajo de tu compañera fue reescribir una rama sobre la que ella ya trabajaba [h01-591]. Para deshacer algo publicado, la próxima vez, `git revert` [h01-535, h01-594].
+
+## El proyecto avanza: Arqueología de un PR
+
+La misión de esta parte: reimplementar sin mirar el diff un PR ya integrado en gentle-shell y comparar tu versión con la real. Aquí solo preparas la excavación, sin escribir código.
+
+1. Clona gentle-shell y elige el PR. Sin abrir su diff, localiza el commit que lo integró.
+2. Averigua cómo se integró: con un commit de fusión, con un solo commit que lo aplasta o con sus commits reaplicados en línea. Mira sus líneas `parent` con `git cat-file -p` y el grafo con `git log --graph`. No des nada por hecho: anota en `arqueologia.md` las pruebas que te deciden.
+3. Identifica la base sobre la que trabajó el autor y crea en ella la rama `arqueologia/pr-NNN`. Comprueba con `cat .git/HEAD` y con el log que estás donde crees.
+4. Dibuja en Mermaid el grafo alrededor del PR: la base, sus commits y el punto de integración.
+5. Anota qué archivos tocó y cuántas líneas, solo con la vista resumida de `git log --stat` [h01-308, h01-309]. Será tu único plano cuando lo reimplementes en el capítulo 5.
+
+Repite los pasos 1 a 4 con un PR de FastAPI.
+
+## Resumen
+
+- Un commit guarda una instantánea completa del proyecto, sus padres y sus metadatos, y se nombra por el hash de su contenido [h01-203, h01-638, h01-570, h01-639, h01-214].
+- Los commits son inmutables: `--amend` y rebase crean commits nuevos, y cambiar uno cambia el hash de todos los que lo siguen [h01-763, h01-764, h01-571].
+- Una rama es un archivo con el hash de un commit; `HEAD`, una referencia a la rama en la que estás. Al confirmar, solo avanza esa rama [h01-424, h01-664, h01-411, h01-420].
+- Merge y rebase dan la misma instantánea y distinto historial; no reescribas lo que otros ya tienen y deshaz lo publicado con `git revert` [h01-510, h01-535, h01-591, h01-594].
+- `reset` mueve la rama y, según el modo, copia al índice y al directorio de trabajo; solo `--hard` destruye datos, y solo los que no confirmaste [h01-718, h01-720, h01-725, h01-728, h01-730, h01-733, h01-345].
+
+## Ejercicios
+
+Las soluciones están en `soluciones.md` de la Parte I.
+
+**Comprobación**
+
+1. `main` apunta a C3; `descuentos`, a C2, padre de C3, y `HEAD`, a `descuentos`. Haces un commit. Dibuja el grafo y di qué archivos de `.git` cambian y cuáles no.
+2. Explica cada columna de estas líneas de `git status -s`: `??`, `A `, ` M` y `MM`. Escribe qué comandos llevan a cada estado desde un repositorio sin cambios.
+
+**Aplicación**
+
+3. En `facturas`, encuentra con `git log`, sin abrir archivos, el commit que cambió el IVA. Recupera el `factura.py` anterior a ese commit sin mover la rama y confírmalo como commit nuevo. Explica por qué no usas `reset`.
+4. Crea tres commits «WIP» seguidos. Aplástalos con `git reset --soft`; después, desde el mismo punto de partida, con rebase interactivo y `fixup`. Compara árbol y hash de ambos resultados y explica la diferencia.
+
+**Construir sin IA**
+
+5. Crea un repo, tres ramas, provoca un conflicto, resuélvelo y limpia el historial con rebase interactivo. Dibuja el grafo antes y después.
+
+**Reto**
+
+6. Escribe en Python un `git log --oneline` mínimo que no llame a `git`. Lee `.git/HEAD`, sigue la referencia hasta el commit, descomprime cada objeto con `zlib` y recorre los padres hasta el primer commit, mostrando el hash y el mensaje de cada uno [h01-664, h01-652, h01-648, h01-570]. Pruébalo en un repositorio nuevo con pocos commits y compáralo con Git.
+
+## Preguntas de examen
+
+**Explicar.** ¿Qué es realmente una rama y qué cambia en el repositorio cuando haces un commit?
+
+**Defender**
+
+1. Un merge y un rebase de las mismas ramas dejan la misma instantánea [h01-510]. ¿Por qué no son intercambiables y con qué criterio eliges?
+2. ¿Qué pasaría si haces rebase de una rama que tu compañera ya tiene y la subes con `--force`? ¿Qué verá ella al traer los cambios?
+3. Corriges con rebase interactivo el mensaje de un commit de hace diez commits, y cambian los hashes de todos los posteriores [h01-543, h01-570, h01-571]. ¿Por qué?
+4. ¿Qué hace `git reset HEAD~` en los tres árboles, y por qué no pierdes trabajo [h01-726, h01-731]?
+5. ¿Qué pasaría si ejecutas `git reset --hard HEAD~2` con cambios sin confirmar? ¿Qué recuperarías, cómo y qué no?
+6. Has subido un commit defectuoso a `main`, que comparte todo el equipo. ¿Por qué lo deshaces con `revert` y no con `reset`?

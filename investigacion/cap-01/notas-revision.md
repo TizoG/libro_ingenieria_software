@@ -13,3 +13,5 @@ Cosas detectadas durante la redacción que no son PENDIENTES pero hay que mirar.
 - **El problema (apertura) frente a 1.7.** El asistente da `rebase -i`, `reset --soft HEAD~2` y `push --force`, sin un `git commit` tras el reset; la 1.7 dice que el reset «era solo la primera mitad de aplastar». Añadir el commit a la lista de «El problema» o hacerlo explícito.
 - **1.7, h01-732.** Se aplica por analogía al ejemplo 21 (misma forma que el de Pro Git). El revisor debe mirarlo.
 - **Extensión tras 1.7:** 9.728 sin ids, sin el cierre. Hará falta recortar unas 1.000 palabras en la pasada final.
+- **Cierre.** Ejercicio 3: el lector no tiene `facturas` montado (las soluciones deben decir cómo, o admitir cualquier repositorio). Ejercicio 4: volver al punto de partida exige reflog o rama de respaldo. Reto: solo funciona con objetos sueltos (sin explicar packfiles). Proyecto: clonar desde GitHub es del capítulo 2. Preguntas de defensa 2 y 6 quizá demasiado guiadas por el texto. Confirmar en `_parte.md` que la reimplementación del PR llega en el capítulo 5.
+- **Extensión con el cierre:** 10.427 sin ids.
