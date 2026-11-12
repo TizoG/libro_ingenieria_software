@@ -33,3 +33,9 @@ def test_guardar_reemplaza_el_bloque(tmp_path):
     texto = estado.read_text(encoding="utf-8")
     assert texto.count("<!-- informe:cap-01 -->") == 1
     assert "| Palabras | 20 |" in texto
+
+
+def test_palabras_sin_ids():
+    import comun, compilar_capitulo
+    cuerpo = "Una rama es un puntero [h01-401, h01-402]."
+    assert compilar_capitulo.contar_palabras(comun.CITA_HECHOS.sub("", cuerpo)) == 5

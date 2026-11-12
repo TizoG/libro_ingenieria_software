@@ -125,7 +125,8 @@ def generar(numero: int, ejecutar: bool = True) -> Informe:
         inf.ids_mal = len(ids.inexistentes) + len(ids.rechazados)
         inf.pendientes = len(comun.PENDIENTE.findall(comun.sin_bloques_de_codigo(cuerpo)))
         inf.parrafos_sin_id = parrafos_sin_id(cuerpo)
-        inf.palabras = compilar_capitulo.contar_palabras(cuerpo)
+        # Sin ids de hechos: el lector no los verá (se convierten en [n] al compilar).
+        inf.palabras = compilar_capitulo.contar_palabras(comun.CITA_HECHOS.sub("", cuerpo))
         inf.ejemplos = len(comun.MARCA_EJEMPLO.findall(cuerpo))
         if ejecutar:
             nuevo, errores = insertar_ejemplos.procesar(borrador)

@@ -23,7 +23,7 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 
 | Cap. | Título | id | Fase | PENDIENTES | Notas |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Git por dentro | `base/git-modelo` | 5-redacción | | Esquema aprobado (2026-11-12). 27 fuentes, 576 hechos, 24 ejemplos ejecutados con Git 2.43.0 (reproducibles) |
+| 1 | Git por dentro | `base/git-modelo` | 6-revisión | 1 | Borrador completo (2026-11-12): 9.563 palabras, 24 ejemplos (23 usados), 14 diagramas, 613 hechos. PENDIENTE consciente: «En un proyecto real» (decisión 8) |
 | 2 | Flujo de contribución | `base/git-colab` | pendiente | | |
 | 3 | Terminal y procesos | `base/terminal` | pendiente | | |
 | 4 | HTTP de verdad | `base/http` | pendiente | | |
@@ -141,8 +141,8 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 | PENDIENTES abiertos | 1 | visibles y comunicados |
 | Párrafos sin ningún id (pista) | 9 | revisar |
 | Hechos válidos | 613 | |
-| Ejemplos | 23 (sin ejecutar) | |
-| Palabras | 10307 | 5.000 a 10.000 |
+| Ejemplos | 23 | |
+| Palabras | 9563 | 5.000 a 10.000 |
 
 - Falta el informe de revisión (`revision.md`): las métricas 1 y 4 no son fiables.
 Puede pasar a «revisado»: **no**.
