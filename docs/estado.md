@@ -125,7 +125,7 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 
 ## Incidencias
 
-- 2026-11-12: la red de la sesión en la nube bloquea git-scm.com, missing.csail.mit.edu y developer.mozilla.org. Hay que permitir esos dominios antes de la fase 2 del capítulo 1.
+- 2026-11-12: la red de la sesión en la nube bloquea git-scm.com, missing.csail.mit.edu y developer.mozilla.org. Resuelto el mismo día con el entorno personal «libro_ingenieria_software», que permite los dominios de las fuentes de las Partes I y II. Las partes siguientes necesitarán añadir sus dominios.
 
 ## Informes de métricas
 
