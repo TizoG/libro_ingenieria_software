@@ -762,6 +762,148 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
   consultada: 2026-11-12
 
+## 1.2 Fotos, no diferencias; los tres estados (documentación de referencia de Git)
+
+- id: h01-275
+  hecho: El comando git init crea un repositorio vacío, que básicamente es un directorio .git con subdirectorios para objects, refs/heads y refs/tags, y archivos de plantilla.
+  evidencia: "This command creates an empty Git repository - basically a .git directory with subdirectories for objects, refs/heads, refs/tags, and template files."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-276
+  hecho: Al ejecutar git init se crea también una rama inicial que no tiene ningún commit.
+  evidencia: "An initial branch without any commits will be created"
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-277
+  hecho: Las opciones -b y --initial-branch de git init permiten dar nombre a la rama inicial del repositorio recién creado.
+  evidencia: "-b <branch-name> --initial-branch=<branch-name> Use <branch-name> for the initial branch in the newly created repository."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-278
+  hecho: Si no se indica nombre para la rama inicial, Git usa el nombre por defecto, que actualmente es master y cambiará a main cuando se publique Git 3.0.
+  evidencia: "If not specified, fall back to the default name (currently master, but this will change to main when Git 3.0 is released)."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-279
+  hecho: El nombre por defecto de la rama inicial se puede personalizar con la variable de configuración init.defaultBranch.
+  evidencia: "The default name can be customized via the init.defaultBranch configuration variable."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-280
+  hecho: La opción --object-format de git init fija el formato de objeto (el algoritmo hash) del repositorio; los valores válidos son sha1 y, si está habilitado, sha256, y sha1 es el valor por defecto.
+  evidencia: "Specify the given object <format> (hash algorithm) for the repository. The valid values are sha1 and (if enabled) sha256. sha1 is the default."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-281
+  hecho: La opción --bare de git init crea un repositorio bare.
+  evidencia: "Create a bare repository."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-282
+  hecho: Ejecutar git init en un repositorio que ya existe es seguro.
+  evidencia: "Running git init in an existing repository is safe."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-283
+  hecho: Según la documentación de git init, por ahora no hay interoperabilidad entre repositorios SHA-256 y repositorios SHA-1.
+  evidencia: "Note: At present, there is no interoperability between SHA-256 repositories and SHA-1 repositories."
+  fuente: f01-17
+  ancla: https://git-scm.com/docs/git-init
+  consultada: 2026-11-12
+
+- id: h01-284
+  hecho: En su núcleo, el sistema de control de versiones Git es un sistema de archivos direccionable por contenido.
+  evidencia: "At its core, the Git version control system is a content addressable filesystem."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-285
+  hecho: Git usa la función hash SHA-1 para nombrar el contenido.
+  evidencia: "At its core, the Git version control system is a content addressable filesystem. It uses the SHA-1 hash function to name content."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-286
+  hecho: Los archivos, directorios y revisiones se refieren mediante valores hash, a diferencia de otros sistemas de control de versiones tradicionales, donde se refieren mediante números secuenciales.
+  evidencia: "files, directories, and revisions are referred to by hash values unlike in other traditional version control systems where files or versions are referred to via sequential numbers."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-287
+  hecho: Comprobar la integridad es fácil con un hash: un cambio de bits se detecta porque el hash del contenido corrupto no coincide con su nombre.
+  evidencia: "Integrity checking is easy. Bit flips, for example, are easily detected, as the hash of corrupted content does not match its name."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-288
+  hecho: El 23 de febrero de 2017 el ataque SHAttered demostró una colisión práctica de hash SHA-1.
+  evidencia: "On 23 February 2017 the SHAttered attack (https://shattered.io) demonstrated a practical SHA-1 hash collision."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-289
+  hecho: Git v2.13.0 y posteriores pasaron por defecto a una implementación reforzada de SHA-1 que no es vulnerable al ataque SHAttered.
+  evidencia: "Git v2.13.0 and later subsequently moved to a hardened SHA-1 implementation by default, which isn’t vulnerable to the SHAttered attack"
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-290
+  hecho: Aun con la implementación reforzada, SHA-1 sigue siendo débil.
+  evidencia: "which isn’t vulnerable to the SHAttered attack, but SHA-1 is still weak."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-291
+  hecho: Se considera prudente pasar a un nuevo hash y dejar atrás cualquier variante de SHA-1.
+  evidencia: "Thus it’s considered prudent to move past any variant of SHA-1 to a new hash."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-292
+  hecho: A finales de 2018 el proyecto eligió SHA-256 como hash sucesor de SHA-1, entre varios candidatos.
+  evidencia: "There were several contenders for a successor hash to SHA-1, including SHA-256, SHA-512/256, SHA-256x16, K12, and BLAKE2bp-256. In late 2018 the project picked SHA-256 as its successor hash."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-293
+  hecho: En el diseño de la transición, un objeto puede nombrarse con su nombre SHA-1 de 40 dígitos hexadecimales o con su nombre SHA-256 de 64 dígitos hexadecimales.
+  evidencia: "Objects can be named by their 40 hexadecimal digit SHA-1 name or 64 hexadecimal digit SHA-256 name"
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
+- id: h01-294
+  hecho: El nombre SHA-1 de un objeto es el SHA-1 de la concatenación de su tipo, su longitud, un byte nulo y su contenido.
+  evidencia: "The SHA-1 name of an object is the SHA-1 of the concatenation of its type, length, a nul byte, and the object’s SHA-1 content."
+  fuente: f01-18
+  ancla: https://git-scm.com/docs/hash-function-transition
+  consultada: 2026-11-12
+
 ## 1.3 Leer y deshacer el historial
 
 - id: h01-301
@@ -1120,6 +1262,94 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   fuente: f01-05
   ancla: https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
   consultada: 2026-11-12
+
+## 1.3 Leer y deshacer el historial (documentación de referencia de Git)
+
+- id: h01-352
+  hecho: git restore restaura las rutas indicadas del directorio de trabajo con contenido procedente de una fuente de restauración.
+  evidencia: "Restore specified paths in the working tree with some contents from a restore source."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-353
+  hecho: Si una ruta está rastreada pero no existe en la fuente de restauración, git restore la elimina para que coincida con la fuente.
+  evidencia: "If a path is tracked but does not exist in the restore source, it will be removed to match the source."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-354
+  hecho: Con la opción --staged, git restore puede restaurar también el contenido del índice.
+  evidencia: "The command can also be used to restore the content in the index with --staged"
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-355
+  hecho: Con --staged --worktree, git restore restaura a la vez el directorio de trabajo y el índice.
+  evidencia: "or restore both the working tree and the index with --staged --worktree."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-356
+  hecho: Por defecto, si se da --staged, git restore restaura el contenido desde HEAD.
+  evidencia: "By default, if --staged is given, the contents are restored from HEAD, otherwise from the index."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-357
+  hecho: Por defecto, si no se da --staged, git restore restaura el contenido desde el índice.
+  evidencia: "By default, if --staged is given, the contents are restored from HEAD, otherwise from the index."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-358
+  hecho: La opción --source sirve para restaurar desde un commit distinto del de la fuente por defecto.
+  evidencia: "Use --source to restore from a different commit."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-359
+  hecho: Es habitual indicar el árbol de origen de --source nombrando un commit, una rama o una etiqueta asociados a él.
+  evidencia: "It is common to specify the source tree by naming a commit, branch or tag associated with it."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-360
+  hecho: Si no se especifica ni --staged ni --worktree, git restore restaura por defecto el directorio de trabajo.
+  evidencia: "Specify the restore location. If neither option is specified, by default the working tree is restored."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-361
+  hecho: La página de git restore indica que restaurar un archivo del índice para que coincida con la versión de HEAD es lo mismo que usar git reset.
+  evidencia: "To restore a file in the index to match the version in HEAD (this is the same as using git-reset[1])"
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-362
+  hecho: La página de git restore indica que restaurar a la vez el índice y el directorio de trabajo es lo mismo que usar git checkout.
+  evidencia: "or you can restore both the index and the working tree (this is the same as using git-checkout[1])"
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+- id: h01-363
+  hecho: La página de git restore remite a la sección «Reset, restore and revert» de la página de git para consultar las diferencias entre esos tres comandos.
+  evidencia: "See "Reset, restore and revert" in git[1] for the differences between the three commands."
+  fuente: f01-19
+  ancla: https://git-scm.com/docs/git-restore
+  consultada: 2026-11-12
+
+> NOTA (huecos, f01-19): la copia local de git-restore no contiene ninguna advertencia de que el comando sea experimental, así que no se registra ningún hecho al respecto.
 
 ## 1.4 Las ramas son punteros
 
@@ -1612,6 +1842,213 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   fuente: f01-07
   ancla: https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%c2%bfQu%c3%a9-es-una-rama%3F
   consultada: 2026-11-12
+
+## 1.4 Las ramas son punteros (documentación de referencia de Git)
+
+- id: h01-471
+  hecho: git switch sirve para cambiar de rama.
+  evidencia: "git-switch - Switch branches"
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-472
+  hecho: Al cambiar de rama con git switch, el directorio de trabajo y el índice se actualizan para coincidir con la rama.
+  evidencia: "Switch to a specified branch. The working tree and the index are updated to match the branch."
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-473
+  hecho: La opción -c de git switch crea una rama nueva a partir de un punto de partida antes de cambiar a ella.
+  evidencia: "-c <new-branch> --create <new-branch> Create a new branch named <new-branch> starting at <start-point> before switching to the branch."
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-474
+  hecho: La opción --detach de git switch sirve para cambiar a un commit para inspeccionarlo o hacer experimentos descartables.
+  evidencia: "-d --detach Switch to a commit for inspection and discardable experiments."
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-475
+  hecho: Si lo hecho tras git switch --detach merece conservarse, se puede crear un nombre nuevo para ello, sin cambiar de sitio, con git switch -c.
+  evidencia: "If it turns out whatever you have done is worth keeping, you can always create a new name for it (without switching away): $ git switch -c good-surprises"
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-476
+  hecho: Cambiar de rama no exige índice ni directorio de trabajo limpios, pero la operación se aborta si llevase a perder cambios locales, salvo que se indique lo contrario con --discard-changes o --merge.
+  evidencia: "Switching branches does not require a clean index and working tree (i.e. no differences compared to HEAD). The operation is aborted however if the operation leads to loss of local changes, unless told otherwise with --discard-changes or --merge."
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-477
+  hecho: La opción -m de git switch lleva tus cambios locales a la nueva rama.
+  evidencia: "You can give the -m flag to the command, which will carry your local changes to the new branch:"
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-478
+  hecho: La documentación de git switch menciona git checkout junto a git switch al explicar que la sintaxis @{-<N>} se refiere a la N-ésima última rama o commit a la que se cambió con cualquiera de los dos.
+  evidencia: "You can use the @{-<N>} syntax to refer to the <N>-th last branch/commit switched to using git switch or git checkout operation."
+  fuente: f01-20
+  ancla: https://git-scm.com/docs/git-switch
+  consultada: 2026-11-12
+
+- id: h01-479
+  hecho: git checkout tiene dos modos principales: cambiar de rama y restaurar otra versión de un archivo.
+  evidencia: "git checkout has two main modes: Switch branches, with git checkout <branch> Restore a different version of a file, for example with git checkout <commit> <filename> or git checkout <filename>"
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-480
+  hecho: HEAD normalmente apunta a una rama con nombre.
+  evidencia: "HEAD normally refers to a named branch (e.g. master)."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-481
+  hecho: A veces resulta útil poder hacer checkout de un commit que no está en la punta de ninguna rama con nombre.
+  evidencia: "It is sometimes useful to be able to checkout a commit that is not at the tip of any named branch, or even to create a new commit that is not referenced by a named branch."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-482
+  hecho: git checkout --detach o git checkout con un commit funciona como git checkout con una rama, salvo que en lugar de apuntar HEAD a la rama lo apunta al identificador del commit.
+  evidencia: "git checkout --detach [<branch>] git checkout [--detach] <commit> The same as git checkout <branch>, except that instead of pointing HEAD at the branch, it points HEAD at the commit ID."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-483
+  hecho: Que HEAD apunte directamente a un commit, y no a una rama con nombre, se conoce como estado de HEAD desacoplado (detached HEAD).
+  evidencia: "HEAD now refers directly to commit b. This is known as being in detached HEAD state. It means simply that HEAD refers to a specific commit, as opposed to referring to a named branch."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-484
+  hecho: En el ejemplo de la página, un commit nuevo creado con HEAD desacoplado (el commit e) queda referenciado solo por HEAD.
+  evidencia: "There is now a new commit e, but it is referenced only by HEAD."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-485
+  hecho: En el ejemplo de la página, en ese punto nada referencia al commit f, y el commit f (y por extensión el e) acabará eliminado por el proceso rutinario de recolección de basura de Git, salvo que se cree antes una referencia.
+  evidencia: "It is important to realize that at this point nothing refers to commit f. Eventually commit f (and by extension commit e) will be deleted by the routine Git garbage collection process, unless we create a reference before that happens."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-486
+  hecho: Si aún no te has movido del commit f, cualquiera de estas opciones crea una referencia a él: git checkout -b foo (o git switch -c foo), git branch foo o git tag foo.
+  evidencia: "If we have not yet moved away from commit f, any of these will create a reference to it: $ git checkout -b foo # or "git switch -c foo" (1) $ git branch foo (2) $ git tag foo (3)"
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-487
+  hecho: Si ya te has movido del commit f, primero hay que recuperar su nombre de objeto (normalmente con git reflog) y después se puede crear una referencia a él.
+  evidencia: "If we have moved away from commit f, then we must first recover its object name (typically by using git reflog), and then we can create a reference to it."
+  fuente: f01-21
+  ancla: https://git-scm.com/docs/git-checkout
+  consultada: 2026-11-12
+
+- id: h01-488
+  hecho: git merge se detiene si hay un conflicto que no puede resolverse automáticamente o si se usó --no-commit al iniciar la fusión; en ese punto se puede ejecutar git merge --abort o git merge --continue.
+  evidencia: "A merge stops if there’s a conflict that cannot be resolved automatically or if --no-commit was provided when initiating the merge. At that point you can run git merge --abort or git merge --continue."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-489
+  hecho: git merge --abort aborta el proceso de resolución de conflictos en curso e intenta reconstruir el estado previo a la fusión.
+  evidencia: "--abort Abort the current conflict resolution process, and try to reconstruct the pre-merge state."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-490
+  hecho: Si había cambios sin confirmar en el directorio de trabajo cuando empezó la fusión, git merge --abort en algunos casos no podrá reconstruirlos.
+  evidencia: "If there were uncommitted worktree changes present when the merge started, git merge --abort will in some cases be unable to reconstruct these changes."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-491
+  hecho: La documentación recomienda confirmar o guardar en el stash tus cambios antes de ejecutar git merge.
+  evidencia: "It is therefore recommended to always commit or stash your changes before running git merge."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-492
+  hecho: Cuando ambos lados cambian la misma zona de un archivo, Git no elige uno al azar y te pide que lo resuelvas dejando lo que hizo cada lado en esa zona.
+  evidencia: "When both sides made changes to the same area, however, Git cannot randomly pick one side over the other, and asks you to resolve it by leaving what both sides did to that area."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-493
+  hecho: La zona donde chocan dos cambios se marca con los marcadores <<<<<<<, ======= y >>>>>>>.
+  evidencia: "The area where a pair of conflicting changes happened is marked with markers <<<<<<<, =======, and >>>>>>>."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-494
+  hecho: En esa presentación, la parte anterior a ======= suele ser tu lado y la posterior suele ser el lado del otro.
+  evidencia: "The part before the ======= is typically your side, and the part afterwards is typically their side."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-495
+  hecho: Se puede usar un estilo alternativo de presentación de conflictos configurando la variable merge.conflictStyle con diff3 o zdiff3.
+  evidencia: "An alternative style can be used by setting the merge.conflictStyle configuration variable to either diff3 or zdiff3."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-496
+  hecho: El estilo alternativo diff3 añade un marcador ||||||| y el texto original antes del marcador =======.
+  evidencia: "a ======= marker, changes made by the other side, and then a >>>>>>> marker. An alternate style, "diff3", adds a ||||||| marker and the original text before the ======= marker."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-497
+  hecho: Con --ff, git merge resuelve la fusión como avance rápido cuando es posible, es decir, solo actualiza el puntero de la rama sin crear un commit de fusión.
+  evidencia: "With --ff, when possible resolve the merge as a fast-forward (only update the branch pointer to match the merged branch; do not create a merge commit)."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-498
+  hecho: Con --no-ff, git merge crea un commit de fusión en todos los casos, incluso cuando la fusión podría resolverse como avance rápido.
+  evidencia: "With --no-ff, create a merge commit in all cases, even when the merge could instead be resolved as a fast-forward."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+- id: h01-499
+  hecho: Con --ff-only, git merge resuelve la fusión como avance rápido cuando es posible y, si no lo es, se niega a fusionar y termina con un estado distinto de cero.
+  evidencia: "With --ff-only, resolve the merge as a fast-forward when possible. When not possible, refuse to merge and exit with a non-zero status."
+  fuente: f01-22
+  ancla: https://git-scm.com/docs/git-merge
+  consultada: 2026-11-12
+
+> NOTA (huecos): ni la copia local de git-switch (f01-20) ni la de git-checkout (f01-21) contienen advertencia alguna de que git switch sea experimental; no se registra hecho al respecto. De f01-21 solo se ha recogido el modo dual y la sección DETACHED HEAD.
 
 ## 1.5 Rebase y reescribir historia
 
@@ -2124,6 +2561,183 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   evidencia: "El comando es filter-branch, y este puede reescribir una gran cantidad de franjas de tu historia"
   fuente: f01-11
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
+  consultada: 2026-11-12
+
+## 1.5 Rebase y reescribir historia (fuentes añadidas)
+
+- id: h01-574
+  hecho: Durante un rebase con conflictos, tras resolver todos los conflictos, se puede continuar el proceso con git rebase --continue.
+  evidencia: "After resolving all of the conflicts, you can continue the rebasing process with git rebase --continue"
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-575
+  hecho: Durante un rebase con conflictos, git rebase --abort detiene el rebase y devuelve la rama a su estado original.
+  evidencia: "Stop the git rebase and return your branch to its original state with git rebase --abort"
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-576
+  hecho: Durante un rebase con conflictos, git rebase --skip omite el commit que causó el conflicto.
+  evidencia: "Skip the commit that caused the merge conflict with git rebase --skip"
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-577
+  hecho: En el rebase interactivo, cambiar «pick» por «edit» hace que git rebase se detenga tras aplicar ese commit, para poder editar archivos o mensaje, enmendar el commit y continuar.
+  evidencia: "By replacing the command "pick" with the command "edit", you can tell git rebase to stop after applying that commit, so that you can edit the files and/or the commit message, amend the commit, and continue rebasing."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-578
+  hecho: El comando «break» interrumpe el rebase como lo haría «edit», pero sin aplicar antes ningún commit con cherry-pick.
+  evidencia: "To interrupt the rebase (just like an "edit" command would do, but without cherry-picking any commit first), use the "break" command."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-579
+  hecho: Para editar solo el mensaje de un commit en un rebase interactivo se cambia «pick» por «reword».
+  evidencia: "If you just want to edit the commit message for a commit, replace the command "pick" with the command "reword"."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-580
+  hecho: Para descartar un commit en un rebase interactivo se cambia «pick» por «drop» o se borra la línea correspondiente.
+  evidencia: "To drop a commit, replace the command "pick" with "drop", or just delete the matching line."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-581
+  hecho: Para fundir dos o más commits en uno, se cambia «pick» por «squash» o «fixup» en el segundo commit y en los siguientes.
+  evidencia: "If you want to fold two or more commits into one, replace the command "pick" for the second and subsequent commits with "squash" or "fixup"."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-582
+  hecho: En el mensaje sugerido para el commit fundido, los mensajes de los commits marcados con «fixup» se omiten, salvo que se use «fixup -c»; los de «squash» se concatenan con el del primer commit.
+  evidencia: "The suggested commit message for the folded commit is the concatenation of the first commit’s message with those identified by "squash" commands, omitting the messages of commits identified by "fixup" commands, unless "fixup -c" is used."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-583
+  hecho: Reordenar y editar commits suele crear pasos intermedios sin probar; para comprobarlos se puede usar el comando «exec» (abreviado «x») en la lista de tareas.
+  evidencia: "Reordering and editing commits usually creates untested intermediate steps. You may want to check that your history editing did not break anything by running a test, or at least recompiling at intermediate points in history by using the "exec" command (shortcut "x")."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-584
+  hecho: El rebase interactivo se detiene cuando un comando falla (sale con estado distinto de 0), para dar la oportunidad de arreglar el problema.
+  evidencia: "The interactive rebase will stop when a command fails (i.e. exits with non-0 status) to give you an opportunity to fix the problem."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-585
+  hecho: El comando «exec» lanza el comando en una shell (por defecto, normalmente /bin/sh).
+  evidencia: "The "exec" command launches the command in a shell (the default one, usually /bin/sh)"
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-586
+  hecho: Con git rebase -i --exec "make test" se puede comprobar que los commits intermedios compilan.
+  evidencia: "$ git rebase -i --exec "make test" This command lets you check that intermediate commits are compilable."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-587
+  hecho: Con --autosquash, git rebase combina automáticamente en commits anteriores los commits cuyos mensajes tienen un formato especial.
+  evidencia: "Automatically squash commits with specially formatted messages into previous commits being rebased."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-588
+  hecho: Si el mensaje de un commit empieza por «squash! », «fixup! » o «amend! », el resto del título se toma como especificador de un commit anterior, que coincide si es el título o el hash de ese commit.
+  evidencia: "If a commit message starts with "squash! ", "fixup! " or "amend! ", the remainder of the title is taken as a commit specifier, which matches a previous commit if it matches the title or the hash of that commit."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-589
+  hecho: Con --autosquash, en la lista de tareas los commits squash, fixup y amend pasan de pick a squash, fixup o fixup -C, y se mueven justo después del commit que modifican.
+  evidencia: "In the rebase todo list, the actions of squash, fixup and amend commits are changed from pick to squash, fixup or fixup -C, respectively, and they are moved right after the commit they modify."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-590
+  hecho: La forma recomendada de crear commits con marcas de squash es usar las opciones --squash, --fixup, --fixup=amend: o --fixup=reword: de git commit, que reciben el commit objetivo como argumento.
+  evidencia: "The recommended way to create commits with squash markers is by using the --squash, --fixup, --fixup=amend: or --fixup=reword: options of git-commit[1], which take the target commit as an argument and automatically fill in the title of the new commit from that."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-591
+  hecho: La documentación de git rebase advierte de que rebasar (o reescribir de cualquier otro modo) una rama sobre la que otros han basado trabajo es mala idea: quien está aguas abajo debe arreglar su historial a mano.
+  evidencia: "Rebasing (or any other form of rewriting) a branch that others have based work on is a bad idea: anyone downstream of it is forced to manually fix their history."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-592
+  hecho: La documentación sostiene que la verdadera solución es evitar rebasar la rama upstream desde el principio.
+  evidencia: "The real fix, however, would be to avoid rebasing the upstream in the first place."
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-593
+  hecho: En el ejemplo de la documentación, para limpiar los commits duplicados hay que hacer rebase de topic sobre la nueva punta de subsystem, lo que arrastra a quienes dependen de topic, que también deben hacer rebase.
+  evidencia: "To clean things up, you need to transplant the commits on topic to the new subsystem tip, i.e., rebase topic. This becomes a ripple effect: anyone downstream from topic is forced to rebase too, and so on!"
+  fuente: f01-23
+  ancla: https://git-scm.com/docs/git-rebase
+  consultada: 2026-11-12
+
+- id: h01-594
+  hecho: git revert registra nuevos commits que revierten el efecto de commits anteriores (a menudo solo uno defectuoso).
+  evidencia: "Note: git revert is used to record some new commits to reverse the effect of some earlier commits (often only a faulty one)."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
+  consultada: 2026-11-12
+
+- id: h01-595
+  hecho: git revert requiere que el árbol de trabajo esté limpio, sin modificaciones respecto al commit HEAD.
+  evidencia: "Given one or more existing commits, revert the changes that the related patches introduce, and record some new commits that record them. This requires your working tree to be clean (no modifications from the HEAD commit)."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
+  consultada: 2026-11-12
+
+- id: h01-596
+  hecho: Según la página de git revert, para descartar todos los cambios sin confirmar del directorio de trabajo hay que ver git reset, en particular la opción --hard.
+  evidencia: "If you want to throw away all uncommitted changes in your working directory, you should see git-reset[1], particularly the --hard option."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
+  consultada: 2026-11-12
+
+- id: h01-597
+  hecho: Según la página de git revert, para extraer archivos concretos tal como estaban en otro commit hay que ver git restore, en concreto la opción --source.
+  evidencia: "If you want to extract specific files as they were in another commit, you should see git-restore[1], specifically the --source option."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
+  consultada: 2026-11-12
+
+- id: h01-598
+  hecho: Normalmente no se puede revertir un merge porque no se sabe qué lado se considera la línea principal; la opción -m (--mainline) indica el número de padre (desde 1) de la línea principal y permite revertir el cambio respecto a ese padre.
+  evidencia: "-m parent-number --mainline parent-number Usually you cannot revert a merge because you do not know which side of the merge should be considered the mainline. This option specifies the parent number (starting from 1) of the mainline and allows revert to reverse the change relative to the specified parent."
+  fuente: f01-24
+  ancla: https://git-scm.com/docs/git-revert
   consultada: 2026-11-12
 
 ## 1.6 Bajo el capó: objetos y referencias
@@ -3248,4 +3862,146 @@ Hechos atómicos con evidencia literal (cortafuegos 2). Se generan con `scripts/
   evidencia: "Supongamos que tienes una serie de confirmaciones con mensajes como “oops.”, “WIP” y “se olvidó de este archivo”. Puedes usar reset para aplastarlos rápida y fácilmente en una sola confirmación"
   fuente: f01-15
   ancla: https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado
+  consultada: 2026-11-12
+
+## 1.7 reset sin miedo (fuentes añadidas)
+
+- id: h01-774
+  hecho: El reflog registra cuándo se actualizaron, en el repositorio local, las puntas de las ramas y de otras referencias.
+  evidencia: "Reference logs, or "reflogs", record when the tips of branches and other references were updated in the local repository."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-775
+  hecho: Según la documentación, HEAD@{2} significa «dónde estaba HEAD hace dos movimientos».
+  evidencia: "HEAD@{2} means "where HEAD used to be two moves ago""
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-776
+  hecho: Según la documentación, master@{one.week.ago} significa dónde apuntaba master hace una semana en ese repositorio local.
+  evidencia: "master@{one.week.ago} means "where master used to point to one week ago in this local repository""
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-777
+  hecho: El subcomando «show» de git reflog es el predeterminado y muestra el log de la referencia indicada en la línea de comandos (o de HEAD, por defecto).
+  evidencia: "The "show" subcommand (which is also the default, in the absence of any subcommands) shows the log of the reference provided in the command-line (or HEAD, by default)."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-778
+  hecho: El reflog cubre todas las acciones recientes y, además, el reflog de HEAD registra los cambios de rama.
+  evidencia: "The reflog covers all recent actions, and in addition the HEAD reflog records branch switching."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-779
+  hecho: El subcomando «expire» elimina las entradas más antiguas del reflog.
+  evidencia: "The "expire" subcommand prunes older reflog entries."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-780
+  hecho: Si no se indica --expire, el tiempo de caducidad sale de la configuración gc.reflogExpire, que por defecto es de 90 días.
+  evidencia: "--expire=<time> Prune entries older than the specified time. If this option is not specified, the expiration time is taken from the configuration setting gc.reflogExpire, which in turn defaults to 90 days."
+  fuente: f01-25
+  ancla: https://git-scm.com/docs/git-reflog
+  consultada: 2026-11-12
+
+- id: h01-781
+  hecho: Pro Git cita entre las causas habituales de perder una confirmación haber hecho un hard-reset de una rama, abandonando todas sus confirmaciones.
+  evidencia: "o porque has reculado (hard-reset) una rama, abandonando todas sus confirmaciones de cambio, y luego te has dado cuenta que necesitabas alguna de ellas."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-782
+  hecho: En el ejemplo de Pro Git se pierden las dos últimas confirmaciones de cambios porque ninguna rama permite acceder a ellas.
+  evidencia: "Vemos que se han perdido las dos últimas confirmaciones de cambios, --no tienes ninguna rama que te permita acceder a ellas--."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-783
+  hecho: Para recuperar una confirmación perdida hay que localizar su SHA-1 y luego añadir una rama que apunte hacia ella.
+  evidencia: "Necesitas localizar el SHA-1 de la última confirmación de cambios y luego añadir una rama que apunte hacia ella."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-784
+  hecho: Pro Git presenta git reflog como el método que suele ser más rápido para localizar el SHA-1 de la confirmación perdida.
+  evidencia: "El problema es cómo localizarla, --porque, ¿no te la sabrás de memoria, no?--. El método más rápido para conseguirlo suele ser utilizar una herramienta denominada git reflog."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-785
+  hecho: Git suele guardar un registro silencioso de dónde está HEAD en cada momento.
+  evidencia: "Según trabajas, Git suele guardar un silencioso registro de donde está HEAD en cada momento."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-786
+  hecho: El reflog se actualiza cada vez que se confirman cambios o se cambia de rama.
+  evidencia: "Cada vez que confirmas cambios o cambias de rama, el registro (reflog) es actualizado."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-787
+  hecho: Pro Git propone git log -g para ver con una salida de registro normal, más amigable, la información que muestra git reflog.
+  evidencia: "Se pueden ver las dos confirmaciones de cambios que hemos activado, pero no hay mucha más información al respecto. Para ver la misma información de manera mucho más amigable, podemos utilizar el comando git log -g, que nos muestra una salida normal de registro"
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-788
+  hecho: Una confirmación perdida se puede recuperar creando una nueva rama que apunte a ella.
+  evidencia: "así que puedes recuperarla creando una nueva rama apuntando a ella."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-789
+  hecho: En el ejemplo, la rama recover-branch se crea en la confirmación perdida con git branch recover-branch ab1afef.
+  evidencia: "Por ejemplo, puedes iniciar una rama llamada recover-branch con dicha confirmación de cambios (ab1afef): $ git branch recover-branch ab1afef"
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-790
+  hecho: La información del reflog se guarda en la carpeta .git/logs/.
+  evidencia: "La información de registro (reflog) se guarda en la carpeta .git/logs/"
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-791
+  hecho: Cuando el reflog no sirve, una forma de recuperar confirmaciones es el comando de chequeo de integridad de la base de datos, git fsck.
+  evidencia: "Una forma es utilizando el comando de chequeo de integridad de la base de datos: git fsck."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-792
+  hecho: git fsck con la opción --full muestra todos los objetos sin referencias a ningún otro objeto.
+  evidencia: "Si lo lanzas con la opción --full, te mostrará todos los objetos sin referencias a ningún otro objeto"
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
+  consultada: 2026-11-12
+
+- id: h01-793
+  hecho: En la salida de git fsck --full, la confirmación perdida aparece tras el texto «dangling commit» y se recupera añadiendo una rama que apunte a su SHA-1.
+  evidencia: "En este caso, puedes ver la confirmación de cambios perdida después del texto 'dangling commit'. Y la puedes recuperar del mismo modo, añadiendo una rama que apunte a esa clave SHA-1."
+  fuente: f01-26
+  ancla: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
   consultada: 2026-11-12
