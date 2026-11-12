@@ -23,7 +23,7 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 
 | Cap. | Título | id | Fase | PENDIENTES | Notas |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Git por dentro | `base/git-modelo` | 3-esquema | | Fases 1 y 2 hechas (2026-11-12): 26 fuentes, 568 hechos verificados. Huecos en `investigacion/cap-01/huecos.md` |
+| 1 | Git por dentro | `base/git-modelo` | 4-ejemplos | | Esquema aprobado por devOC el 2026-11-12 (`investigacion/cap-01/esquema.md`). 26 fuentes, 568 hechos |
 | 2 | Flujo de contribución | `base/git-colab` | pendiente | | |
 | 3 | Terminal y procesos | `base/terminal` | pendiente | | |
 | 4 | HTTP de verdad | `base/http` | pendiente | | |

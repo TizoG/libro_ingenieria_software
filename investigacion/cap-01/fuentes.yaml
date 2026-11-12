@@ -105,3 +105,8 @@ f01-26:
   titulo: "Pro Git 10.7, Mantenimiento y recuperación de datos"
   url: https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos
   secciones: ["1.7"]
+# Añadida el 2026-11-12 al aprobar el esquema (decisión 11).
+f01-27:
+  titulo: "Documentación de Git, merge-strategies"
+  url: https://git-scm.com/docs/merge-strategies
+  secciones: ["1.4"]

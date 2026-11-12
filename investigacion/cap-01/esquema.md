@@ -434,3 +434,23 @@ Cinco líneas como máximo, en el borrador: instantáneas nombradas por su conte
 
 - **Para el programador.** En el código visible, preferir comandos cuyo comportamiento tiene hecho (`cat .git/HEAD`, `cat .git/refs/heads/...`, `git cat-file`, `git log --oneline --graph --all`, `HEAD~N`, `HEAD@{N}`, `^{tree}`). Si se usa algo sin hecho (`git rev-parse`, `git ls-files`, `ORIG_HEAD`, `git update-index`), el texto no podrá explicarlo. `advice.detachedHead=false` está fijado en el entorno, así que el ejemplo 10 no mostrará el aviso de HEAD desacoplado.
 - **Para el redactor.** No heredar las erratas de la traducción listadas en `investigacion/cap-01/huecos.md`: `refs/remotes` es local; «área de preparación», no «área de ensayo»; «stash», no «alijos»; `git mv`, no «el comando mv».
+
+---
+
+## 12. Aprobación de devOC (2026-11-12)
+
+devOC aprobó el esquema con estas decisiones:
+
+1. Terminología: la propuesta tal cual.
+2. Rama `main` en los ejemplos, con el recuadro de 1.2 y la configuración en «Lo que necesitas antes».
+3. Opción (b): `insertar_ejemplos.py` admite grupos de preparación que se ejecutan pero no se muestran (terminados en `# preparación`), y la variable `EJEMPLO_DIR` para cargar ayudas comunes de `ejemplos/cap-01/_*.sh`.
+4. Opción (a): el investigador busca el hecho sobre el editor del rebase interactivo; si no lo hay, (b) con su PENDIENTE.
+5. Fecha fija: los ejemplos se diseñan para que cada commit cambie algo; el efecto se aprovecha en un «Bajo el capó» de 1.6.
+6. Se mantiene el orden del catálogo.
+7. Lo que queda fuera: la lista propuesta.
+8. «En un proyecto real»: PENDIENTE hasta que el capítulo 2 dé de alta las guías de contribución de gentle-shell y FastAPI.
+9. Extensión: se escribe y se recorta sobre el borrador.
+10. Se mantienen los 24 ejemplos; los opcionales se deciden al recortar.
+11. Estrategia `ort`: se da de alta la página oficial de estrategias de fusión (f01-27).
+
+Los hechos que se añadan desde ahora van en `secciones/9-adicionales.md`, con ids desde h01-801.

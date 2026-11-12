@@ -60,6 +60,7 @@ Fuentes añadidas el 2026-11-12 para cubrir lo que la edición en español de Pr
 | 1.5 | [Documentación de Git: git-revert](https://git-scm.com/docs/git-revert) | ✔ |
 | 1.7 | [Documentación de Git: git-reflog](https://git-scm.com/docs/git-reflog) | ✔ |
 | 1.7 | [Pro Git 10.7, Mantenimiento y recuperación de datos](https://git-scm.com/book/es/v2/Los-entresijos-internos-de-Git-Mantenimiento-y-recuperaci%c3%b3n-de-datos) | ✔ |
+| 1.4 | [Documentación de Git: merge-strategies](https://git-scm.com/docs/merge-strategies) (estrategia `ort`) | ✔ |
 
 ### Capítulo 2: Flujo de contribución
 

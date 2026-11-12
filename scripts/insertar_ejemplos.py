@@ -22,8 +22,11 @@ Tipos de ejemplo:
 - .sh: sesión de terminal. Cada grupo de líneas separado por una línea en blanco
   es un comando; se muestra como «$ comando» seguido de su salida, en un bloque
   «console». Un grupo que termine con el comentario «# falla» puede acabar con
-  error. Las líneas que empiezan por «#» antes del primer comando son cabecera
-  y no se muestran.
+  error. Un grupo que termine con el comentario «# preparación» se ejecuta (y
+  debe salir bien) pero no se muestra: sirve para montar el estado de partida.
+  Las líneas que empiezan por «#» antes del primer comando son cabecera y no se
+  muestran. La variable EJEMPLO_DIR apunta a la carpeta del ejemplo, para cargar
+  ayudas comunes: «source "$EJEMPLO_DIR/_repo.sh"  # preparación».
 - Otros lenguajes se añadirán cuando los pida el libro (node, go...).
 
 La primera línea del archivo puede declarar herramientas extra cuya versión se
@@ -62,8 +65,10 @@ class Ejemplo:
     falla: bool = False
 
 
-def entorno_reproducible(casa: Path) -> dict[str, str]:
+def entorno_reproducible(casa: Path, carpeta_ejemplo: Path | None = None) -> dict[str, str]:
     env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    if carpeta_ejemplo is not None:
+        env["EJEMPLO_DIR"] = str(carpeta_ejemplo)
     env.update({
         "HOME": str(casa), "LC_ALL": "C.UTF-8", "LANG": "C.UTF-8", "TZ": "Europe/Madrid",
         "PYTHONHASHSEED": "0", "PYTHONDONTWRITEBYTECODE": "1",
@@ -108,7 +113,8 @@ def ejecutar_python(ej: Ejemplo, codigo: str) -> tuple[str, str]:
         carpeta = Path(tmp).resolve()
         shutil.copy(ej.ruta, carpeta / ej.ruta.name)
         r = subprocess.run([sys.executable, ej.ruta.name], cwd=carpeta, capture_output=True,
-                           text=True, timeout=TIEMPO_MAXIMO, env=entorno_reproducible(carpeta))
+                           text=True, timeout=TIEMPO_MAXIMO,
+                           env=entorno_reproducible(carpeta, ej.ruta.parent.resolve()))
         salida = _limpiar(r.stdout + r.stderr, carpeta)
     if (r.returncode != 0) != ej.falla:
         estado = "falló" if r.returncode else "no falló y debía fallar"
@@ -145,7 +151,7 @@ def ejecutar_shell(ej: Ejemplo, codigo: str) -> tuple[str, str]:
         carpeta = Path(tmp).resolve()
         r = subprocess.run(["bash", "--noprofile", "--norc", "-c", "exec 2>&1\n" + "\n".join(guion)],
                            cwd=carpeta, capture_output=True, text=True, timeout=TIEMPO_MAXIMO,
-                           env=entorno_reproducible(carpeta))
+                           env=entorno_reproducible(carpeta, ej.ruta.parent.resolve()))
         salida = _limpiar(r.stdout, carpeta) + "\n"
     trozos = re.split(rf"{re.escape(marca)}(\d+)\n", salida)
     if len(trozos) != 2 * len(grupos) + 1:
@@ -155,11 +161,14 @@ def ejecutar_shell(ej: Ejemplo, codigo: str) -> tuple[str, str]:
     for i, g in enumerate(grupos):
         texto, codigo_salida = trozos[2 * i], int(trozos[2 * i + 1])
         espera_fallo = g[-1].rstrip().endswith("# falla")
-        visibles = [re.sub(r"\s*# falla\s*$", "", l) for l in g]
+        oculto = g[-1].rstrip().endswith("# preparación")
+        visibles = [re.sub(r"\s*# (falla|preparación)\s*$", "", l) for l in g]
         if (codigo_salida != 0) != espera_fallo:
             estado = "falló" if codigo_salida else "no falló y debía fallar"
             raise ErrorEjemplo(f"{ej.ruta}: el comando «{visibles[0]}» {estado} "
                                f"(código {codigo_salida}):\n{texto}")
+        if oculto:
+            continue
         sesion.append("$ " + visibles[0])
         sesion.extend("> " + l for l in visibles[1:])
         if texto.strip():

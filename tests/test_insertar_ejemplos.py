@@ -101,3 +101,25 @@ def test_quitar_marcas(tmp_path):
     limpio = ie.quitar_marcas(texto)
     assert "<!--" not in limpio
     assert "```text\n1\n```" in limpio
+
+
+def test_shell_preparacion_oculta_y_ayuda_comun(tmp_path):
+    escribir(tmp_path, "_repo.sh", "crear_repo() { git init -q; echo uno > a.txt; git add a.txt; git commit -q -m 'Uno'; }\n")
+    codigo = (
+        "# versiones: git\n\n"
+        'source "$EJEMPLO_DIR/_repo.sh"  # preparación\n\n'
+        "crear_repo\n"
+        "echo dos >> a.txt  # preparación\n\n"
+        "git status --short\n"
+    )
+    rel = escribir(tmp_path, "oculto.sh", codigo)
+    texto, errores = ie.procesar(f"<!-- ejemplo: {rel} -->\n", tmp_path)
+    assert errores == [], errores
+    assert "$ git status --short\n M a.txt" in texto
+    assert "source" not in texto and "crear_repo" not in texto and "preparación" not in texto
+
+
+def test_preparacion_que_falla_es_error(tmp_path):
+    rel = escribir(tmp_path, "s.sh", "false  # preparación\n\necho hola\n")
+    _, errores = ie.procesar(f"<!-- ejemplo: {rel} -->\n", tmp_path)
+    assert "falló" in errores[0]
