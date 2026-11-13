@@ -23,7 +23,7 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 
 | Cap. | Título | id | Fase | PENDIENTES | Notas |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Git por dentro | `base/git-modelo` | 6-revisión | 1 | Borrador completo (2026-11-12): 9.563 palabras, 24 ejemplos (23 usados), 14 diagramas, 613 hechos. PENDIENTE consciente: «En un proyecto real» (decisión 8) |
+| 1 | Git por dentro | `base/git-modelo` | 7-aprobación | 1 | Reescrito el 2026-11-13 tras la revisión del 2026-11-12 (`borrador.md`; vista previa en `investigacion/cap-01/vista-previa.md`). 9.894 palabras, 23 ejemplos (Git 2.43.0), 16 diagramas, 0 literales de fuente. **Sin segunda revisión independiente** (decisión de devOC): lo revisa devOC. PENDIENTE consciente: «En un proyecto real» (decisión 8). Informes de la revisión del v1 en `revision-v1/` |
 | 2 | Flujo de contribución | `base/git-colab` | pendiente | | |
 | 3 | Terminal y procesos | `base/terminal` | pendiente | | |
 | 4 | HTTP de verdad | `base/http` | pendiente | | |
@@ -130,20 +130,21 @@ Tablero de progreso. Claude Code lo actualiza cada vez que un capítulo cambia d
 ## Informes de métricas
 
 <!-- informe:cap-01 -->
-### Capítulo 1 (informe del 2026-11-12)
+### Capítulo 1 (informe del 2026-11-13)
 
 | Métrica | Valor | Objetivo |
 | --- | --- | --- |
-| Frases técnicas sin id de hecho | 12 | 0 |
+| Frases técnicas sin id de hecho | 0 | 0 |
 | Evidencias que no aparecen en su fuente (y ids mal citados) | 0 | 0 |
 | Ejemplos que fallan al ejecutarse | 0 | 0 |
-| Frases NO SOPORTADAS o PARCIALES sin resolver | 58 | 0 |
-| Fragmentos literales de una fuente (8+ palabras sin comillas, o citas de 15+) | 10 | 0 |
+| Frases NO SOPORTADAS o PARCIALES sin resolver | 0 | 0 |
+| Fragmentos literales de una fuente (8+ palabras sin comillas, o citas de 15+) | 0 | 0 |
 | PENDIENTES abiertos | 1 | visibles y comunicados |
-| Párrafos sin ningún id (pista) | 9 | revisar |
-| Hechos válidos | 613 | |
-| Ejemplos | 23 (sin ejecutar) | |
-| Palabras | 9563 | 5.000 a 10.000 |
+| Párrafos sin ningún id (pista) | 27 | revisar |
+| Hechos válidos | 680 | |
+| Ejemplos | 23 | |
+| Palabras | 9894 | 5.000 a 10.000 |
 
+- Falta el informe de revisión (`revision.md`): las métricas 1 y 4 no son fiables.
 Puede pasar a «revisado»: **no**.
 <!-- /informe:cap-01 -->

@@ -17,3 +17,11 @@ Cosas detectadas durante la redacción que no son PENDIENTES pero hay que mirar.
 - **Extensión tras 1.7:** 9.728 sin ids, sin el cierre. Hará falta recortar unas 1.000 palabras en la pasada final.
 - **Cierre.** Ejercicio 3: el lector no tiene `facturas` montado (las soluciones deben decir cómo, o admitir cualquier repositorio). Ejercicio 4: volver al punto de partida exige reflog o rama de respaldo. Reto: solo funciona con objetos sueltos (sin explicar packfiles). Proyecto: clonar desde GitHub es del capítulo 2. Preguntas de defensa 2 y 6 quizá demasiado guiadas por el texto. Confirmar en `_parte.md` que la reimplementación del PR llega en el capítulo 5.
 - **Extensión con el cierre:** 10.427 sin ids.
+
+## Entrega a devOC (2026-11-13)
+
+- El capítulo se entrega sin segunda revisión independiente, por decisión de devOC. Verificado por script: ids existentes, evidencias, 23 ejemplos ejecutados dos veces con salida idéntica, 16 diagramas renderizados, 0 fragmentos copiados de 8+ palabras, contrato con la web.
+- No verificado por un revisor: que cada reformulación de los hallazgos de `revision-v1/` sostenga su hecho (lo afirman los redactores), la paráfrasis cercana y el calco de estructura.
+- `soluciones.md` de la Parte I y `_parte.md` no existen aún; el ejercicio 3 y el proyecto los necesitan (montar `facturas`, capítulo 5).
+- Frases que los redactores señalaron como deducciones: el tercer bloque de `diff3` en 1.4 (se deduce sin verlo en una salida), `21c1b83` en 1.2, y `git rev-list --objects` en 1.6 (se lee su salida sin hecho propio).
+- Los ejemplos conservan los números 21 a 25 (faltan 19 y 20): renumerar es cosmético.

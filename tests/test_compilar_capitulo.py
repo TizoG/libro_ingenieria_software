@@ -1,4 +1,5 @@
 import datetime as dt
+import re
 
 import pytest
 
@@ -74,3 +75,10 @@ def test_vista_previa_admite_pendientes():
         cc.compilar(1, con_pendiente, HECHOS, FUENTES)
     salida = cc.compilar(1, con_pendiente, HECHOS, FUENTES, permitir_pendientes=True)
     assert "> PENDIENTE: falta algo" in salida
+
+
+def test_palabras_de_cabecera_no_cuentan_referencias_ni_fuentes():
+    salida = cc.compilar(1, BORRADOR, HECHOS, FUENTES, hoy=dt.date(2026, 11, 12))
+    datos, cuerpo = comun.leer_frontmatter(salida)
+    sin_fuentes = cuerpo.split("## Fuentes")[0]
+    assert datos["palabras"] == cc.contar_palabras(re.sub(r"\[\d+(?:, \d+)*\]", "", sin_fuentes))

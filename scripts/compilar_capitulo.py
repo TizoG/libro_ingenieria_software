@@ -83,6 +83,7 @@ def compilar(numero: int, borrador: str, hechos: list[comun.Bloque], fuentes: di
     cuerpo = "".join(t if i % 2 else comun.CITA_HECHOS.sub(sustituir, t) for i, t in enumerate(trozos))
     cuerpo = insertar_ejemplos.quitar_marcas(cuerpo).rstrip() + "\n"
 
+    palabras = contar_palabras(re.sub(r"\[\d+(?:, \d+)*\]", "", cuerpo))  # prosa: sin [n] ni lista de fuentes
     if numeros:
         lineas = ["", "## Fuentes", ""]
         for fuente, n in sorted(numeros.items(), key=lambda x: x[1]):
@@ -94,7 +95,7 @@ def compilar(numero: int, borrador: str, hechos: list[comun.Bloque], fuentes: di
             lineas.append("")
         cuerpo += "\n".join(lineas)
 
-    datos["palabras"] = contar_palabras(cuerpo)
+    datos["palabras"] = palabras
     datos["actualizado"] = hoy or dt.date.today()
     return comun.escribir_frontmatter(datos, cuerpo)
 
