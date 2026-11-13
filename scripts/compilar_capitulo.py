@@ -4,6 +4,7 @@
 Uso:
     python scripts/compilar_capitulo.py 1
     python scripts/compilar_capitulo.py 1 --salida /tmp/prueba.md
+    python scripts/compilar_capitulo.py 1 --vista-previa investigacion/cap-01/vista-previa.md
 
 Toma investigacion/cap-XX/borrador.md (con ids de hechos y marcas de ejemplo) y
 escribe la ruta del catálogo en contenido/:
@@ -15,6 +16,10 @@ escribe la ruta del catálogo en contenido/:
 
 Se niega a compilar si quedan PENDIENTES, ids que no pasan la verificación,
 ejemplos sin insertar o si el resultado no cumple el contrato con la web.
+
+Con --vista-previa RUTA genera una copia para que devOC la lea antes de aprobar:
+admite PENDIENTES abiertos (quedan visibles en el texto), no toca contenido/ y no
+sirve para publicar. Lo demás (ids, ejemplos, contrato) se sigue exigiendo.
 El estado lo decide la cabecera del borrador; «publicado» solo lo pone devOC.
 """
 
@@ -43,12 +48,12 @@ def contar_palabras(cuerpo: str) -> int:
 
 
 def compilar(numero: int, borrador: str, hechos: list[comun.Bloque], fuentes: dict[str, dict],
-             hoy: dt.date | None = None) -> str:
+             hoy: dt.date | None = None, permitir_pendientes: bool = False) -> str:
     datos, cuerpo = comun.leer_frontmatter(borrador)
     if datos is None:
         raise ErrorCompilacion("el borrador no tiene cabecera YAML")
     sin_codigo = comun.sin_bloques_de_codigo(cuerpo)
-    if comun.PENDIENTE.search(sin_codigo):
+    if comun.PENDIENTE.search(sin_codigo) and not permitir_pendientes:
         raise ErrorCompilacion("el borrador tiene PENDIENTES abiertos")
     if re.search(r"^## Fuentes\s*$", sin_codigo, re.MULTILINE):
         raise ErrorCompilacion("el borrador no debe tener «## Fuentes»: la genera este script")
@@ -98,6 +103,8 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("capitulo", type=int)
     p.add_argument("--salida", type=Path, help="ruta alternativa (para previsualizar)")
+    p.add_argument("--vista-previa", type=Path, metavar="RUTA",
+                   help="copia para revisar a mano: admite PENDIENTES y no escribe en contenido/")
     args = p.parse_args(argv)
 
     cap = comun.capitulo_por_numero(args.capitulo)
@@ -109,13 +116,16 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     try:
         resultado = compilar(args.capitulo, borrador, comun.leer_hechos(args.capitulo),
-                             comun.leer_fuentes_capitulo(args.capitulo))
+                             comun.leer_fuentes_capitulo(args.capitulo),
+                             permitir_pendientes=args.vista_previa is not None)
     except ErrorCompilacion as e:
         print(f"No se compila: {e}")
         return 1
 
-    destino = args.salida or comun.RAIZ / cap.archivo
+    destino = args.vista_previa or args.salida or comun.RAIZ / cap.archivo
     errores = validar_contrato.validar_cuerpo(destino.name, comun.leer_frontmatter(resultado)[1])
+    if args.vista_previa:
+        errores = [e for e in errores if "PENDIENTE" not in e]
     if errores:
         for e in errores:
             print(f"  INCUMPLE {e}")

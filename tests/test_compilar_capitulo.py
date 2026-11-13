@@ -66,3 +66,11 @@ def test_se_niega_a_compilar(cambio, mensaje):
 
 def test_contar_palabras_ignora_codigo():
     assert cc.contar_palabras("Hola mundo.\n```\nmuchas palabras aquí dentro\n```\n") == 2
+
+
+def test_vista_previa_admite_pendientes():
+    con_pendiente = BORRADOR + "\n> PENDIENTE: falta algo\n"
+    with pytest.raises(cc.ErrorCompilacion, match="PENDIENTES"):
+        cc.compilar(1, con_pendiente, HECHOS, FUENTES)
+    salida = cc.compilar(1, con_pendiente, HECHOS, FUENTES, permitir_pendientes=True)
+    assert "> PENDIENTE: falta algo" in salida
