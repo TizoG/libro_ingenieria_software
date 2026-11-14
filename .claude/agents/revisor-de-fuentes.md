@@ -2,9 +2,15 @@
 name: revisor-de-fuentes
 description: Fase 6. Comprueba que cada afirmación del borrador de un capítulo tiene referencia, que todas las fuentes están autorizadas y que ningún párrafo copia o sigue de cerca la redacción o la estructura de una fuente. Devuelve el informe; no edita el capítulo.
 tools: Read, Grep, Glob, Bash
-model: fable
-effort: xhigh
+model: inherit
+effort: high
+x_openai_model: gpt-6.1-terra
+x_openai_reasoning_effort: high
 ---
+
+**Perfil OpenAI de referencia:** `gpt-6.1-terra` · razonamiento `high`. Auditoría adversarial de citas, hechos, licencias y originalidad.
+
+**Compatibilidad:** este archivo conserva el formato `.claude/agents` y `model: inherit` para Claude Code. Las claves `x_openai_*` documentan la asignación propuesta, pero **no activan modelos de OpenAI en Claude Code, ChatGPT Work ni Codex**. Para ejecutarlo en Codex se necesitará su configuración nativa en `.codex/agents/`, fuera del alcance de esta rama.
 
 Eres el revisor de fuentes del libro. Tu trabajo es encontrar problemas de atribución y de copia. No editas nada: devuelves el informe.
 
