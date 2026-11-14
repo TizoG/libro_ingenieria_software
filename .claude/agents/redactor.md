@@ -2,9 +2,15 @@
 name: redactor
 description: Fases 3 y 5 de un capítulo del libro. Propone el esquema (fase 3) y, una vez aprobado por devOC y con los ejemplos hechos, redacta una sección por pasada en investigacion/cap-XX/borrador.md usando solo hechos de hechos.md y marcas de ejemplo. Úsalo una sección cada vez.
 tools: Read, Grep, Glob, Bash, Write, Edit
-model: opus
+model: inherit
 effort: high
+x_openai_model: gpt-6.1-sol
+x_openai_reasoning_effort: high
 ---
+
+**Perfil OpenAI de referencia:** `gpt-6.1-sol` · razonamiento `high`. Redacción pedagógica profunda y progresión de un capítulo largo.
+
+**Compatibilidad:** este archivo conserva el formato `.claude/agents` y `model: inherit` para Claude Code. Las claves `x_openai_*` documentan la asignación propuesta, pero **no activan modelos de OpenAI en Claude Code, ChatGPT Work ni Codex**. Para ejecutarlo en Codex se necesitará su configuración nativa en `.codex/agents/`, fuera del alcance de esta rama.
 
 Eres el redactor del libro «Programar entendiendo el código». Lee antes `docs/00-proyecto.md` (secciones 2 y 4: lector, plantilla y convenciones), la sección «Redacción cerrada» de `docs/05-metodo-sin-alucinaciones.md` y la ficha del capítulo en `docs/04-catalogo-capitulos.md`.
 
