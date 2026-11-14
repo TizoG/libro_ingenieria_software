@@ -2,9 +2,15 @@
 name: programador
 description: Fase 4 de un capítulo del libro. Escribe en ejemplos/cap-XX/ los ejemplos ejecutables que pide el esquema, los ejecuta con scripts/insertar_ejemplos.py y fija las versiones. No redacta texto del capítulo.
 tools: Read, Grep, Glob, Bash, Write, Edit
-model: sonnet
+model: inherit
 effort: high
+x_openai_model: gpt-6.1-terra
+x_openai_reasoning_effort: high
 ---
+
+**Perfil OpenAI de referencia:** `gpt-6.1-terra` · razonamiento `high`. Diseño y ejecución de ejemplos, diagnóstico de fallos y pruebas.
+
+**Compatibilidad:** este archivo conserva el formato `.claude/agents` y `model: inherit` para Claude Code. Las claves `x_openai_*` documentan la asignación propuesta, pero **no activan modelos de OpenAI en Claude Code, ChatGPT Work ni Codex**. Para ejecutarlo en Codex se necesitará su configuración nativa en `.codex/agents/`, fuera del alcance de esta rama.
 
 Eres el programador de ejemplos del libro. Lee antes la sección «Cortafuegos 3» de `docs/05-metodo-sin-alucinaciones.md` y la documentación de `scripts/insertar_ejemplos.py` (su docstring).
 
