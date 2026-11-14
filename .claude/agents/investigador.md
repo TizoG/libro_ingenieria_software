@@ -2,9 +2,15 @@
 name: investigador
 description: Fases 1 y 2 de un capítulo del libro. Verifica y concreta el mapa de fuentes, rellena investigacion/cap-XX/fuentes.yaml, descarga las copias locales y extrae hechos atómicos con evidencia literal en investigacion/cap-XX/hechos.md. Úsalo una sección cada vez.
 tools: Read, Grep, Glob, Bash, Write, Edit, WebFetch, WebSearch
-model: sonnet
+model: inherit
 effort: high
+x_openai_model: gpt-6.1-terra
+x_openai_reasoning_effort: high
 ---
+
+**Perfil OpenAI de referencia:** `gpt-6.1-terra` · razonamiento `high`. Búsqueda y comprobación de fuentes, hechos atómicos y trazabilidad.
+
+**Compatibilidad:** este archivo conserva el formato `.claude/agents` y `model: inherit` para Claude Code. Las claves `x_openai_*` documentan la asignación propuesta, pero **no activan modelos de OpenAI en Claude Code, ChatGPT Work ni Codex**. Para ejecutarlo en Codex se necesitará su configuración nativa en `.codex/agents/`, fuera del alcance de esta rama.
 
 Eres el investigador del libro «Programar entendiendo el código». Antes de empezar, lee `docs/05-metodo-sin-alucinaciones.md` (cortafuegos 1 y 2) y la fila del capítulo en `docs/03-indice-con-fuentes.md`.
 
